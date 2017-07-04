@@ -17,7 +17,7 @@ class User_controller extends CI_Controller {
         $this->load->helper('email');
         $this->load->library('encrypt');
         $this->load->library('utils');
-        $this->load->model('User_model');
+        $this->load->model('User');
     }
 
     /**
@@ -25,7 +25,7 @@ class User_controller extends CI_Controller {
     *
     * @access public
     */
-    public function register_user()
+    public function register()
     {
         $data["password"] = $this->input->get('password');
         $data["mail"] = $this->input->get('mail');
@@ -45,17 +45,13 @@ class User_controller extends CI_Controller {
     */
     private function _validate_data($data)
     {
-        if (!$this->_is_valid_email($data["mail"])) {
-            $result["mensaje"] = "El mail ingresado esta mal escrito";
-            $result["registrado"] = FALSE;
-
-        } else if ($this->_exists_email($data["mail"])) {
+        if ($this->_exists_email($data["mail"])) {
             $result["mensaje"] = "El mail ingresado ya fue utilizado en otra cuenta";
             $result["registrado"] = FALSE;
-
         } else {
             $result = $this->_insert_user($data);
         }
+
         return $result;
     }
 
@@ -80,8 +76,10 @@ class User_controller extends CI_Controller {
     */
     private function _exists_email($mail)
     {
-        $mail = $this->User_model->find_user_by_email($mail);
-        return (isset($mail)) ? true : false;
+        $where = array("mail" => $mail);
+
+        $mail = $this->User->exists($where);
+        return $mail;
     }
 
     /**
@@ -92,11 +90,12 @@ class User_controller extends CI_Controller {
     */
     private function _insert_user($data)
     {
-        $qualification = 1; // calificacion inicial
-        $data["password"] = $this->encrypt->encode($data["password"]);
-        $this->User_model->create_user($data["password"], $data["mail"], $data["name"], $data["surname"], $qualification);
+        $data["qualification"] = 1;
+        $data["accumulated"] = 0;
+        $data["active_account"] = 1;
+
+        $result["registrado"] = $this->User->create($data);
         $result["mensaje"] = "Registrado con  exito";
-        $result["registrado"] = TRUE;
 
         return $result;
     }
@@ -113,29 +112,14 @@ class User_controller extends CI_Controller {
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        if (!$this->User_model->find_user_by_email($data["mail"])) {
-             $result["noUser"] = 1;
-
-        } else if (!$this->_is_valid_password($data["mail"], $data["password"])) {
-             $result["noUser"] = 1;
-
+        if ($this->User->exists($data) && $this->_is_valid_password($data["mail"], $data["password"])) {
+            $where = array("mail" => $data["mail"]);
+            $result = $this->User->find($where)[0];
         } else {
-             $result = $this->User_model->find_user_by_email($data["mail"]);
+            $result["noUser"] = 1;
         }
-        echo json_encode($result);
-    }
 
-    /**
-    * Valida si la cuenta asociada al mail recibido esta activa.
-    *
-    * @access private
-    * @param email
-    * @return boolean true si la cuenta esta activa.
-    */
-    private function _is_active_account($mail)
-    {
-        $user = $this->User_model->find_user_by_email($mail);
-        return ($user->active_account);
+        echo json_encode($result);
     }
 
     /**
@@ -148,10 +132,11 @@ class User_controller extends CI_Controller {
     */
     private function _is_valid_password($mail, $password)
     {
-        $user = $this->User_model->find_user_by_email($mail);
-        $password_decoded = $this->encrypt->decode($user->password);
+        $where = array("mail" => $mail);
+        $user = $this->User->find($where);
+        $password_decoded = $this->encrypt->decode($user[0]->password);
 
-        return ($password_decoded == $password || $user->password == $password);
+        return ($password_decoded == $password || $user[0]->password == $password);
     }
 
     /**
@@ -165,16 +150,18 @@ class User_controller extends CI_Controller {
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        $data["password"] = $this->encrypt->encode($data["password"]);
-        $update = $this->User_model->update_password($data["mail"], $data["password"]);
+        $data["password"] = $this->encrypt->encode($data["password"]);  // encripto la contraseña
 
-        if ($update) {
+        $where = array("mail" => $data["mail"]);
+        $fields = array("password" => $data["password"]);
+        $result["updated"] = $this->User->update($where, $fields);
+
+        if ($result["updated"]) {
             $result["message"] = "La clave se cambio correctamente";
-            $result["updated"] = TRUE;
         } else {
             $result["message"] = "No se pudo cambiar la clave del usuario";
-            $result["updated"] = FALSE;
         }
+
         echo json_encode($result);
     }
 
@@ -191,13 +178,14 @@ class User_controller extends CI_Controller {
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
         if ($this->_is_valid_password($data["mail"], $data["password"])) {  // Si la contraseña es correcta
-            $this->User_model->delete_account($data["mail"]);
+            $this->User->delete_account($data["mail"]);
             $result["message"] = "La cuenta se dio de baja correctamente";
             $result["deleted"] = TRUE;
         } else {
             $result["message"] = "La clave es incorrecta, la cuenta no pudo darse de baja";
             $result["deleted"] = FALSE;
         }
+
         echo json_encode($result);
     }
 

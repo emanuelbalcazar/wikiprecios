@@ -16,6 +16,7 @@ class Commerce_controller extends CI_Controller
         $this->load->helper(array('url', 'form'));
         $this->load->model('Commerce_model');
         $this->load->library('utils');
+        $this->table = 'cities';
     }
 
     /**
@@ -73,7 +74,8 @@ class Commerce_controller extends CI_Controller
      */
     public function businesses()
     {
-        $result = $this->Commerce_model->get_businesses();
+        //$result = $this->Commerce_model->get_businesses();
+        $result = $this->Commerce_model->findAll();
         echo json_encode($result);
     }
 

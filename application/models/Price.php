@@ -7,37 +7,13 @@
 * @subpackage      Models
 * @category        Models
 */
-class Price_model extends CI_Model {
+class Price extends MY_Model {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
-    }
-
-    /**
-     * Registra un nuevo precio de un determinado producto en un comercio con la fecha actual
-     *
-     * @access  public
-     * @param $commerce comercio donde se obtuvo el precio del producto
-     * @param $user usuario que esta registrando el nuevo precio
-     * @param $price precio registrado
-     * @param $code codigo de barra del producto registrado
-     *
-     */
-    public function register_price($commerce, $user, $price, $code)
-    {
-        $data = array(
-            'commerce_id' => $commerce,
-            'user' => $user,
-            'price' => $price,
-            'product_code' => $code,
-            'date' => date("Y-m-d")
-        );
-
-        $result = $this->db->insert('prices', $data);
-
-        return $result;
+        $this->table = 'prices';
     }
 
     /**

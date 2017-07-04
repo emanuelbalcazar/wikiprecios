@@ -60,10 +60,10 @@ $route['default_controller'] = "Login_web_controller/load_login_view";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['registrar_usuario'] = "mobile/User_controller/register_user";
-$route['login'] = "mobile/User_controller/login";
-$route['cambiar_clave'] = "mobile/User_controller/change_password";
-$route['eliminar_cuenta'] = "mobile/User_controller/delete_account";
+$route['api/registrarse'] = "API/User_controller/register";
+$route['api/login'] = "API/User_controller/login";
+$route['api/cambiar_clave'] = "API/User_controller/change_password";
+$route['api/eliminar_cuenta'] = "API/User_controller/delete_account";
 
 $route['registrar_comercio'] = "mobile/Commerce_controller/register_trade";
 $route['comercios'] = "mobile/Commerce_controller/businesses";

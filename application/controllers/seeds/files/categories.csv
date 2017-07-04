@@ -1,4 +1,4 @@
-ITEM,CATEGORY,CODE,UNIT
+item_id,category,special_product_code,unit
 1,peceto,CAR1,KG
 1,bola de lomo,CAR2,KG
 1,nalga,CAR3,KG

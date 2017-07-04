@@ -1,2 +1,2 @@
-NAME,SURNAME,MAIL,PASSWORD,CITY,PROVINCE,COUNTRY
-Emanuel,Balcazar,emanuelbalcazar13@gmail.com,emanuel,Puerto Madryn,Chubut,Argentina
+name,surname,mail,password,city,province,country,active_account
+Emanuel,Balcazar,emanuelbalcazar13@gmail.com, ,Puerto Madryn,Chubut,Argentina,1
