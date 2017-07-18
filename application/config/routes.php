@@ -55,20 +55,22 @@ $route["productoEspecial"] = "Special_product_controller/items_view";
 $route["ImportarCsv"] = "Price_controller/register_massive_price";
 $route["CargarCsv"] = "CsvController/importcsv";
 
-/* ------------------------- Rutas de servicios movil -------------------------- */
+/* ------------------------- Rutas de servicios  -------------------------- */
 $route['default_controller'] = "Login_web_controller/load_login_view";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/registrarse'] = "API/User_controller/register";
-$route['api/login'] = "API/User_controller/login";
-$route['api/cambiar_clave'] = "API/User_controller/change_password";
-$route['api/eliminar_cuenta'] = "API/User_controller/delete_account";
+// rutas asociadas a usuarios.
+$route['api/usuario/registrar'] = "API/User_controller/register";
+$route['api/usuario/login'] = "API/User_controller/login";
+$route['api/usuario/cambiar_clave'] = "API/User_controller/change_password";
+$route['api/usuario/eliminar_cuenta'] = "API/User_controller/delete_account";
 
-$route['registrar_comercio'] = "mobile/Commerce_controller/register_trade";
-$route['comercios'] = "mobile/Commerce_controller/businesses";
-$route['comercios_favoritos'] = "mobile/Commerce_controller/favorites_businesses";
-$route['comercios_cercanos'] = "mobile/Commerce_controller/nearby_businesses";
+// rutas asociadas a comercios.
+$route['api/comercio/registrar'] = "API/Commerce_controller/register";
+$route['api/comercios'] = "API/Commerce_controller/businesses";
+$route['api/comercios/favoritos'] = "API/Commerce_controller/favorites";
+$route['api/comercios/cercanos'] = "API/Commerce_controller/nearby_businesses";
 
 $route['registrar_favoritos'] = "mobile/Favorite_controller/register_favorite_trade";
 

@@ -7,15 +7,15 @@
 * @subpackage      Controllers
 * @category        Controller
 */
-class User_controller extends CI_Controller {
-
+class User_controller extends CI_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
         $this->load->helper('email');
-        $this->load->library('encrypt');
+        $this->load->library('encryption');
         $this->load->library('utils');
         $this->load->model('User');
     }
@@ -95,7 +95,7 @@ class User_controller extends CI_Controller {
         $data["active_account"] = 1;
 
         $result["registrado"] = $this->User->create($data);
-        $result["mensaje"] = "Registrado con  exito";
+        $result["mensaje"] = "Registrado con exito";
 
         return $result;
     }
@@ -134,7 +134,7 @@ class User_controller extends CI_Controller {
     {
         $where = array("mail" => $mail);
         $user = $this->User->find($where);
-        $password_decoded = $this->encrypt->decode($user[0]->password);
+        $password_decoded = $this->encryption->decrypt($user[0]->password);
 
         return ($password_decoded == $password || $user[0]->password == $password);
     }
@@ -150,18 +150,13 @@ class User_controller extends CI_Controller {
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        $data["password"] = $this->encrypt->encode($data["password"]);  // encripto la contraseña
+        $data["password"] = $this->encryption->encrypt($data["password"]);  // encripto la contraseña
 
         $where = array("mail" => $data["mail"]);
         $fields = array("password" => $data["password"]);
         $result["updated"] = $this->User->update($where, $fields);
 
-        if ($result["updated"]) {
-            $result["message"] = "La clave se cambio correctamente";
-        } else {
-            $result["message"] = "No se pudo cambiar la clave del usuario";
-        }
-
+        $result["message"] = ($result["updated"]) ? "La clave se cambio correctamente" : "No se pudo cambiar la clave del usuario";
         echo json_encode($result);
     }
 

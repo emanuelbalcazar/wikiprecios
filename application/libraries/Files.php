@@ -23,7 +23,6 @@ class Files {
     public function __construct()
     {
         $this->CI =& get_instance();
-        $this->CI->load->library('encrypt');
         $this->CI->load->library('csvimport');
     }
 
@@ -71,5 +70,4 @@ class Files {
 
         return $count;
     }
-
 }

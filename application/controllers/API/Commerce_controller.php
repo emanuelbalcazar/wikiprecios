@@ -9,14 +9,13 @@
 */
 class Commerce_controller extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
-        $this->load->helper(array('url', 'form'));
-        $this->load->model('Commerce_model');
+        $this->load->model('Commerce');
         $this->load->library('utils');
-        $this->table = 'cities';
     }
 
     /**
@@ -24,7 +23,7 @@ class Commerce_controller extends CI_Controller
     *
     * @access public
     */
-    public function register_trade()
+    public function register()
     {
         $data["name"] = $this->input->get('name');
         $data["address"] = $this->input->get('address');
@@ -34,11 +33,12 @@ class Commerce_controller extends CI_Controller
         $data["province"] = $this->input->get('province');
         $data["country"] = $this->input->get('country');
 
-        // En caso de recibir multiples comercios, los separo en campos independientes
-        $data = $this->utils->replace($data, "+", " ");
-        $data = $this->utils->replace($data, "\"", "");
+        $data = $this->utils->replace($data, "\"", "");     // elimino las comillas.
 
-        if ($this->Commerce_model->commerce_exists($data["name"], $data["address"], $data["city"], $data["province"])) {
+        // Armo la consulta de busqueda en el arreglo.
+        $where = array("name" => $data["name"], "address" => $data["name"], "city" => $data["city"]);
+
+        if ($this->Commerce->exists($where)) {
             $result["registered"] = FALSE;
             $result["message"] = "El comercio ya existe";
         } else {
@@ -54,16 +54,9 @@ class Commerce_controller extends CI_Controller
     */
     private function insert_commerce($data)
     {
-        $insert = $this->Commerce_model->register_trade($data["name"], $data["address"], $data["latitude"], $data["longitude"],
-                                                        $data["city"], $data["province"], $data["country"]);
+        $result["registered"] = $this->Commerce->create($data);
+        $result["message"] = ($result["registered"]) ? "Comercio registrado con exito" : "Hubo un error al insertar el comercio";
 
-        if ($insert) {
-            $result["registered"] = TRUE;
-            $result["message"] = "Comercio registrado con exito";
-        } else {
-            $result["registered"] = FALSE;
-            $data["message"] = "Hubo un error al insertar el comercio, intentelo de nuevo";
-        }
         return $result;
     }
 
@@ -74,37 +67,34 @@ class Commerce_controller extends CI_Controller
      */
     public function businesses()
     {
-        //$result = $this->Commerce_model->get_businesses();
-        $result = $this->Commerce_model->findAll();
+        $result = $this->Commerce->find();
         echo json_encode($result);
     }
 
     /**
-    *  Devuelve todos los comercios favoritos de un determinado usuario
+    *  Devuelve todos los comercios favoritos de un determinado usuario.
     *
     * @access public
     */
-    public function favorites_businesses()
+    public function favorites()
     {
         $data["user"] = $this->input->get('user');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        $commerces = $this->Commerce_model->get_businesses();
-        $favorites_businesses = $this->Commerce_model->get_favorites_businesses($data["user"]);
+        $commerces = $this->Commerce->find();
+        $favorites_businesses = $this->Commerce->get_favorites($data["user"]);
 
         for ($i = 0; $i < count($commerces); $i++) {
             $commerce = $commerces[$i];
             $commerce->id = intval($commerce->id);
-            $commerce->favorite = ($this->_is_favorite($commerce->id, $favorites_businesses)) ? TRUE : FALSE;
+            $commerce->favorite = ($this->_is_favorite($commerce->id, $favorites_businesses)) ? 1 : 0;
         }
-
 
         echo json_encode($commerces);
     }
 
     /**
     * Devuelve los comercios favoritos ordenados por cercania (comercios cercanos)
-    * TODO - Indicar si el comercio es favorito o no.
     *
     * @access public
     */
@@ -115,26 +105,38 @@ class Commerce_controller extends CI_Controller
         $data["user"] = $this->input->get('usuario');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        $commerces = $this->Commerce_model->get_businesses();
-        $favorites_businesses = $this->Commerce_model->get_favorites_businesses($data["user"]);
+        $commerces = $this->Commerce->find();
+        $favorites_businesses = $this->Commerce->get_favorites($data["user"]);  // obtengo los comercios favoritos.
 
-        for ($i = 0; $i < count($commerces); $i++) {
-            $distance = $this->utils->calculate_distance($data["latitude"], $data["longitude"], $commerces[$i]->latitude, $commerces[$i]->longitude);
-            $commerce = $commerces[$i];
-            $commerce->distance = $distance;
+        $commerces = $this->_get_favorites_by_distance($commerces, $favorites_businesses, $data);
+        $nearby_businesses = [];    // almaceno los comercios cercanos para posteriormente devolverlos.
 
-            $commerce->favorite = ($this->_is_favorite($commerce->id, $favorites_businesses)) ? 1 : 0;
-        }
-
-        uasort($commerces, array($this, 'cmp')); // Ordeno los comercios de menor a mayor
-
-        $nearby_businesses = [];
-
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < count($commerces) - 1; $i++) {
             array_push($nearby_businesses, next($commerces));
         }
 
         echo json_encode($nearby_businesses);
+    }
+
+    /**
+     * Retorna todos los comercios ordenados por distancia e indicando si es favorito o no
+     * @param  [Array] $commerces todos los comercios registrados.
+     * @param  [Array] $favorites_businesses comercios favoritos del usuario.
+     * @param  [Array] $data  datos recibidos en el request.
+     * @return [Array] todos los comercios ordenados por distancia, mas una bandera
+     * indicando si el comercio es favorito del usuario o no.
+     */
+    private function _get_favorites_by_distance($commerces, $favorites_businesses, $data)
+    {
+        for ($i = 0; $i < count($commerces); $i++) {
+            $distance = $this->utils->calculate_distance($data["latitude"], $data["longitude"], $commerces[$i]->latitude, $commerces[$i]->longitude);
+            $commerce = $commerces[$i];
+            $commerce->distance = $distance;    // seteo la distancia calculada desde la coordenada del usuario.
+            $commerce->favorite = ($this->_is_favorite($commerce->id, $favorites_businesses)) ? 1 : 0;
+        }
+
+        uasort($commerces, array($this, 'sort_by_distance')); // Ordeno los comercios de menor a mayor
+        return $commerces;
     }
 
     /**
@@ -153,11 +155,11 @@ class Commerce_controller extends CI_Controller
     }
 
     /**
-    * Funcion de comparacion para el ordenamiento.
+    * Funcion de comparacion para el ordenamiento usando la distancia del comercio.
     *
     * @access private
     */
-    private function cmp($a, $b)
+    private function sort_by_distance($a, $b)
     {
         if ($a->distance == $b->distance) {
             return 0;

@@ -43,9 +43,7 @@ class User extends MY_Model {
     */
     public function delete_account($mail)
     {
-        $data = array(
-            'active_account' => FALSE
-        );
+        $data = array('active_account' => FALSE);
 
         $this->db->where('mail', $mail);
         $result = $this->db->update('users', $data);

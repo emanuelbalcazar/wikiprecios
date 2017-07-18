@@ -22,7 +22,7 @@ class Commerce extends MY_Model {
     * @param $user
     * @return todos los comercios favoritos del usuario pasado como parametro
     */
-    public function get_favorites_businesses($user)
+    public function get_favorites($user)
     {
         $this->db->select('*');
         $this->db->from('businesses b');

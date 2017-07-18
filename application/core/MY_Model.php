@@ -13,15 +13,17 @@
 class MY_Model extends CI_Model {
 
     /**
-    * Nombre de la tabla de la base de datos a la que le corresponde el modelo.
-    **/
+     * Nombre de la tabla a la cual le corresponde el modelo, se sobreescribe
+     * en cada implementacion.
+     * @var string
+     */
     protected $table = '';
 
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('encrypt');
+        $this->load->library('encryption');
     }
 
     /**
@@ -34,7 +36,7 @@ class MY_Model extends CI_Model {
     public function create($data = [])
     {
         if (isset($data['password'])) {
-            $data['password'] = $this->encrypt->encode($data['password']);
+            $data['password'] = $this->encryption->encrypt($data['password']);
         }
 
         $result = $this->db->insert($this->table, $data);
@@ -43,10 +45,11 @@ class MY_Model extends CI_Model {
 
     /**
     * Busca un registro filtrando por los atributos recibidos como parametro.
+    * Por defecto, si no recibe ningun parametro de busqueda trae todos los registros.
     *
     * @access  public
-    * @param $where condiciones de busqueda en la base de datos.
-    * @return el registro encontrado.
+    * @param $where condiciones de busqueda en la base de datos, puede no estar.
+    * @return el registro encontrado, o Array vacio .
     */
     public function find($where = [])
     {
