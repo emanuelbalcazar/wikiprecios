@@ -13,11 +13,10 @@ class Special_product_controller extends CI_Controller {
     {
         parent::__construct();
         $this->load->database();
-        $this->load->helper(array('url', 'form'));
         $this->load->library('Utils');
-        $this->load->model('Special_product_model');
-        $this->load->model('Item_model');
-        $this->load->model('Category_model');
+        $this->load->model('Special_product');
+        $this->load->model('Item');
+        $this->load->model('Category');
     }
 
     /**
@@ -26,18 +25,18 @@ class Special_product_controller extends CI_Controller {
     *
     * @access public
     */
-    public function register_category()
+    public function register()
     {
-        $data["item"] = $this->input->get('item'); // rubro
-        $data["name"] = $this->input->get('name'); // nombre ej: peceto
+        $data["item_id"] = $this->input->get('item'); // rubro
+        $data["category"] = $this->input->get('name'); // nombre ej: peceto
         $data["unit"] = $this->input->get('unit');
         $data = $this->utils->replace($data, "\"", "");
 
-        if ($this->Category_model->category_exists($data["name"])) {
+        if ($this->Category->exists($data)) {
             $result["message"] = "La categoria ya existe";
             $result["registered"] = FALSE;
         }
-        else if (!$this->Item_model->id_item_exists($data["item"])) {
+        else if (!$this->Item->exists(array("id" => $data["item_id"]))) {
             $result["message"] = "El rubro no existe";
             $result["registered"] = FALSE;
         }
@@ -57,10 +56,11 @@ class Special_product_controller extends CI_Controller {
     */
     private function _insert_category($data)
     {
-        $product_code = $this->_get_special_product_code($data["item"]);
-        $category_inserted = $this->Category_model->register_category($data["item"], $data["name"], $product_code, $data["unit"]);
-        $product_inserted = $this->Special_product_model->register_special_product($product_code, $data["name"]);
+        $product_code = $this->_get_special_product_code($data["item_id"]);
+        $data["special_product_code"] = $product_code;
 
+        $category_inserted = $this->Category->create($data);
+        $product_inserted = $this->Special_product->create(array("product_code" => $product_code, "name" => $data["category"]));
         $result = $this->_check_inserts($category_inserted, $product_inserted);
 
         return $result;
@@ -75,8 +75,8 @@ class Special_product_controller extends CI_Controller {
     */
     private function _get_special_product_code($item)
     {
-        $quantity = $this->Item_model->get_amount_category_by_item($item);
-        $letters = $this->Item_model->get_letters_item($item);
+        $quantity = $this->Item->get_amount_category_by_item($item);
+        $letters = $this->Item->get_letters_item($item);
 
         $quantity = $quantity->quantity + 1;
         $letter = $letters->letter;
@@ -104,8 +104,8 @@ class Special_product_controller extends CI_Controller {
             $data['message'] = "Producto Especial agregado correctamente";
             $data['registered'] = TRUE;
         }
-        $data["rubros"] = $this->Item_model->get_items();
 
+        $data["rubros"] = $this->Item->find();
         return $data;
     }
 
@@ -116,9 +116,9 @@ class Special_product_controller extends CI_Controller {
     */
     public function get_categories_of_items()
     {
-        $data["item"] = $this->input->get('item');
+        $data["item_id"] = $this->input->get('item');
         $data = $this->utils->replace($data, "\"", "");
-        $categories = $this->Category_model->get_categories_of_items($data["item"]);
+        $categories = $this->Category->find($data);
 
         echo json_encode($categories);
     }
@@ -130,7 +130,7 @@ class Special_product_controller extends CI_Controller {
     */
     public function get_items()
     {
-        $items = $this->Item_model->get_items();
+        $items = $this->Item->find();
         echo json_encode($items);
     }
 

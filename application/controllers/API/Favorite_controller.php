@@ -14,8 +14,7 @@ class Favorite_controller extends CI_Controller
     {
         parent::__construct();
         $this->load->database();
-        $this->load->helper(array('url', 'form'));
-        $this->load->model('Favorite_model');
+        $this->load->model('Favorite');
         $this->load->library('utils');
     }
 
@@ -25,14 +24,14 @@ class Favorite_controller extends CI_Controller
     *
     * @access public
     */
-    public function register_favorite_trade()
+    public function register()
     {
         $data["user"] = $this->input->get('user');
         $data["commerce"] = $this->input->get('commerce');
         $data = $this->utils->replace($data, "\"", "");
 
         if ($data["commerce"] < 0) {
-            $result["deleted"] = $this->Favorite_model->delete_all_favorites($data["user"]);
+            $result["deleted"] = $this->Favorite->delete(array("user" => $data["user"]));
             $result["message"] = "Se eliminaron los comercios favoritos satisfactoriamente";
         } else {
             $result = $this->_insert_favorite_trade($data["commerce"], $data["user"]);
@@ -52,10 +51,11 @@ class Favorite_controller extends CI_Controller
     {
         // retorna un arreglo con cada elemento separado por el delimitador
         $favorites_businesses = explode(",", $businesses);
-        $this->Favorite_model->delete_all_favorites($user);
+        $this->Favorite->delete(array("user" => $user));
 
         foreach ($favorites_businesses as $commerce) {
-            $result["registered"] = $this->Favorite_model->register_favorite_trade($user, $commerce);
+            $params = array("user" => $user, "commerce_id" => $commerce);
+            $result["registered"] = $this->Favorite->create($params);
             array_push($result, $commerce);
         }
         return $result;

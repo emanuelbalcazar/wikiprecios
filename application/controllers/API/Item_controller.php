@@ -13,8 +13,7 @@ class Item_controller extends CI_Controller
     {
         parent::__construct();
         $this->load->database();
-        $this->load->helper(array('url', 'form'));
-        $this->load->model('Item_model');
+        $this->load->model('Item');
         $this->load->library('utils');
     }
 
@@ -23,40 +22,19 @@ class Item_controller extends CI_Controller
     *
     * @access public
     */
-    public function register_item()
+    public function register()
     {
         $data["name"] = $this->input->get('name');
         $data = $this->utils->replace($data, "\"", "");
 
-        if ($this->Item_model->item_exists($data["name"])) {
+        if ($this->Item->exists($data)) {
             $result["message"] = "El rubro ya existe";
             $result["registered"] = FALSE;
         } else {
-            $result = $this->_insert_item($data["name"]);
+            $result["registered"] = $this->Item->create($data);
+            $result["message"] = "Rubro agregado correctamente";
         }
         echo json_encode($result);
-    }
-
-    /**
-     * Inserta un nuevo rubro en la base de datos
-     *
-     * @access private
-     * @param $item rubro a insertar
-     * @return $data indicando si el rubro pudo ser insertado
-     */
-    private function _insert_item($name)
-    {
-        $registered = $this->Item_model->register_item($name);
-
-        if ($registered) {
-            $data["message"] = "Rubro agregado correctamente";
-            $data["registered"] = TRUE;
-        } else {
-            $data["message"] = "No se pudo registrar el rubro";
-            $data["registered"] = FALSE;
-        }
-
-        return $data;
     }
 
 }  // Fin del controlador

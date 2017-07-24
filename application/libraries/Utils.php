@@ -52,4 +52,41 @@ class Utils {
         return round($kilometers, 2);
     }
 
+    /**
+     * Envia una peticion post a la ruta indicada como parametro.
+     * @param  [type] $url  [description]
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
+    public function send_post($url, $data)
+    {
+        $data_string = json_encode($data);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                    'Content-Length: '.strlen($data_string)));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return $result;
+    }
+
+    /**
+     * Envia una peticion GET a la ruta solicitada.
+     * @param  [type] $url [description]
+     * @return [type]      [description]
+     */
+    public function send_get($url)
+    {
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return $result;
+    }
+
 }

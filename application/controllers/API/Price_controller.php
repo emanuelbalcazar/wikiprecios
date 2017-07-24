@@ -18,15 +18,16 @@ class Price_controller extends CI_Controller
     private $MAX_ACCUMULATED = 5;
     private $MIN_ACCUMULATED = -3;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
         $this->load->library('utils');
-        $this->load->model('Price_model');
-        $this->load->model('Product_model');
-        $this->load->model('User_model');
-        $this->load->model('Commerce_model');
+        $this->load->model('Price');
+        $this->load->model('Product');
+        $this->load->model('User');
+        $this->load->model('Commerce');
     }
 
     /**
@@ -38,25 +39,26 @@ class Price_controller extends CI_Controller
     *
     * @access public
     */
-    public function register_price()
+    public function register()
     {
         $data["user"] = $this->input->get('user');
-        $data["commerce"] = $this->input->get('commerce');
+        $data["commerce_id"] = $this->input->get('commerce');
         $data["price"] = $this->input->get('price');
-        $data["product"]= $this->input->get('product');
+        $data["product_code"]= $this->input->get('product');
 
+        echo json_encode($data);
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
 
-        $product_exists = $this->Product_model->product_exists($data["product"]);
+        $product_exists = $this->Product->exists($data["product_code"]);
 
         if (!$product_exists) {
-            $this->_insert_product($data["product"]);
+            $this->_insert_product($data["product_code"]);
         }
 
-        $this->_register_price($data["commerce"], $data["user"], $data["price"], $data["product"]);
-        $this->_calculate_price($data["commerce"], $data["price"], $data["product"]);
-        $this->_user_qualify($data["commerce"], $data["user"], $data["price"], $data["product"]);
-        $result = $this->_get_favorites_prices($data["commerce"], $data["user"], $data["product"]);
+        $this->_register_price($data);
+        $this->_calculate_price($data["commerce_id"], $data["price"], $data["product_code"]);
+        $this->_user_qualify($data["commerce_id"], $data["user"], $data["price"], $data["product_code"]);
+        $result = $this->_get_favorites_prices($data["commerce_id"], $data["user"], $data["product_code"]);
 
         echo json_encode($result);
     }
@@ -71,17 +73,8 @@ class Price_controller extends CI_Controller
     */
     private function _insert_product($product)
     {
-        $insert_product = $this->Product_model->register_product($product);
+        $insert_product = $this->Product->create(array("product_code" => $product));
         $this->IS_NEW_PRODUCT = TRUE;
-
-        if ($insert_product) {
-            $result["message"] = "El producto se registro correctamente";
-            $result["registered"] = TRUE;
-        } else {
-            $result["message"] = "El producto no pudo ser registrado";
-            $result["registered"] = FALSE;
-        }
-        echo json_encode($result);
     }
 
     // -------------------------------------------------------------------------
@@ -95,18 +88,10 @@ class Price_controller extends CI_Controller
     * @param $price precio del producto
     * @param $product codigo del producto a registrar
     */
-    private function _register_price($commerce, $user, $price, $product)
+    private function _register_price($data)
     {
-        $insert = $this->Price_model->register_price($commerce, $user, $price, $product);
-
-        if ($insert) {
-            $result["message"] = "El precio se registro correctamente";
-            $result["registered"] = TRUE;
-        } else {
-            $result["message"] = "El precio no pudo ser registrado";
-            $result["registered"] = FALSE;
-        }
-        // echo json_encode($result);
+        $data["date"] = date("Y-m-d");
+        $insert = $this->Price->create($data);
     }
 
     // -------------------------------------------------------------------------
@@ -124,7 +109,7 @@ class Price_controller extends CI_Controller
         if ($this->IS_NEW_PRODUCT) {
             $price_2 = 0;
             $price_1 = $price;
-            $ok = $this->Price_model->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price);
+            $ok = $this->Price->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price);
         } else {
             $this->_existing_calculate_price($commerce, $product);
         }
@@ -141,11 +126,11 @@ class Price_controller extends CI_Controller
     private function _existing_calculate_price($commerce, $product)
     {
         $days = 5; // Como parametro inicial, tomo 5 dias previos de precios registrados.
-        $all_prices = $this->Price_model->get_last_prices($commerce, $product, $days);
+        $all_prices = $this->Price->get_last_prices($commerce, $product, $days);
 
         if (count($all_prices) < 10) {  // Si tengo pocos precios, pido datos de los ultimos 10 dias.
             $days = 10;
-            $all_prices = $this->Price_model->get_last_prices($commerce, $product, $days);
+            $all_prices = $this->Price->get_last_prices($commerce, $product, $days);
         }
         $this->_calculate_possible_prices($all_prices, $commerce, $product);
     }
@@ -233,7 +218,7 @@ class Price_controller extends CI_Controller
 
         if ($score > $this->DIFF_SCORE) {
            $price_2 = 0;
-           $this->Price_model->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1);
+           $this->Price->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1);
         }
         else if (count($possible_prices > 1)) {
            $this->_insert_new_calculated_price($commerce, $product, $price_1, $price_2);
@@ -252,13 +237,13 @@ class Price_controller extends CI_Controller
     private function _insert_new_calculated_price($commerce, $product, $price_1, $price_2)
     {
         if ($price_1 > $price_2 && $price_2 != 0) {
-           $ok = $this->Price_model->register_new_price_calculated($commerce, $product, $price_2, $price_1, "$".$price_2."- $".$price_1);
+           $ok = $this->Price->register_new_price_calculated($commerce, $product, $price_2, $price_1, "$".$price_2."- $".$price_1);
         }
         else if ($price_2 != 0) {
-           $ok = $this->Price_model->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1."- $".$price_2);
+           $ok = $this->Price->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1."- $".$price_2);
         }
         else {
-           $ok = $this->Price_model->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1);
+           $ok = $this->Price->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price_1);
        }
    }
 
@@ -275,16 +260,16 @@ class Price_controller extends CI_Controller
    */
    private function _user_qualify($commerce, $user, $price, $product)
    {
-       $prices = $this->Price_model->get_product_prices($product, $commerce);
-       $user = $this->User_model->find_user_by_email($user);
-       $qualification = $user->qualification;
-       $accumulated = $user->accumulated;
+       $prices = $this->Price->get_product_prices($product, $commerce);
+       $user = $this->User->find(array("mail" => $user));
+       $qualification = $user[0]->qualification;
+       $accumulated = $user[0]->accumulated;
 
        $diff_1 = abs($prices->price_1 - $price);
        $diff_2 = abs($prices->price_2 - $price);
 
        $accepted = $this->_price_accepted($diff_1, $diff_2, $price);
-       $this->_update_qualify($accepted, $user->mail, $qualification, $accumulated);
+       $this->_update_qualify($accepted, $user[0]->mail, $qualification, $accumulated);
    }
 
    /**
@@ -347,7 +332,10 @@ class Price_controller extends CI_Controller
                $qualification++;
            }
        }
-       $this->User_model->update_rating($user, $qualification, $accumulated);
+
+       $where = array("mail" => $user);
+       $data = array("qualification" => $qualification, "accumulated" => $accumulated);
+       $this->User->update($where, $data);
    }
 
    /**
@@ -370,7 +358,10 @@ class Price_controller extends CI_Controller
                $qualification--;
            }
         }
-        $this->User_model->update_rating($user, $qualification, $accumulated);
+
+        $where = array("user" => $user);
+        $data = array("qualification" => $qualification, "accumulated" => $accumulated);
+        $this->User->update($where, $data);
     }
 
     // -------------------------------------------------------------------------
@@ -387,12 +378,12 @@ class Price_controller extends CI_Controller
     */
     private function _get_favorites_prices($commerce, $user, $product)
     {
-        $current_commerce = $this->Commerce_model->find_commerce_by_id($commerce);
+        $current_commerce = $this->Commerce->find(array("id" => $commerce));
 
-        $favorites_prices = $this->Price_model->get_favorites_prices($product, $user, $commerce);
+        $favorites_prices = $this->Price->get_favorites_prices($product, $user, $commerce);
         $favorites_prices = $this->order_by_distance($favorites_prices, $current_commerce);
 
-        $not_favorites_prices = $this->Price_model->get_prices_that_are_not_favorites($product, $user, $commerce);
+        $not_favorites_prices = $this->Price->get_prices_that_are_not_favorites($product, $user, $commerce);
         $not_favorites_prices = $this->order_by_distance($not_favorites_prices, $current_commerce);
 
         for ($i = 0; $i < count($not_favorites_prices); $i++) {
@@ -412,7 +403,7 @@ class Price_controller extends CI_Controller
     private function order_by_distance($array, $current_commerce)
     {
        for ($i = 0; $i < count($array); $i++) {
-           $commerce_data = $this->Commerce_model->find_commerce_by_id($array[$i]->id);
+           $commerce_data = $this->Commerce->find(array("id" => $array[$i]->id));
            $distance = $this->utils->calculate_distance($current_commerce->latitude, $current_commerce->longitude, $commerce_data->latitude, $commerce_data->longitude);
            $array[$i]->distance = $distance;
        }
@@ -454,7 +445,7 @@ class Price_controller extends CI_Controller
        $data["product"]= $this->input->get('product');
        $data = $this->utils->replace($data, "\"", "");
 
-       $result = $this->Price_model->get_possible_prices($data["commerce"] , $data["product"]);
+       $result = $this->Price->get_possible_prices($data["commerce"] , $data["product"]);
        echo json_encode($result);
    }
 

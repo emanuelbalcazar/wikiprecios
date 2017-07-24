@@ -50,13 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['altaComercioAdm'] = "Commerce_controller/register_trade_as_administrator";
-$route["productoEspecial"] = "Special_product_controller/items_view";
-$route["ImportarCsv"] = "Price_controller/register_massive_price";
-$route["CargarCsv"] = "CsvController/importcsv";
-
-/* ------------------------- Rutas de servicios  -------------------------- */
-$route['default_controller'] = "Login_web_controller/load_login_view";
+/* ------------------------- Rutas de servicios rest  -------------------------- */
+$route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -72,48 +67,46 @@ $route['api/comercios'] = "API/Commerce_controller/businesses";
 $route['api/comercios/favoritos'] = "API/Commerce_controller/favorites";
 $route['api/comercios/cercanos'] = "API/Commerce_controller/nearby_businesses";
 
-$route['registrar_favoritos'] = "mobile/Favorite_controller/register_favorite_trade";
+// rutas asociadas a comercios favoritos.
+$route['api/favorito/registrar'] = "API/Favorite_controller/register";
 
-$route['registrar_producto_especial'] = "mobile/Special_product_controller/register_category";
-$route['categorias_rubro'] = "mobile/Special_product_controller/get_categories_of_items";
-$route['registrar_rubro'] = "mobile/Item_controller/register_item";
-$route['rubros'] = "mobile/Special_product_controller/get_items";
+// rutas asociadas a categorias de productos y rubros.
+$route['api/categoria/registrar'] = "API/Special_product_controller/register";
+$route['api/rubro/categorias'] = "API/Special_product_controller/get_categories_of_items";
+$route['api/rubros'] = "API/Special_product_controller/get_items";
+$route['api/rubro/registrar'] = "API/Item_controller/register";
 
-$route['registrar_precio'] = "mobile/Price_controller/register_price";
-$route['precio_sugerido'] = "mobile/Price_controller/get_possible_prices";
+// rutas asociadas a precios de productos.
+$route['api/precio/registrar'] = "API/Price_controller/register";
+$route['api/precio/sugerido'] = "API/Price_controller/get_possible_prices";
 
-/* ------------------------- Rutas de servicios web -------------------------- */
+/* ------------------------- Rutas de servicios web --------------------------- */
+$route['login'] = "Login_controller/index";
+$route['recuperar_clave'] = "Forgot_password_controller/index";
+$route['home'] = "Home_controller/index";
 
-$route['menu_login_administrador'] = "Login_web_controller/load_login_view";
-$route['login_administrador'] = "Login_web_controller/login";
-$route['menu_administrador'] = "Login_web_controller/menu";
-$route['menu_recuperar_clave'] = "Login_web_controller/load_reset_password_view";
-$route['recuperar_clave'] = "Login_web_controller/reset_password";
-$route['cerrar_sesion'] = "Login_web_controller/logout";
+$route['cerrar_sesion'] = "Account_controller/logout";
+$route['desactivar_cuenta'] = "Account_controller/delete";
+$route['cambiar_clave'] = "Account_controller/change";
 
-$route['menu_desactivar_cuenta'] = "Administrator_account_controller/load_delete_account_view";
-$route['desactivar_cuenta'] = "Administrator_account_controller/delete_account";
-$route['menu_cambiar_clave'] = "Administrator_account_controller/load_change_password_view";
-$route['cambiar_clave_admin'] = "Administrator_account_controller/change_password";
-
-$route['menu_precios_masivos'] = "Price_web_controller/load_masive_price_view";
-$route['precios_masivos'] = "Price_web_controller/load_masive_price";
-
-$route['menu_nuevo_comercio'] = "Commerce_web_controller/load_commerce_view";
-$route['nuevo_comercio'] = "Commerce_web_controller/load_commerce";
-
-$route['menu_comercios_masivos'] = "Commerce_web_controller/load_masive_businesses_view";
-$route['comercios_masivos'] = "Commerce_web_controller/load_masive_businesses";
-
-$route['menu_nuevo_producto_especial'] = "Special_product_web_controller/load_special_product_view";
-$route['nuevo_producto_especial'] = "Special_product_web_controller/load_special_product";
-$route['menu_productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products_view";
-$route['productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products";
-
-$route['menu_nuevo_rubro'] = "Item_web_controller/load_item_view";
-$route['nuevo_rubro'] = "Item_web_controller/load_item";
-$route['menu_listar_rubros'] = "Item_web_controller/load_list_items_view";
-$route['buscar_rubro'] = "Item_web_controller/search_item";
+$route['comercios/nuevo'] = "Commerce_controller/new";
+$route['comercios/cargar'] = "Commerce_controller/load";
+// $route['menu_precios_masivos'] = "Price_web_controller/load_masive_price_view";
+$route['precios/cargar'] = "Price_controller/load";
+//
+// $route['nuevo_comercio'] = "Commerce_web_controller/load_commerce";
+//
+// $route['menu_comercios_masivos'] = "Commerce_web_controller/load_masive_businesses_view";
+//
+// $route['menu_nuevo_producto_especial'] = "Special_product_web_controller/load_special_product_view";
+// $route['nuevo_producto_especial'] = "Special_product_web_controller/load_special_product";
+// $route['menu_productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products_view";
+// $route['productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products";
+//
+// $route['menu_nuevo_rubro'] = "Item_web_controller/load_item_view";
+// $route['nuevo_rubro'] = "Item_web_controller/load_item";
+// $route['menu_listar_rubros'] = "Item_web_controller/load_list_items_view";
+// $route['buscar_rubro'] = "Item_web_controller/search_item";
 
 
 

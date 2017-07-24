@@ -51,6 +51,15 @@ class Files {
     }
 
     /**
+    * @access  public
+    * @param  $array retorna los datos leidos en el archivo.
+    */
+    public function get_data()
+    {
+        return $this->CI->csvimport->get_array($this->file_path);
+    }
+
+    /**
     * Inicia la carga de los datos utilizando el modelo para crear los nuevos registros.
     *
     * @access  public
