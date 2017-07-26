@@ -72,12 +72,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-
+//Test ignore
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'ema',
-	'password' => 'ema',  
+	'password' => 'ema',
 	'database' => 'wikiprecios',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
