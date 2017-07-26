@@ -1,0 +1,45 @@
+NUEVAS 2017:
+
+http://localhost/wikiprecios/api/usuario/registrar/?password="emanuel"&mail="emanuelbalcazar13@gmail.com"&name="emanuel"&surname="balcazar"
+
+http://localhost/wikiprecios/api/usuario/login/?mail="emanuelbalcazar13@gmail.com"&password="emanuel"
+
+http://localhost/wikiprecios/api/usuario/cambiar_clave/?mail="emanuelbalcazar13@gmail.com"&password="emanuel"
+
+http://localhost/wikiprecios/api/usuario/eliminar_cuenta/?mail="emanuelbalcazar13@gmail.com"&password="emanuel"
+
+
+http://localhost/wikiprecios/api/comercio/registrar/?name="La anonima"&address="Jujuy 1330"&latitude=-42.7805146&longitude=-65.0447228&city="Puerto Madryn"&province="Chubut"&country="Argentina"
+
+http://localhost/wikiprecios/api/comercios/
+
+http://localhost/wikiprecios/api/comercios/favoritos/?user="emanuelbalcazar13@gmail.com" 
+
+http://localhost/wikiprecios/api/comercios/cercanos/?latitud=-42.785849&longitud=-65.005789&usuario="emanuelbalcazar13@gmail.com"
+
+
+http://localhost/wikiprecios/api/favorito/registrar/?user="emanuelbalcazar13@gmail.com"&commerce=1,2,3
+
+http://localhost/wikiprecios/api/favorito/registrar/?user="emanuelbalcazar13@gmail.com"&commerce=-1
+
+http://localhost/wikiprecios/api/categoria/registrar/?item=1&name="peceto"&unit="kg"
+
+http://localhost/wikiprecios/api/rubro/categorias/?item=1
+
+http://localhost/wikiprecios/api/rubro/registrar/?name="cosmetica"
+
+http://localhost/wikiprecios/api/rubros/  (Trae todos los rubros registrados)
+
+http://localhost/wikiprecios/api/precio/registrar/?user="emanuelbalcazar13@gmail.com"&commerce=1&price=20&product="7791615000426"
+
+http://localhost/wikiprecios/api/precio/sugerido/?commerce=1&product="7791615000426"
+
+
+ADMINISTRADOR:
+
+http://localhost/wikiprecios/
+
+http://localhost/wikiprecios/login_administrador/
+
+http://localhost/wikiprecios/menu_administrador/
+
