@@ -91,14 +91,14 @@ $route['cambiar_clave'] = "Account_controller/change";
 
 $route['comercios/nuevo'] = "Commerce_controller/new";
 $route['comercios/cargar'] = "Commerce_controller/load";
-// $route['menu_precios_masivos'] = "Price_web_controller/load_masive_price_view";
+
 $route['precios/cargar'] = "Price_controller/load";
-//
+
 // $route['nuevo_comercio'] = "Commerce_web_controller/load_commerce";
-//
+
 // $route['menu_comercios_masivos'] = "Commerce_web_controller/load_masive_businesses_view";
-//
-// $route['menu_nuevo_producto_especial'] = "Special_product_web_controller/load_special_product_view";
+
+$route['producto/nuevo'] = "Special_product_controller/new";
 // $route['nuevo_producto_especial'] = "Special_product_web_controller/load_special_product";
 // $route['menu_productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products_view";
 // $route['productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products";

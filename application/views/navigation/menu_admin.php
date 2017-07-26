@@ -34,7 +34,7 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Productos<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= base_url('menu_nuevo_producto_especial'); ?>">Nuevo Producto Especial</a></li>
+                            <li><a href="<?= base_url('producto/nuevo'); ?>">Nuevo Producto Especial</a></li>
                             <li><a href="<?= base_url('menu_productos_especiales_masivos'); ?>">Cargar Desde Archivo</a></li>
                         </ul>
                     </li>

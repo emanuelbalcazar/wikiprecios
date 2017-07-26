@@ -29,7 +29,7 @@ class Home_controller extends CI_Controller
         if (!$this->session->userdata('user')) {
             redirect(base_url());
         }
-        
+
         $data["user"] = $this->session->userdata('user');
         $this->load->view('header/header');
         $this->load->view('navigation/menu_admin', $data);
