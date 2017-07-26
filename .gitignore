@@ -8,6 +8,7 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+## ------------------------- cambios
 !application/config/database.php
 
 user_guide_src/build/*
