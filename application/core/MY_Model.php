@@ -29,7 +29,7 @@ class MY_Model extends CI_Model {
     /**
     * Crea un nuevo registro en la base de datos.
     *
-    * @access  public
+    * @access public
     * @param $data
     * @return TRUE en caso de la creacion exitosa, FALSE en caso contrario.
     */
@@ -47,9 +47,9 @@ class MY_Model extends CI_Model {
     * Busca un registro filtrando por los atributos recibidos como parametro.
     * Por defecto, si no recibe ningun parametro de busqueda trae todos los registros.
     *
-    * @access  public
+    * @access public
     * @param $where condiciones de busqueda en la base de datos, puede no estar.
-    * @return el registro encontrado, o Array vacio .
+    * @return Record el registro encontrado, o arreglo vacio en otro caso.
     */
     public function find($where = [])
     {
@@ -62,7 +62,7 @@ class MY_Model extends CI_Model {
     /**
     * Actualiza un registro con los datos indicados como parametros.
     *
-    * @access  public
+    * @access public
     * @param $where condiciones de busqueda para el registro a actualizar.
     * @param $data informacion a actualizar.
     * @return TRUE si el registro pudo ser actualizado.
@@ -78,9 +78,9 @@ class MY_Model extends CI_Model {
     /**
     * Actualiza un registro con los datos indicados como parametros.
     *
-    * @access  public
+    * @access public
     * @param $where condiciones de busqueda para el registro a borrar.
-    * @return TRUE si el registro pudo ser borrado.
+    * @return Number cantidad de columnas afectadas.
     */
     public function delete($where = [])
     {
@@ -91,8 +91,8 @@ class MY_Model extends CI_Model {
     }
 
     /**
-    * @access  public
-    * @return retorna los campos de la tabla en la base de datos.
+    * @access public
+    * @return Fields retorna los campos de la tabla en la base de datos.
     */
     public function get_schema()
     {
@@ -103,7 +103,7 @@ class MY_Model extends CI_Model {
     /**
     * Verifica si un registro existe.
     *
-    * @access  public
+    * @access public
     * @return TRUE si existe, FALSE en caso contrario.
     */
     public function exists($where = [])

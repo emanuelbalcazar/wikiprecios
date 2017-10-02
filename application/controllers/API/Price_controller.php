@@ -49,7 +49,8 @@ class Price_controller extends CI_Controller
         echo json_encode($data);
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
 
-        $product_exists = $this->Product->exists($data["product_code"]);
+        $where = array("product_code" => $data["product_code"]);
+        $product_exists = $this->Product->exists($where);
 
         if (!$product_exists) {
             $this->_insert_product($data["product_code"]);

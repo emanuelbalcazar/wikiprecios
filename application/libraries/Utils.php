@@ -38,7 +38,7 @@ class Utils {
     * @param   $longitude1
     * @param   $latitude2
     * @param   $longitude2
-    * @return  la distancia calculada en kilometros con 2 decimales de precision.
+    * @return  distance distancia calculada en kilometros con 2 decimales de precision.
     */
     public function calculate_distance($latitude1, $longitude1, $latitude2, $longitude2)
     {
