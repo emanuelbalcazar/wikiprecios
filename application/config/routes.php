@@ -94,21 +94,14 @@ $route['comercios/cargar'] = "Commerce_controller/load";
 
 $route['precios/cargar'] = "Price_controller/load";
 
-// $route['nuevo_comercio'] = "Commerce_web_controller/load_commerce";
+$route['productos/nuevo'] = "Special_product_controller/new";
+$route['productos/cargar'] = "Special_product_controller/load";
 
-// $route['menu_comercios_masivos'] = "Commerce_web_controller/load_masive_businesses_view";
 
-$route['producto/nuevo'] = "Special_product_controller/new";
-// $route['nuevo_producto_especial'] = "Special_product_web_controller/load_special_product";
-// $route['menu_productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products_view";
-// $route['productos_especiales_masivos'] = "Special_product_web_controller/load_masive_special_products";
-//
-// $route['menu_nuevo_rubro'] = "Item_web_controller/load_item_view";
+$route['rubros/nuevo'] = "Item_controller/new";
 // $route['nuevo_rubro'] = "Item_web_controller/load_item";
 // $route['menu_listar_rubros'] = "Item_web_controller/load_list_items_view";
 // $route['buscar_rubro'] = "Item_web_controller/search_item";
-
-
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test_user'] = "test/Test_user_model/test";

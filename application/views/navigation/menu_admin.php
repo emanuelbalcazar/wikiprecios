@@ -34,8 +34,8 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Productos<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= base_url('producto/nuevo'); ?>">Nuevo Producto Especial</a></li>
-                            <li><a href="<?= base_url('menu_productos_especiales_masivos'); ?>">Cargar Desde Archivo</a></li>
+                            <li><a href="<?= base_url('productos/nuevo'); ?>">Nuevo Producto Especial</a></li>
+                            <li><a href="<?= base_url('productos/cargar'); ?>">Cargar Desde Archivo</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -44,8 +44,8 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Rubros<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= base_url('menu_nuevo_rubro'); ?>">Nuevo Rubro</a></li>
-                            <li><a href="<?= base_url('menu_listar_rubros'); ?>">Listar Rubros</a></li>
+                            <li><a href="<?= base_url('rubros/nuevo'); ?>">Nuevo Rubro</a></li>
+                            <li><a href="<?= base_url('rubros'); ?>">Listar Rubros</a></li>
                         </ul>
                     </li>
                 </ul>
