@@ -97,6 +97,7 @@ $route['precios/cargar'] = "Price_controller/load";
 $route['productos/nuevo'] = "Special_product_controller/new";
 $route['productos/cargar'] = "Special_product_controller/load";
 
+$route['comercios/nuevo'] = "Commerce_controller/new";
 
 $route['rubros/nuevo'] = "Item_controller/new";
 // $route['nuevo_rubro'] = "Item_web_controller/load_item";

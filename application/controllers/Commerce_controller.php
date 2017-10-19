@@ -22,6 +22,26 @@ class Commerce_controller extends CI_Controller
     }
 
     /**
+    * Carga en el navegador la pantalla de nuevo producto especial.
+    * @access public
+    */
+    public function new()
+    {
+        if (!$this->session->userdata('user')) {
+            redirect(base_url());
+        }
+
+        $data["user"] = $this->session->userdata('user');
+        // $data["items"] = $this->Item->find();
+        $this->load->view('header/header');
+        $this->load->view('navigation/menu_admin', $data);
+        $this->load->view('footer/toast', $this->session->flashdata('messages'));
+        $this->load->view('commerce/commerce_view', $data);
+    }
+
+
+
+    /**
     * Carga en el navegador la pantalla de carga de comercio masivo.
     *
     * @access public
