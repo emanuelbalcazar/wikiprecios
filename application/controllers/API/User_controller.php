@@ -150,6 +150,15 @@ class User_controller extends CI_Controller
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
+        $founded = $this->User->find(array("mail" => $data["mail"]));
+
+        if (!$this->User->exists(array("mail" => $data["mail"]))) {
+            $result["message"] = "No existe el usuario con el email: ".$data["mail"];
+            $result["updated"] = FALSE;
+            echo json_encode($result); 
+            return;           
+        }
+
         $data["password"] = $this->encryption->encrypt($data["password"]);  // encripto la contraseña
 
         $where = array("mail" => $data["mail"]);
@@ -171,6 +180,14 @@ class User_controller extends CI_Controller
         $data["mail"] = $this->input->get('mail');
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
+
+        
+        if (!$this->User->exists(array("mail" => $data["mail"]))) {
+            $result["message"] = "No existe el usuario con el email: ".$data["mail"];
+            $result["deleted"] = FALSE;
+            echo json_encode($result); 
+            return;           
+        }
 
         if ($this->_is_valid_password($data["mail"], $data["password"])) {  // Si la contraseña es correcta
             $this->User->delete_account($data["mail"]);

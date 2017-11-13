@@ -55,6 +55,9 @@ $route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// rutas de utileria
+$route['api/info'] = "API/Utils_controller/version";
+
 // rutas asociadas a usuarios.
 $route['api/usuario/registrar'] = "API/User_controller/register";
 $route['api/usuario/login'] = "API/User_controller/login";
@@ -105,13 +108,13 @@ $route['rubros/nuevo'] = "Item_controller/new";
 // $route['buscar_rubro'] = "Item_web_controller/search_item";
 
 /* -------------------------- Rutas de Testing ----------------------------- */
-$route['test_user'] = "test/Test_user_model/test";
-$route['test_commerce'] = "test/Test_commerce_model/test";
-$route['test_favorite'] = "test/Test_favorite_model/test";
-$route['test_item'] = "test/Test_item_model/test";
-$route['test_category'] = "test/Test_category_model/test";
-$route['test_special_product'] = "test/Test_special_product_model/test";
-$route['test_product'] = "test/Test_product_model/test";
+$route['test/user'] = "test/Test_user_model/test";
+//$route['test_commerce'] = "test/Test_commerce_model/test";
+//$route['test_favorite'] = "test/Test_favorite_model/test";
+//$route['test_item'] = "test/Test_item_model/test";
+//$route['test_category'] = "test/Test_category_model/test";
+//$route['test_special_product'] = "test/Test_special_product_model/test";
+//$route['test_product'] = "test/Test_product_model/test";
 
 $route['testPrice'] = "test/Test_price_model/test";
 

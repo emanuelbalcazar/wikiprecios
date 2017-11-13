@@ -32,7 +32,7 @@ class Migration_create_users extends CI_Migration {
             'password' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 500,
-                'null' => FALSE
+                'null' => TRUE
             ),
             'qualification' => array(
                 'type' => 'INT',
@@ -43,6 +43,11 @@ class Migration_create_users extends CI_Migration {
                 'type' => 'INT',
                 'constraint' => 5,
                 'null' => FALSE
+            ),
+            'facebook_id' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 500,
+                'null' => TRUE
             ),
             'active_account' => array(
                 'type' => 'BOOLEAN'

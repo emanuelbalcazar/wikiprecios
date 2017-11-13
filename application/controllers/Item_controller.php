@@ -47,6 +47,19 @@ class Item_controller extends CI_Controller {
             $this->session->set_flashdata('messages', $result);
             redirect(base_url().'rubros/nuevo');
         }
+
+        if ($this->Item->exists($data)) {
+            $result['error'] = "El rubro ya estaba registrado";
+            $this->session->set_flashdata('messages', $result);
+            redirect(base_url().'rubros/nuevo');
+        } else {
+            $url = base_url().'api/rubros/registrar/?name='.$data["name"];
+            $response = $this->utils->send_get($url);
+
+            $result['success'] = "El producto especial se registro correctamente";
+            $this->session->set_flashdata('messages', $result);
+            redirect(base_url().'productos/nuevo');
+        }
     }
 
 } // Fin controlador

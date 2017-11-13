@@ -9,8 +9,8 @@
  */
 class Seeder extends CI_Controller
 {
-    public $route = '/controllers/seeds/files/';
-    public $file_path;
+    protected $route = '/controllers/seeds/files/';
+    protected $file_path;
 
     public function __construct()
     {

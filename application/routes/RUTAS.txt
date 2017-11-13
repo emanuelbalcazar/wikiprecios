@@ -38,8 +38,3 @@ http://localhost/wikiprecios/api/precio/sugerido/?commerce=1&product="7791615000
 ADMINISTRADOR:
 
 http://localhost/wikiprecios/
-
-http://localhost/wikiprecios/login_administrador/
-
-http://localhost/wikiprecios/menu_administrador/
-
