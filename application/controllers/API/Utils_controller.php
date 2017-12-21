@@ -29,4 +29,4 @@ class Utils_controller extends CI_Controller
         echo json_encode($version);
     }
 
-}  // Fin del controlador
+}

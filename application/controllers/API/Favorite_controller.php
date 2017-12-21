@@ -61,4 +61,4 @@ class Favorite_controller extends CI_Controller
         return $result;
     }
 
-} // Fin del controlador
+}

@@ -167,4 +167,4 @@ class Commerce_controller extends CI_Controller
         return ($a->distance < $b->distance) ? -1 : 1;
     }
 
-} // Fin del controlador
+}

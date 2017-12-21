@@ -37,4 +37,4 @@ class Item_controller extends CI_Controller
         echo json_encode($result);
     }
 
-}  // Fin del controlador
+} 

@@ -134,4 +134,4 @@ class Special_product_controller extends CI_Controller {
         echo json_encode($items);
     }
 
-} // Fin del controlador
+}
