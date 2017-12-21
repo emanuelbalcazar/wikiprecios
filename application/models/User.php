@@ -12,7 +12,6 @@ class User extends MY_Model {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
         $this->load->helper('url');
         $this->table = 'users';
     }
@@ -22,7 +21,7 @@ class User extends MY_Model {
     *
     * @access  public
     * @param $mail
-    * @return la calificacion del usuario
+    * @return Number calificacion del usuario
     */
     public function get_qualification($mail)
     {
@@ -38,8 +37,8 @@ class User extends MY_Model {
     * la base de datos.
     *
     * @access  public
-    * @param type $mail
-    * @return boolean true si pudo actualizar el estado de la cuenta.
+    * @param $mail
+    * @return Boolean TRUE si pudo actualizar el estado de la cuenta.
     */
     public function delete_account($mail)
     {

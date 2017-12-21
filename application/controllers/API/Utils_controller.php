@@ -23,7 +23,7 @@ class Utils_controller extends CI_Controller
     {
         $version["name"] = "wikiprecios";
         $versiom["version"] = "3.0";
-        $version["date"] = "noviembre 2017";
+        $version["date"] = "diciembre 2017";
         $version["php"] = phpversion();
 
         echo json_encode($version);

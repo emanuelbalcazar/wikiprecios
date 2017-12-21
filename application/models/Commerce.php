@@ -20,7 +20,7 @@ class Commerce extends MY_Model {
     /**
     * @access  public
     * @param $user
-    * @return todos los comercios favoritos del usuario pasado como parametro
+    * @return Array todos los comercios favoritos del usuario pasado como parametro
     */
     public function get_favorites($user)
     {

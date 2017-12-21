@@ -25,7 +25,7 @@ class User_controller extends CI_Controller
     *
     * @access public
     */
-    public function register()
+    public function create()
     {
         $data["password"] = $this->input->get('password');
         $data["mail"] = $this->input->get('mail');
@@ -40,12 +40,11 @@ class User_controller extends CI_Controller
 
     /**
     * Valida los datos ingresados del usuario a registrar.
-    *
     * @access private
     */
     private function _validate_data($data)
     {
-        if ($this->_exists_email($data["mail"])) {
+        if ($this->User->exists(array("mail" => $data["mail"]))) {
             $result["mensaje"] = "El mail ingresado ya fue utilizado en otra cuenta";
             $result["registrado"] = FALSE;
         } else {
@@ -53,33 +52,6 @@ class User_controller extends CI_Controller
         }
 
         return $result;
-    }
-
-    /**
-    * Valida si el email esta bien formado
-    *
-    * @access private
-    * @param email
-    * @return boolean true si el email esta bien formado.
-    */
-    private function _is_valid_email($mail)
-    {
-        return valid_email($mail);
-    }
-
-    /**
-    * Valida si existe un usuario con el email recibido como parametro
-    *
-    * @access private
-    * @param email
-    * @return boolean true si el email ya fue registrado.
-    */
-    private function _exists_email($mail)
-    {
-        $where = array("mail" => $mail);
-
-        $mail = $this->User->exists($where);
-        return $mail;
     }
 
     /**
@@ -98,107 +70,8 @@ class User_controller extends CI_Controller
         $result["mensaje"] = "Registrado con exito";
 
         return $result;
-    }
+    }    
 
-    /**
-    * Retorna un mensaje indicando si el usuario se loggeo correctamente
-    * TODO - Cambiar el GET por el POST
-    *
-    * @access public
-    */
-    public function login()
-    {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
-        $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
-
-        if ($this->User->exists($data) && $this->_is_valid_password($data["mail"], $data["password"])) {
-            $where = array("mail" => $data["mail"]);
-            $result = $this->User->find($where)[0];
-        } else {
-            $result["noUser"] = 1;
-        }
-
-        echo json_encode($result);
-    }
-
-    /**
-    * Valida si la contraseña recibida corresponde a la cuenta asociada al mail recibido.
-    *
-    * @access private
-    * @param email del usuario
-    * @param $password contraseña ingresada por el usuario
-    * @return boolean true si la contraseña es correcta.
-    */
-    private function _is_valid_password($mail, $password)
-    {
-        $where = array("mail" => $mail);
-        $user = $this->User->find($where);
-        $password_decoded = $this->encryption->decrypt($user[0]->password);
-
-        return ($password_decoded == $password || $user[0]->password == $password);
-    }
-
-    /**
-    * Cambia la contraseña de un usuario por una nueva contraseña ingresada.
-    *
-    * @access public
-    */
-    public function change_password()
-    {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
-        $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
-
-        $founded = $this->User->find(array("mail" => $data["mail"]));
-
-        if (!$this->User->exists(array("mail" => $data["mail"]))) {
-            $result["message"] = "No existe el usuario con el email: ".$data["mail"];
-            $result["updated"] = FALSE;
-            echo json_encode($result); 
-            return;           
-        }
-
-        $data["password"] = $this->encryption->encrypt($data["password"]);  // encripto la contraseña
-
-        $where = array("mail" => $data["mail"]);
-        $fields = array("password" => $data["password"]);
-        $result["updated"] = $this->User->update($where, $fields);
-
-        $result["message"] = ($result["updated"]) ? "La clave se cambio correctamente" : "No se pudo cambiar la clave del usuario";
-        echo json_encode($result);
-    }
-
-    /**
-    * Desactiva la cuenta de un usuario utilizando su mail y contraseña.
-    * Se realiza una baja logica, lo cual los datos del usuario nunca son eliminados.
-    *
-    * @access public
-    */
-    public function delete_account()
-    {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
-        $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
-
-        
-        if (!$this->User->exists(array("mail" => $data["mail"]))) {
-            $result["message"] = "No existe el usuario con el email: ".$data["mail"];
-            $result["deleted"] = FALSE;
-            echo json_encode($result); 
-            return;           
-        }
-
-        if ($this->_is_valid_password($data["mail"], $data["password"])) {  // Si la contraseña es correcta
-            $this->User->delete_account($data["mail"]);
-            $result["message"] = "La cuenta se dio de baja correctamente";
-            $result["deleted"] = TRUE;
-        } else {
-            $result["message"] = "La clave es incorrecta, la cuenta no pudo darse de baja";
-            $result["deleted"] = FALSE;
-        }
-
-        echo json_encode($result);
-    }
+   
 
 } // Fin del controlador

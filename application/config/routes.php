@@ -56,13 +56,14 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // rutas de utileria
-$route['api/info'] = "API/Utils_controller/version";
+$route['api/info']['GET'] = "API/Utils_controller/version";
 
 // rutas asociadas a usuarios.
-$route['api/usuario/registrar'] = "API/User_controller/register";
-$route['api/usuario/login'] = "API/User_controller/login";
-$route['api/usuario/cambiar_clave'] = "API/User_controller/change_password";
-$route['api/usuario/eliminar_cuenta'] = "API/User_controller/delete_account";
+$route['api/usuario/login']['GET'] = "API/Account_controller/login";
+$route['api/usuario/cambiar_clave']['GET'] = "API/Account_controller/change_password";
+$route['api/usuario/eliminar_cuenta']['GET'] = "API/Account_controller/delete_account";
+
+$route['api/usuario/registrar']['GET'] = "API/User_controller/create";
 
 // rutas asociadas a comercios.
 $route['api/comercio/registrar'] = "API/Commerce_controller/register";

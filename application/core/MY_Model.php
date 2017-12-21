@@ -15,7 +15,7 @@ class MY_Model extends CI_Model {
     /**
      * Nombre de la tabla a la cual le corresponde el modelo, se sobreescribe
      * en cada implementacion.
-     * @var string
+     * @var String
      */
     protected $table = '';
 
@@ -31,7 +31,7 @@ class MY_Model extends CI_Model {
     *
     * @access public
     * @param $data
-    * @return TRUE en caso de la creacion exitosa, FALSE en caso contrario.
+    * @return Boolean TRUE en caso de la creacion exitosa, FALSE en caso contrario.
     */
     public function create($data = [])
     {
@@ -65,7 +65,7 @@ class MY_Model extends CI_Model {
     * @access public
     * @param $where condiciones de busqueda para el registro a actualizar.
     * @param $data informacion a actualizar.
-    * @return TRUE si el registro pudo ser actualizado.
+    * @return Boolean TRUE si el registro pudo ser actualizado.
     */
     public function update($where = [], $data = [])
     {

@@ -22,7 +22,7 @@ class Item extends MY_Model {
     *
     * @access  public
     * @param $item rubro
-    * @return cantidad de categorias
+    * @return Number cantidad de categorias
     */
     public function get_amount_category_by_item($item)
     {
@@ -38,7 +38,7 @@ class Item extends MY_Model {
     *
     * @access  public
     * @param $name nombre del rubro
-    * @return las letras del rubro
+    * @return String letras correspondientes al rubro
     */
     public function get_letters_item($id)
     {
@@ -53,7 +53,7 @@ class Item extends MY_Model {
     *
     * @access  public
     * @param $name nombre del rubro
-    * @return el rubro encontrado
+    * @return Record rubro encontrado
     */
     public function search_item($name)
     {

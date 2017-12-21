@@ -22,7 +22,7 @@ class Administrator extends MY_Model {
     * la base de datos.
     *
     * @access  public
-    * @param type $mail
+    * @param $mail
     * @return boolean true si pudo actualizar el estado de la cuenta.
     */
     public function delete_account($mail)
