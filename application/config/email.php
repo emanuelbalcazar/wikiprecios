@@ -12,5 +12,5 @@ $config['smtp_pass'] = 'wikiprecios2017';
 $config['smtp_timeout'] = '5';
 $config['charset'] = 'utf-8';
 $config['newline'] = "\r\n";
-$config['mailtype'] = 'text'; // or html
-$config['validation'] = TRUE; // bool whether to validate email or not
+$config['mailtype'] = 'text';
+$config['validation'] = TRUE;

@@ -15,6 +15,7 @@ class User_controller extends CI_Controller
         parent::__construct();
         $this->load->database();
         $this->load->helper('email');
+        $this->load->helper('url');        
         $this->load->library('encryption');
         $this->load->library('utils');
         $this->load->model('User');
@@ -70,8 +71,15 @@ class User_controller extends CI_Controller
         $result["mensaje"] = "Registrado con exito";
 
         return $result;
-    }    
+    }
 
-   
+    /**
+     * Busca un usuario mediante su ID.
+     * @access public
+     */
+    public function findById($id) {
+        $user = $this->User->find(array("id" => $id));
+        echo json_encode($user);
+    }
 
 } // Fin del controlador
