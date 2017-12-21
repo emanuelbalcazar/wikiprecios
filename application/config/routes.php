@@ -115,8 +115,7 @@ $route['test/user'] = "test/Test_user_model/test";
 //$route['test_category'] = "test/Test_category_model/test";
 //$route['test_special_product'] = "test/Test_special_product_model/test";
 //$route['test_product'] = "test/Test_product_model/test";
-
-$route['testPrice'] = "test/Test_price_model/test";
+//$route['testPrice'] = "test/Test_price_model/test";
 
 /* ------------------------ Ruta de Migraciones ---------------------------- */
 $route['migrate'] = "migrations/Migrate/run";

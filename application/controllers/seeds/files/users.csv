@@ -1,11 +1,11 @@
-password,mail,name,surname,qualification,accumulated,active_account
-emanuel,emanuelbalcazar13@gmail.com,Emanuel,Balcazar,1,0,1
-jorge,sanicojorge@gmail.com,Jorge,Sanico,1,0,1
-rodrigo,rodrigo.renecura@gmail.com,Rodrigo,Rene Cura,1,0,1
-gustavo,gsamec@gmail.com,Gustavo,Samec,1,0,1
-carlos,carlos-aldana@hotmail.com,Carlos,Aldana,1,0,1
-guillermo,gcosentinoster@gmail.com,Guillermo,Cosentino,1,0,1
-juanmanuel,juanmanuelcortez@gmail.com,Juan Manuel,Cortez,1,0,1
-demian,demian.barry@gmail.com,Demian,Barry,1,0,1
-jorge,jdignani@yahoo.com,Jorge,Dignani,1,0,1
-leandro,leandro_diaz@gmail.com,Leandro,Diaz,1,0,1
+password;mail;name;surname;qualification;accumulated;active_account
+emanuel;emanuelbalcazar13@gmail.com;Emanuel;Balcazar;1;0;1
+jorge;sanicojorge@gmail.com;Jorge;Sanico;1;0;1
+rodrigo;rodrigo.renecura@gmail.com;Rodrigo;Rene Cura;1;0;1
+gustavo;gsamec@gmail.com;Gustavo;Samec;1;0;1
+carlos;carlos-aldana@hotmail.com;Carlos;Aldana;1;0;1
+guillermo;gcosentinoster@gmail.com;Guillermo;Cosentino;1;0;1
+juanmanuel;juanmanuelcortez@gmail.com;Juan Manuel;Cortez;1;0;1
+demian;demian.barry@gmail.com;Demian;Barry;1;0;1
+jorge;jdignani@yahoo.com;Jorge;Dignani;1;0;1
+leandro;leandro_diaz@gmail.com;Leandro;Diaz;1;0;1

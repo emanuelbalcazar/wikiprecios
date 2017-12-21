@@ -1,3 +1,3 @@
-price,product_code
-20,123123123
-10,123123123
+price;product_code
+20;123123123
+10;123123123
