@@ -19,8 +19,7 @@ class Commerce_controller extends CI_Controller
     }
 
     /**
-    *  Registra un nuevo comercio en caso de que no exista
-    *
+    * Registra un nuevo comercio en caso de que no exista.
     * @access public
     */
     public function register()
@@ -36,7 +35,7 @@ class Commerce_controller extends CI_Controller
         $data = $this->utils->replace($data, "\"", "");     // elimino las comillas.
 
         // Armo la consulta de busqueda en el arreglo.
-        $where = array("name" => $data["name"], "address" => $data["name"], "city" => $data["city"]);
+        $where = $data;
 
         if ($this->Commerce->exists($where)) {
             $result["registered"] = FALSE;
@@ -44,12 +43,12 @@ class Commerce_controller extends CI_Controller
         } else {
             $result = $this->insert_commerce($data);
         }
+
         echo json_encode($result);
     }
 
     /**
-    * Inserta un nuevo comercio en la Base de Datos
-    *
+    * Inserta un nuevo comercio en la Base de Datos.
     * @access private
     */
     private function insert_commerce($data)
@@ -62,7 +61,6 @@ class Commerce_controller extends CI_Controller
 
     /**
      * Devuelve todos los comercios registrados
-     *
      * @access public
      */
     public function businesses()
@@ -72,8 +70,7 @@ class Commerce_controller extends CI_Controller
     }
 
     /**
-    *  Devuelve todos los comercios favoritos de un determinado usuario.
-    *
+    * Devuelve todos los comercios favoritos de un determinado usuario.
     * @access public
     */
     public function favorites()
@@ -95,7 +92,6 @@ class Commerce_controller extends CI_Controller
 
     /**
     * Devuelve los comercios favoritos ordenados por cercania (comercios cercanos)
-    *
     * @access public
     */
     public function nearby_businesses()
@@ -141,7 +137,6 @@ class Commerce_controller extends CI_Controller
 
     /**
     * Busca un comercio favorito en un arreglo de comercios favoritos existentes.
-    *
     * @access private
     */
     private function _is_favorite($id, $favorites)
@@ -156,7 +151,6 @@ class Commerce_controller extends CI_Controller
 
     /**
     * Funcion de comparacion para el ordenamiento usando la distancia del comercio.
-    *
     * @access private
     */
     private function sort_by_distance($a, $b)

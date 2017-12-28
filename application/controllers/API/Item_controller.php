@@ -31,6 +31,7 @@ class Item_controller extends CI_Controller
             $result["message"] = "El rubro ya existe";
             $result["registered"] = FALSE;
         } else {
+            $data["letter"] = strtoupper(substr($data["name"], 0, 3));
             $result["registered"] = $this->Item->create($data);
             $result["message"] = "Rubro agregado correctamente";
         }

@@ -46,7 +46,6 @@ class Price_controller extends CI_Controller
         $data["price"] = $this->input->get('price');
         $data["product_code"]= $this->input->get('product');
 
-        echo json_encode($data);
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
 
         $where = array("product_code" => $data["product_code"]);
@@ -405,7 +404,7 @@ class Price_controller extends CI_Controller
     {
        for ($i = 0; $i < count($array); $i++) {
            $commerce_data = $this->Commerce->find(array("id" => $array[$i]->id));
-           $distance = $this->utils->calculate_distance($current_commerce->latitude, $current_commerce->longitude, $commerce_data->latitude, $commerce_data->longitude);
+           $distance = $this->utils->calculate_distance($current_commerce[0]->latitude, $current_commerce[0]->longitude, $commerce_data[0]->latitude, $commerce_data[0]->longitude);
            $array[$i]->distance = $distance;
        }
 
