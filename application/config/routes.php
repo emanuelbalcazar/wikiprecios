@@ -64,22 +64,22 @@ $route['api/usuario/cambiar_clave']['GET'] = "API/Account_controller/change_pass
 $route['api/usuario/eliminar_cuenta']['GET'] = "API/Account_controller/delete_account";
 
 $route['api/usuario/registrar']['GET'] = "API/User_controller/create";
-$route['api/usuario/(:num)'] = 'API/User_controller/findById/$1';
+$route['api/usuario/(:num)']['GET'] = 'API/User_controller/findById/$1';
 
 // rutas asociadas a comercios.
-$route['api/comercio/registrar'] = "API/Commerce_controller/register";
-$route['api/comercios'] = "API/Commerce_controller/businesses";
-$route['api/comercios/favoritos'] = "API/Commerce_controller/favorites";
-$route['api/comercios/cercanos'] = "API/Commerce_controller/nearby_businesses";
+$route['api/comercio/registrar']['GET'] = "API/Commerce_controller/register";
+$route['api/comercios']['GET'] = "API/Commerce_controller/businesses";
+$route['api/comercios/favoritos']['GET'] = "API/Commerce_controller/favorites";
+$route['api/comercios/cercanos']['GET'] = "API/Commerce_controller/nearby_businesses";
 
 // rutas asociadas a comercios favoritos.
-$route['api/favorito/registrar'] = "API/Favorite_controller/register";
+$route['api/favorito/registrar']['GET'] = "API/Favorite_controller/register";
 
 // rutas asociadas a categorias de productos y rubros.
-$route['api/categoria/registrar'] = "API/Special_product_controller/register";
-$route['api/rubro/categorias'] = "API/Special_product_controller/get_categories_of_items";
-$route['api/rubros'] = "API/Special_product_controller/get_items";
-$route['api/rubro/registrar'] = "API/Item_controller/register";
+$route['api/categoria/registrar']['GET'] = "API/Special_product_controller/register";
+$route['api/rubro/categorias']['GET'] = "API/Special_product_controller/get_categories_of_items";
+$route['api/rubros']['GET'] = "API/Special_product_controller/get_items";
+$route['api/rubro/registrar']['GET'] = "API/Item_controller/register";
 
 // rutas asociadas a precios de productos.
 $route['api/precio/registrar'] = "API/Price_controller/register";
