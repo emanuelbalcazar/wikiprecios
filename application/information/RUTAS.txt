@@ -13,7 +13,7 @@ http://localhost/wikiprecios/api/comercio/registrar/?name="La anonima"&address="
 
 http://localhost/wikiprecios/api/comercios/
 
-http://localhost/wikiprecios/api/comercios/favoritos/?user="emanuelbalcazar13@gmail.com" 
+http://localhost/wikiprecios/api/comercios/favoritos/?user="emanuelbalcazar13@gmail.com"
 
 http://localhost/wikiprecios/api/comercios/cercanos/?latitud=-42.785849&longitud=-65.005789&usuario="emanuelbalcazar13@gmail.com"
 
