@@ -36,7 +36,7 @@ class Commerce_controller extends CI_Controller
         $this->load->view('header/header');
         $this->load->view('navigation/menu_admin', $data);
         $this->load->view('footer/toast', $this->session->flashdata('messages'));
-        $this->load->view('commerce/commerce_view', $data);
+        $this->load->view('commerce/new_commerce_view', $data);
     }
 
 

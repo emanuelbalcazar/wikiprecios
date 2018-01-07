@@ -82,4 +82,12 @@ class User_controller extends CI_Controller
         echo json_encode($user);
     }
 
+    /**
+     * Retorna todos los usuarios registrados.
+     * @access public
+     */
+    public function findAll() {
+        $users = $this->User->find();
+        echo json_encode($users);
+    }
 }

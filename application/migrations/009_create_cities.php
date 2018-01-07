@@ -17,7 +17,7 @@ class Migration_create_cities extends CI_Migration {
             'postal_code' => array(
                 'type' => 'INT',
                 'constraint' => 50,
-                'null' => FALSE
+                'null' => TRUE
             ),
             'name' => array(
                 'type' => 'VARCHAR',

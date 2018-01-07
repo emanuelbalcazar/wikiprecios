@@ -35,9 +35,8 @@ class MY_Model extends CI_Model {
     */
     public function create($data = [])
     {
-        if (isset($data['password'])) {
+        if (isset($data['password']))
             $data['password'] = $this->encryption->encrypt($data['password']);
-        }
 
         $result = $this->db->insert($this->table, $data);
         return $result;
@@ -49,7 +48,7 @@ class MY_Model extends CI_Model {
     *
     * @access public
     * @param $where condiciones de busqueda en la base de datos, puede no estar.
-    * @return Record el registro encontrado, o arreglo vacio en otro caso.
+    * @return Array el registro encontrado, o arreglo vacio en otro caso.
     */
     public function find($where = [])
     {
@@ -92,7 +91,7 @@ class MY_Model extends CI_Model {
 
     /**
     * @access public
-    * @return Fields retorna los campos de la tabla en la base de datos.
+    * @return Schema retorna los campos de la tabla en la base de datos.
     */
     public function get_schema()
     {
@@ -108,9 +107,8 @@ class MY_Model extends CI_Model {
     */
     public function exists($where = [])
     {
-        if (isset($where['password'])) {
+        if (isset($where['password']))
             unset($where['password']);
-        }
 
         $this->db->select('count(*) as count');
         $this->db->from($this->table);

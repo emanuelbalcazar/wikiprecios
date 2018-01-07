@@ -65,6 +65,7 @@ $route['api/usuario/eliminar_cuenta']['GET'] = "API/Account_controller/delete_ac
 
 $route['api/usuario/registrar']['GET'] = "API/User_controller/create";
 $route['api/usuario/(:num)']['GET'] = 'API/User_controller/findById/$1';
+$route['api/usuarios']['GET'] = 'API/User_controller/findAll';
 
 // rutas asociadas a comercios.
 $route['api/comercio/registrar']['GET'] = "API/Commerce_controller/register";
@@ -105,19 +106,16 @@ $route['productos/cargar'] = "Special_product_controller/load";
 $route['comercios/nuevo'] = "Commerce_controller/new";
 
 $route['rubros/nuevo'] = "Item_controller/new";
-// $route['nuevo_rubro'] = "Item_web_controller/load_item";
-// $route['menu_listar_rubros'] = "Item_web_controller/load_list_items_view";
-// $route['buscar_rubro'] = "Item_web_controller/search_item";
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test/user'] = "test/Test_user_model/test";
-//$route['test_commerce'] = "test/Test_commerce_model/test";
-//$route['test_favorite'] = "test/Test_favorite_model/test";
-//$route['test_item'] = "test/Test_item_model/test";
-//$route['test_category'] = "test/Test_category_model/test";
-//$route['test_special_product'] = "test/Test_special_product_model/test";
-//$route['test_product'] = "test/Test_product_model/test";
-//$route['testPrice'] = "test/Test_price_model/test";
+$route['test/category'] = "test/Test_category_model/test";
+$route['test/commerce'] = "test/Test_commerce_model/test";
+$route['test/favorite'] = "test/Test_favorite_model/test";
+$route['test/item'] = "test/Test_item_model/test";
+$route['test/price'] = "test/Test_price_model/test";
+$route['test/product'] = "test/Test_product_model/test";
+$route['test/special'] = "test/Test_special_product_model/test";
 
 /* ------------------------ Ruta de Migraciones ---------------------------- */
 $route['migrate'] = "migrations/Migrate/run";

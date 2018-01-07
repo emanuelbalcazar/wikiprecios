@@ -26,7 +26,7 @@ class Item_controller extends CI_Controller
     {
         $data["name"] = $this->input->get('name');
         $data = $this->utils->replace($data, "\"", "");
-
+        
         if ($this->Item->exists($data)) {
             $result["message"] = "El rubro ya existe";
             $result["registered"] = FALSE;
@@ -35,6 +35,7 @@ class Item_controller extends CI_Controller
             $result["registered"] = $this->Item->create($data);
             $result["message"] = "Rubro agregado correctamente";
         }
+
         echo json_encode($result);
     }
 

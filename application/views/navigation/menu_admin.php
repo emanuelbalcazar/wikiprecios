@@ -14,17 +14,16 @@
 
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Comercios<b class="caret"></b></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Comercios<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="<?= base_url('comercios/nuevo'); ?>">Nuevo Comercio</a></li>
-                            <li><a href="<?= base_url('comercios/cargar'); ?>">Cargar Desde Archivo</a></li>
                         </ul>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Precios<b class="caret"></b></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-usd"></span>&nbsp;Precios<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="<?= base_url('precios/cargar'); ?>">Cargar Desde Archivo</a></li>
                         </ul>
@@ -33,20 +32,19 @@
 
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Productos<b class="caret"></b></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-barcode"></span>&nbsp;Productos<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= base_url('menu_nuevo_producto_especial'); ?>">Nuevo Producto Especial</a></li>
-                            <li><a href="<?= base_url('menu_productos_especiales_masivos'); ?>">Cargar Desde Archivo</a></li>
+                            <li><a href="<?= base_url('productos/nuevo'); ?>">Nuevo Producto Especial</a></li>
+                            <li><a href="<?= base_url('productos/cargar'); ?>">Cargar Desde Archivo</a></li>
                         </ul>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Rubros<b class="caret"></b></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-apple"></span>&nbsp;Rubros<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= base_url('menu_nuevo_rubro'); ?>">Nuevo Rubro</a></li>
-                            <li><a href="<?= base_url('menu_listar_rubros'); ?>">Listar Rubros</a></li>
+                            <li><a href="<?= base_url('rubros/nuevo'); ?>">Nuevo Rubro</a></li>
                         </ul>
                     </li>
                 </ul>
