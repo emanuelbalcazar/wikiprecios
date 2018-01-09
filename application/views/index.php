@@ -29,6 +29,9 @@
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 
+     <!-- App configuration -->
+     <script src="public/app.js"></script>
+
 </head>
 
 <body>
