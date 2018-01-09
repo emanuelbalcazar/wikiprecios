@@ -30,11 +30,10 @@ class Item_controller extends CI_Controller {
         }
 
         $data["user"] = $this->session->userdata('user');
-        $data["items"] = $this->Item->find();
         $this->load->view('header/header');
         $this->load->view('navigation/menu_admin', $data);
         $this->load->view('footer/toast', $this->session->flashdata('messages'));
-        $this->load->view('item/load_item_view', $data);
+        $this->load->view('item/new_item_view', $data);
     }
 
     public function load_item()
@@ -55,10 +54,9 @@ class Item_controller extends CI_Controller {
         } else {
             $url = base_url().'api/rubros/registrar/?name='.$data["name"];
             $response = $this->utils->send_get($url);
-
-            $result['success'] = "El producto especial se registro correctamente";
+            $result['success'] = "El rubro se registro correctamente";
             $this->session->set_flashdata('messages', $result);
-            redirect(base_url().'productos/nuevo');
+            redirect(base_url().'rubros/nuevo');
         }
     }
 

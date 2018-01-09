@@ -213,7 +213,7 @@ class Price_controller extends CI_Controller
     private function _check_calculated_price($all_prices, $possible_prices, $score, $price_1, $price_2, $commerce, $product)
     {
         if (count($all_prices) == 0) {
-            $price_1 = $price;
+            $price_1 = $price_1;
         }
 
         if ($score > $this->DIFF_SCORE) {
@@ -262,6 +262,10 @@ class Price_controller extends CI_Controller
    {
        $prices = $this->Price->get_product_prices($product, $commerce);
        $user = $this->User->find(array("mail" => $user));
+
+        if (!isset($user[0]->qualification) || !isset($user[0]->accumulated))
+            return;
+
        $qualification = $user[0]->qualification;
        $accumulated = $user[0]->accumulated;
 
@@ -332,7 +336,6 @@ class Price_controller extends CI_Controller
                $qualification++;
            }
        }
-
        $where = array("mail" => $user);
        $data = array("qualification" => $qualification, "accumulated" => $accumulated);
        $this->User->update($where, $data);
@@ -358,8 +361,7 @@ class Price_controller extends CI_Controller
                $qualification--;
            }
         }
-
-        $where = array("user" => $user);
+        $where = array("mail" => $user);
         $data = array("qualification" => $qualification, "accumulated" => $accumulated);
         $this->User->update($where, $data);
     }

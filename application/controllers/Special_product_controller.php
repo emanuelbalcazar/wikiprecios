@@ -38,7 +38,7 @@ class Special_product_controller extends CI_Controller
         $this->load->view('header/header');
         $this->load->view('navigation/menu_admin', $data);
         $this->load->view('footer/toast', $this->session->flashdata('messages'));
-        $this->load->view('product/load_special_product_view', $data);
+        $this->load->view('product/new_special_product_view', $data);
     }
 
     /**
@@ -87,7 +87,7 @@ class Special_product_controller extends CI_Controller
         $this->load->view('header/header');
         $this->load->view('navigation/menu_admin', $data);
         $this->load->view('footer/toast', $this->session->flashdata('messages'));
-        $this->load->view('product/load_masive_products_view');
+        $this->load->view('product/load_products_view');
     }
 
     /**

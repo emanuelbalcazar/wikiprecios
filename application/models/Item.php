@@ -47,10 +47,10 @@ class Item extends MY_Model {
         $result = $this->db->get('items');
         return $result->row();
     }
-
+    
     /**
     * Busca un rubro por su nombre incluyendo ocurrencias en substrings.
-    *
+    * TODO: Posiblemente se elimine esta funcion, no usar por el momento.
     * @access  public
     * @param $name nombre del rubro
     * @return Record rubro encontrado

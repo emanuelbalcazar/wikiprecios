@@ -8,7 +8,7 @@
 
 
                    <h4>Ingrese el nombre:</h4>
-                     <input type="text" class="form-control" name="name" placeholder="nombre del producto especial">
+                     <input type="text" class="form-control" name="name" placeholder="Nombre del producto especial">
                    <h3></h3>
 
                    <h4>Seleccione el rubro:</h4>
@@ -27,7 +27,7 @@
                    </select>
                    <h3></h3>
 
-                   <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Subir</button>
+                   <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Cargar</button>
                </form>
 
            </div><!-- /.col-lg-4 -->

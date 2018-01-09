@@ -3,7 +3,7 @@
     <body>
         <div id="container">
 
-            <div class="col-lg-3 col-lg-offset-4">
+            <div class="col-md-3 col-md-offset-4">
 
             <br></br>
             <div style="text-align: center;"><img src="<?= base_url("/images/logo-medium.png"); ?>"/></div>
