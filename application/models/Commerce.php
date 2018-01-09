@@ -33,4 +33,12 @@ class Commerce extends MY_Model {
         return $result->result();
     }
 
+    public function find_by_name($name){
+          $this->db->select('*');
+          $this->db->from('businesses b');
+          $this->db->where('name', $name);
+          $query = $this->db->get();
+          return $query->result()[0];
+       }
+
 }

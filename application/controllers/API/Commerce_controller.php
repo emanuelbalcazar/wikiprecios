@@ -55,7 +55,7 @@ class Commerce_controller extends CI_Controller
     {
         $result["registered"] = $this->Commerce->create($data);
         $result["message"] = ($result["registered"]) ? "Comercio registrado con exito" : "Hubo un error al insertar el comercio";
-
+        $result["commerce"] = $this->Commerce->find_by_name($data["name"]);
         return $result;
     }
 
