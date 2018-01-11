@@ -28,10 +28,10 @@ class User_controller extends CI_Controller
     */
     public function create()
     {
-        $data["password"] = $this->input->get('password');
-        $data["mail"] = $this->input->get('mail');
-        $data["name"] = $this->input->get('name');
-        $data["surname"] = $this->input->get('surname');
+        $data["mail"] = $this->input->post('mail');        
+        $data["password"] = $this->input->post('password');
+        $data["name"] = $this->input->post('name');
+        $data["surname"] = $this->input->post('surname');
 
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 

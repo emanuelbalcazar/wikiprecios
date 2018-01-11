@@ -41,10 +41,10 @@ class Price_controller extends CI_Controller
     */
     public function register()
     {
-        $data["user"] = $this->input->get('user');
-        $data["commerce_id"] = $this->input->get('commerce');
-        $data["price"] = $this->input->get('price');
-        $data["product_code"]= $this->input->get('product');
+        $data["user"] = $this->input->post('user');
+        $data["commerce_id"] = $this->input->post('commerce');
+        $data["price"] = $this->input->post('price');
+        $data["product_code"]= $this->input->post('product');
 
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
 

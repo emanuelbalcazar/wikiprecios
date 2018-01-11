@@ -27,9 +27,9 @@ class Special_product_controller extends CI_Controller {
     */
     public function register()
     {
-        $data["item_id"] = $this->input->get('item'); // rubro
-        $data["category"] = $this->input->get('name'); // nombre ej: peceto
-        $data["unit"] = $this->input->get('unit');
+        $data["item_id"] = $this->input->post('item'); // rubro
+        $data["category"] = $this->input->post('name'); // nombre ej: peceto
+        $data["unit"] = $this->input->post('unit');
         $data = $this->utils->replace($data, "\"", "");
 
         if ($this->Category->exists($data)) {

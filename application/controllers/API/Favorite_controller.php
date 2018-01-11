@@ -26,8 +26,8 @@ class Favorite_controller extends CI_Controller
     */
     public function register()
     {
-        $data["user"] = $this->input->get('user');
-        $data["commerce"] = $this->input->get('commerce');
+        $data["user"] = $this->input->post('user');
+        $data["commerce"] = $this->input->post('commerce');
         $data = $this->utils->replace($data, "\"", "");
 
         if ($data["commerce"] < 0) {

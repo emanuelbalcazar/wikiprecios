@@ -29,4 +29,14 @@ class Utils_controller extends CI_Controller
         echo json_encode($version);
     }
 
+     /**
+     * Retorna el mensaje recibido como dato en el POST.
+     * @access public
+     */
+    public function echo() {
+        $data["message"] = $this->input->post('message', TRUE);
+        $data["status"] = "ok";
+ 
+        echo json_encode($data);
+    }
 }
