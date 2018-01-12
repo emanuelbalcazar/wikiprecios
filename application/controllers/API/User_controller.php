@@ -98,10 +98,10 @@ class User_controller extends CI_Controller
     */
     public function login_facebook()
     {
-        $data["facebook_id"] = $this->input->get('facebook_id');
-        $data["mail"] = $this->input->get('mail');
-        $data["name"] = $this->input->get('name');
-        $data["surname"] = $this->input->get('surname');
+        $data["facebook_id"] = $this->input->post('facebook_id');
+        $data["mail"] = $this->input->post('mail');
+        $data["name"] = $this->input->post('name');
+        $data["surname"] = $this->input->post('surname');
 
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
