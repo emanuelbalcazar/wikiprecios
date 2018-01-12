@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* ------------------------- Rutas de servicios rest  -------------------------- */
-$route['default_controller'] = "Welcome/index";
+$route['default_controller'] = "Login_controller/index";
 // $route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
