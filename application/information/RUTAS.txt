@@ -1,4 +1,4 @@
-RUTAS 2017 VIEJASSS:
+NUEVAS 2017:
 
 http://localhost/wikiprecios/api/usuario/registrar/?password="emanuel"&mail="emanuelbalcazar13@gmail.com"&name="emanuel"&surname="balcazar"
 
@@ -38,63 +38,3 @@ http://localhost/wikiprecios/api/precio/sugerido/?commerce=1&product="7791615000
 ADMINISTRADOR:
 
 http://localhost/wikiprecios/
-
-------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------
-
-API REST 2018 CON POST INCLUIDO:
-
-NOTA: Usar en el POST el formato x-www-form-urlencoded.
-
-// GET - informacion del servidor.
-http://localhost/wikiprecios/api/info
-
-// POST: message="algo" - retorna el mismo mensaje recibido.
-http://localhost/wikiprecios/api/echo
-
-// POST: mail="emanuelbalcazar13@gmail.com"&password="emanuel"&name="Emanuel"&surname="Balcazar" 
-http://localhost/wikiprecios/api/usuario/registrar
-
-// POST: mail="emanuelbalcazar13@gmail.com"&password="emanuel" - inicio de sesion.
-http://localhost/wikiprecios/api/usuario/login
-
-// POST: mail="emanuelbalcazar13@gmail.com"&password="emanuel" - cambia la contraseña del usuario.
-http://localhost/wikiprecios/api/usuario/cambiar_clave
-
-// POST: mail="emanuelbalcazar13@gmail.com"&password="emanuel" - da de baja una cuenta de usuario.
-http://localhost/wikiprecios/api/usuario/eliminar_cuenta
-
-
-// POST: name="La anonima"&address="Jujuy 1330"&latitude=-42.7805146&longitude=-65.0447228&city="Puerto Madryn"&province="Chubut"&country="Argentina"
-http://localhost/wikiprecios/api/comercio/registrar
-
-// GET - obtiene todos los comercios.
-http://localhost/wikiprecios/api/comercios/
-
-// GET - trae los comercios favoritos del usuario.
-http://localhost/wikiprecios/api/comercios/favoritos/?user="emanuelbalcazar13@gmail.com"
-
-// GET - trae los comercios cercanos a un punto.
-http://localhost/wikiprecios/api/comercios/cercanos/?latitud=-42.785849&longitud=-65.005789&usuario="emanuelbalcazar13@gmail.com"
-
-// POST: user="emanuelbalcazar13@gmail.com"&commerce=1,2,3 - registra los comercios favoritos.
-http://localhost/wikiprecios/api/favorito/registrar
-
-
-// POST: item=1&name="peceto"&unit="kg" - registra una nueva categoria de producto.
-http://localhost/wikiprecios/api/categoria/registrar
-
-// GET - obtiene todas las categorias de un determinado rubro.
-http://localhost/wikiprecios/api/rubro/categorias/?item=1
-
-// GET - obtiene todos los rubros.
-http://localhost/wikiprecios/api/rubros
-
-POST: name="cosmetica" - registra un nuevo rubro.
-http://localhost/wikiprecios/api/rubro/registrar
-
-// POST: user="emanuelbalcazar13@gmail.com"&commerce=1&price=20&product="7791615000426" - registra un precio.
-http://localhost/wikiprecios/api/precio/registrar
-
-// GET - obtiene los precios sugeridos de un producto en un determinado comercio.
-http://localhost/wikiprecios/api/precio/sugerido/?commerce=1&product="7791615000426"

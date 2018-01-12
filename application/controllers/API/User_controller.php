@@ -15,7 +15,7 @@ class User_controller extends CI_Controller
         parent::__construct();
         $this->load->database();
         $this->load->helper('email');
-        $this->load->helper('url');        
+        $this->load->helper('url');
         $this->load->library('encryption');
         $this->load->library('utils');
         $this->load->model('User');
@@ -90,4 +90,63 @@ class User_controller extends CI_Controller
         $users = $this->User->find();
         echo json_encode($users);
     }
+
+    /**
+    * Login de facebook
+    *
+    * @access public
+    */
+    public function login_facebook()
+    {
+        $data["facebook_id"] = $this->input->get('facebook_id');
+        $data["mail"] = $this->input->get('mail');
+        $data["name"] = $this->input->get('name');
+        $data["surname"] = $this->input->get('surname');
+
+        $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
+
+        //$result =
+        $this->_validate_data_facebook($data);
+
+        $where = array("mail" => $data["mail"]);
+        $result = $this->User->find($where)[0];
+        echo json_encode($result);
+    }
+
+    /**
+    * Valida los datos ingresados del usuario a registrar.
+    * @access private
+    */
+    private function _validate_data_facebook($data)
+    {
+        if ($this->User->exists(array("mail" => $data["mail"]))) {
+          if($this->_is_valid_facebook_id($data["mail"], $data["facebook_id"])){
+            $result["mensaje"] = "Logeado correctamente";
+          }else {
+            $result["mensaje"] = "facebook_id incorrecto";
+          }
+          $result["registrado"] = FALSE;
+        } else {
+            $result = $this->_insert_user($data);
+        }
+
+        return $result;
+    }
+
+    /**
+    * Valida si el id de facebook recibido corresponde a la cuenta asociada al mail recibido.
+    *
+    * @access private
+    * @param $mail correo del usuario
+    * @param facebook_id contraseña ingresada por el usuario
+    * @return Boolean TRUE si los facebook_id coinciden.
+    */
+    private function _is_valid_facebook_id($mail, $facebook_id)
+    {
+        $where = array("mail" => $mail);
+        $user = $this->User->find($where);
+
+        return $user[0]->facebook_id == $facebook_id;
+    }
+
 }
