@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* ------------------------- Rutas de servicios rest  -------------------------- */
-// $route['default_controller'] = "Welcome/index";
-$route['default_controller'] = "Login_controller/index";
+$route['default_controller'] = "Welcome/index";
+// $route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -89,25 +89,11 @@ $route['api/precio/registrar']['POST'] = "API/Price_controller/register";
 $route['api/precio/sugerido'] = "API/Price_controller/get_possible_prices";
 
 /* ------------------------- Rutas de servicios web --------------------------- */
-/* $route['login'] = "Login_controller/index";
-$route['recuperar_clave'] = "Forgot_password_controller/index";
-$route['home'] = "Home_controller/index";
+$route['api/admin/login']['POST'] = "ADMIN/Login_controller/login";
+$route['api/admin/password/reset']['POST'] = "ADMIN/Forgot_password_controller/reset";
+$route['api/admin/password/change']['POST'] = "ADMIN/Account_controller/change_password";
 
-$route['cerrar_sesion'] = "Account_controller/logout";
-$route['desactivar_cuenta'] = "Account_controller/delete";
-$route['cambiar_clave'] = "Account_controller/change";
 
-$route['comercios/nuevo'] = "Commerce_controller/new";
-$route['comercios/cargar'] = "Commerce_controller/load";
-
-$route['precios/cargar'] = "Price_controller/load";
-
-$route['productos/nuevo'] = "Special_product_controller/new";
-$route['productos/cargar'] = "Special_product_controller/load";
-
-$route['comercios/nuevo'] = "Commerce_controller/new";
-
-$route['rubros/nuevo'] = "Item_controller/new"; */
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test/user'] = "test/Test_user_model/test";
