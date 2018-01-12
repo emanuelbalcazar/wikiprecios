@@ -51,12 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* ------------------------- Rutas de servicios rest  -------------------------- */
+// $route['default_controller'] = "Welcome/index";
 $route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // rutas de utileria
 $route['api/info']['GET'] = "API/Utils_controller/version";
+$route['api/echo']['POST'] = "API/Utils_controller/echo";
 
 // rutas asociadas a usuarios.
 $route['api/usuario/login']['GET'] = "API/Account_controller/login";
@@ -64,32 +66,32 @@ $route['api/usuario/cambiar_clave']['GET'] = "API/Account_controller/change_pass
 $route['api/usuario/eliminar_cuenta']['GET'] = "API/Account_controller/delete_account";
 $route['api/usuario/login_facebook']['GET'] = 'API/User_controller/login_facebook';
 
-$route['api/usuario/registrar']['GET'] = "API/User_controller/create";
+$route['api/usuario/registrar']['POST'] = "API/User_controller/create";
 $route['api/usuario/(:num)']['GET'] = 'API/User_controller/findById/$1';
 $route['api/usuarios']['GET'] = 'API/User_controller/findAll';
 
 
 // rutas asociadas a comercios.
-$route['api/comercio/registrar']['GET'] = "API/Commerce_controller/register";
+$route['api/comercio/registrar']['POST'] = "API/Commerce_controller/register";
 $route['api/comercios']['GET'] = "API/Commerce_controller/businesses";
 $route['api/comercios/favoritos']['GET'] = "API/Commerce_controller/favorites";
 $route['api/comercios/cercanos']['GET'] = "API/Commerce_controller/nearby_businesses";
 
 // rutas asociadas a comercios favoritos.
-$route['api/favorito/registrar']['GET'] = "API/Favorite_controller/register";
+$route['api/favorito/registrar']['POST'] = "API/Favorite_controller/register";
 
 // rutas asociadas a categorias de productos y rubros.
-$route['api/categoria/registrar']['GET'] = "API/Special_product_controller/register";
+$route['api/categoria/registrar']['POST'] = "API/Special_product_controller/register";
 $route['api/rubro/categorias']['GET'] = "API/Special_product_controller/get_categories_of_items";
 $route['api/rubros']['GET'] = "API/Special_product_controller/get_items";
-$route['api/rubro/registrar']['GET'] = "API/Item_controller/register";
+$route['api/rubro/registrar']['POST'] = "API/Item_controller/register";
 
 // rutas asociadas a precios de productos.
-$route['api/precio/registrar'] = "API/Price_controller/register";
+$route['api/precio/registrar']['POST'] = "API/Price_controller/register";
 $route['api/precio/sugerido'] = "API/Price_controller/get_possible_prices";
 
 /* ------------------------- Rutas de servicios web --------------------------- */
-$route['login'] = "Login_controller/index";
+/* $route['login'] = "Login_controller/index";
 $route['recuperar_clave'] = "Forgot_password_controller/index";
 $route['home'] = "Home_controller/index";
 
@@ -105,9 +107,9 @@ $route['precios/cargar'] = "Price_controller/load";
 $route['productos/nuevo'] = "Special_product_controller/new";
 $route['productos/cargar'] = "Special_product_controller/load";
 
-//$route['comercios/nuevo'] = "Commerce_controller/new";
+$route['comercios/nuevo'] = "Commerce_controller/new";
 
-$route['rubros/nuevo'] = "Item_controller/new";
+$route['rubros/nuevo'] = "Item_controller/new"; */
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test/user'] = "test/Test_user_model/test";

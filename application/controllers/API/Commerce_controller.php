@@ -24,13 +24,13 @@ class Commerce_controller extends CI_Controller
     */
     public function register()
     {
-        $data["name"] = $this->input->get('name');
-        $data["address"] = $this->input->get('address');
-        $data["latitude"] = $this->input->get('latitude');
-        $data["longitude"] = $this->input->get('longitude');
-        $data["city"] = $this->input->get('city');
-        $data["province"] = $this->input->get('province');
-        $data["country"] = $this->input->get('country');
+        $data["name"] = $this->input->post('name');
+        $data["address"] = $this->input->post('address');
+        $data["latitude"] = $this->input->post('latitude');
+        $data["longitude"] = $this->input->post('longitude');
+        $data["city"] = $this->input->post('city');
+        $data["province"] = $this->input->post('province');
+        $data["country"] = $this->input->post('country');
 
         $data = $this->utils->replace($data, "\"", "");     // elimino las comillas.
 

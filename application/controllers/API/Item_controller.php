@@ -24,7 +24,7 @@ class Item_controller extends CI_Controller
     */
     public function register()
     {
-        $data["name"] = $this->input->get('name');
+        $data["name"] = $this->input->post('name');
         $data = $this->utils->replace($data, "\"", "");
         
         if ($this->Item->exists($data)) {

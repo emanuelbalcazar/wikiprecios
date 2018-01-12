@@ -25,8 +25,8 @@ class Account_controller extends CI_Controller
     */
     public function login()
     {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
+        $data["mail"] = $this->input->post('mail');
+        $data["password"] = $this->input->post('password');
 
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
 
@@ -46,8 +46,8 @@ class Account_controller extends CI_Controller
     */
     public function change_password()
     {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
+        $data["mail"] = $this->input->post('mail');
+        $data["password"] = $this->input->post('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
         $founded = $this->User->find(array("mail" => $data["mail"]));
@@ -77,10 +77,9 @@ class Account_controller extends CI_Controller
     */
     public function delete_account()
     {
-        $data["mail"] = $this->input->get('mail');
-        $data["password"] = $this->input->get('password');
+        $data["mail"] = $this->input->post('mail');
+        $data["password"] = $this->input->post('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
-
 
         if (!$this->User->exists(array("mail" => $data["mail"]))) {
             $result["message"] = "No existe el usuario con el email: ".$data["mail"];
