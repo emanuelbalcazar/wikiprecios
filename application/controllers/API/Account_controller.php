@@ -29,7 +29,7 @@ class Account_controller extends CI_Controller
         $data["password"] = $this->input->get('password');
 
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
-        
+
         if ($this->User->exists($data) && $this->_is_valid_password($data["mail"], $data["password"])) {
             $where = array("mail" => $data["mail"]);
             $result = $this->User->find($where)[0];
@@ -55,8 +55,8 @@ class Account_controller extends CI_Controller
         if (!$this->User->exists(array("mail" => $data["mail"]))) {
             $result["message"] = "No existe el usuario con el email: ".$data["mail"];
             $result["updated"] = FALSE;
-            echo json_encode($result); 
-            return;           
+            echo json_encode($result);
+            return;
         }
 
         $data["password"] = $this->encryption->encrypt($data["password"]);  // encripto la contraseña
@@ -81,12 +81,12 @@ class Account_controller extends CI_Controller
         $data["password"] = $this->input->get('password');
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
-        
+
         if (!$this->User->exists(array("mail" => $data["mail"]))) {
             $result["message"] = "No existe el usuario con el email: ".$data["mail"];
             $result["deleted"] = FALSE;
-            echo json_encode($result); 
-            return;           
+            echo json_encode($result);
+            return;
         }
 
         if ($this->_is_valid_password($data["mail"], $data["password"])) {  // Si la contraseña es correcta
