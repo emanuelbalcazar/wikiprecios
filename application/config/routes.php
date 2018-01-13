@@ -61,10 +61,10 @@ $route['api/info']['GET'] = "API/Utils_controller/version";
 $route['api/echo']['POST'] = "API/Utils_controller/echo";
 
 // rutas asociadas a usuarios.
-$route['api/usuario/login']['GET'] = "API/Account_controller/login";
-$route['api/usuario/cambiar_clave']['GET'] = "API/Account_controller/change_password";
-$route['api/usuario/eliminar_cuenta']['GET'] = "API/Account_controller/delete_account";
-$route['api/usuario/login_facebook']['GET'] = 'API/User_controller/login_facebook';
+$route['api/usuario/login']['POST'] = "API/Account_controller/login";
+$route['api/usuario/cambiar_clave']['POST'] = "API/Account_controller/change_password";
+$route['api/usuario/eliminar_cuenta']['POST'] = "API/Account_controller/delete_account";
+$route['api/usuario/login_facebook']['POST'] = 'API/User_controller/login_facebook';
 
 $route['api/usuario/registrar']['POST'] = "API/User_controller/create";
 $route['api/usuario/(:num)']['GET'] = 'API/User_controller/findById/$1';
