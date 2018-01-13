@@ -1,0 +1,38 @@
+<!-- Table -->
+<table class="table table-responsive table-bordered" data-ng-show="pagination.data.length">
+    <thead class="thead-inverse">
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Ciudad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tr ng-repeat="commerce in pagination.data">
+        <td>{{$index + 1}}</td>
+        <td>{{commerce.name}}</td>
+        <td>{{commerce.address}}</td>
+        <td>{{commerce.latitude}}</td>
+        <td>{{commerce.longitude}}</td>
+        <td>{{commerce.city}}</td>
+        <td>
+            <div class="text-center">
+                <div class="btn-group">
+                    <span class="glyphicon glyphicon-pencil" uib-tooltip="Editar"></span>&nbsp;
+                    <span class="glyphicon glyphicon-trash" data-ng-click="remove(commerce)" uib-tooltip="Eliminar"></span>&nbsp;
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</div>
+
+<div data-ng-hide="records.length">
+    <h3>No se encontraron resultados.</h3>
+</div>
+
+<div data-ng-include src="'public/app/pagination/pagination.html'"></div>

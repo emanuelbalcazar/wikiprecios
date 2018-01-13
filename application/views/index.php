@@ -7,13 +7,14 @@
     <title>{{title}}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css">
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
+    <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
 
     <!-- Scripts -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -28,14 +29,59 @@
     <script src="bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
 
-     <!-- App configuration -->
-     <script src="public/app.js"></script>
+    <!-- App configuration -->
+    <script src="public/app/app.js"></script>
+    <script src="public/app/config/routes.js"></script>
+
+    <!-- App directives -->
+    <script src="public/app/directives/directives.js"></script>
+
+    <!-- Pagination -->
+    <script src="public/app/pagination/pagination.service.js"></script>
+
+    <!-- App components -->
+    <script src="public/app/navigation/navbar.component.js"></script>
+    <script src="public/app/navigation/navbar.controller.js"></script>
+
+    <!-- Home -->
+    <script src="public/app/home/home.controller.js"></script>
+
+    <!-- Authentication -->
+    <script src="public/app/authentication/login.controller.js"></script>
+    <script src="public/app/authentication/forgot.password.controller.js"></script>
+
+    <!-- Accounts -->
+    <script src="public/app/account/change.password.controller.js"></script>
+    <script src="public/app/account/account.service.js"></script>
+
+    <!-- Commerce -->
+    <script src="public/app/commerce/edit.js"></script>
+    <script src="public/app/commerce/list.js"></script>
+    <script src="public/app/commerce/commerce.service.js"></script>
+
+    <!-- Prices -->
+    <script src="public/app/prices/load.js"></script>
+    <script src="public/app/prices/list.js"></script>
+    <script src="public/app/prices/prices.service.js"></script>
+
+    <!-- Products -->
+    <script src="public/app/products/new.js"></script>
+    <script src="public/app/products/list.js"></script>
+    <script src="public/app/products/product.service.js"></script>
+
+    <!-- Items -->
+    <script src="public/app/items/item.service.js"></script>
+    <script src="public/app/items/new.js"></script>
+    <script src="public/app/items/list.js"></script>
 
 </head>
 
 <body>
-    Hola
+    <navbar></navbar>
+    <div class="container" ng-view=""></div>
 </body>
 
 </html>

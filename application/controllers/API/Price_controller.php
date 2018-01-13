@@ -47,7 +47,7 @@ class Price_controller extends CI_Controller
         $data["product_code"]= $this->input->post('product');
 
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
-
+        
         $where = array("product_code" => $data["product_code"]);
         $product_exists = $this->Product->exists($where);
 
@@ -451,4 +451,8 @@ class Price_controller extends CI_Controller
        echo json_encode($result);
    }
 
+    public function findAll() {
+        $all = $this->Price->find();
+        echo json_encode($all);
+    }
 }

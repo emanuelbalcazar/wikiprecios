@@ -28,13 +28,24 @@ class Item_controller extends CI_Controller
         $data = $this->utils->replace($data, "\"", "");
         
         if ($this->Item->exists($data)) {
-            $result["message"] = "El rubro ya existe";
+            $result["error"] = "El rubro ya existe";
             $result["registered"] = FALSE;
         } else {
             $data["letter"] = strtoupper(substr($data["name"], 0, 3));
             $result["registered"] = $this->Item->create($data);
-            $result["message"] = "Rubro agregado correctamente";
+            $result["success"] = "Rubro agregado correctamente";
         }
+
+        echo json_encode($result);
+    }
+
+    public function delete($id) {
+        $result["deleted"] = $this->Item->delete(array("id" => $id));
+
+        if ($result["deleted"] > 0)
+            $result["success"] = "El rubro se elimino correctamente.";
+        else
+            $result["error"] = "No se pudo eliminar el rubro con ID ".$id;
 
         echo json_encode($result);
     }

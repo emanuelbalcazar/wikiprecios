@@ -32,8 +32,8 @@ class Special_product_controller extends CI_Controller {
         $data["unit"] = $this->input->post('unit');
         $data = $this->utils->replace($data, "\"", "");
 
-        if ($this->Category->exists($data)) {
-            $result["message"] = "La categoria ya existe";
+        if ($this->Category->exists(array("category" => $data["category"]))) {
+            $result["message"] = "El producto especial \"".$data["category"]."\" ya existe";
             $result["registered"] = FALSE;
         }
         else if (!$this->Item->exists(array("id" => $data["item_id"]))) {
@@ -97,11 +97,11 @@ class Special_product_controller extends CI_Controller {
     private function _check_inserts($category_inserted, $product_inserted)
     {
         if ($category_inserted) {
-            $data['message'] = "Categoria agregada correctamente";
+            $data['message'] = "Producto especial agregado correctamente";
             $data['registered'] = TRUE;
         }
         else if ($product_inserted) {
-            $data['message'] = "Producto Especial agregado correctamente";
+            $data['message'] = "Producto especial agregado correctamente";
             $data['registered'] = TRUE;
         }
 
@@ -132,6 +132,24 @@ class Special_product_controller extends CI_Controller {
     {
         $items = $this->Item->find();
         echo json_encode($items);
+    }
+
+    public function categories()
+    {
+        $categories = $this->Category->find();
+        echo json_encode($categories);
+    }
+
+    public function delete_category($id)
+    {
+        $result["deleted"] = $this->Category->delete(array("id" => $id));
+        
+        if ($result["deleted"] > 0)
+            $result["success"] = "El producto especial se elimino correctamente.";
+        else
+            $result["error"] = "No se pudo eliminar el producto especial con ID ".$id;
+
+        echo json_encode($result);
     }
 
 }

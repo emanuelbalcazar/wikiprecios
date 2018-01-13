@@ -1,0 +1,39 @@
+<div class="col-md-8 col-md-offset-2">
+        
+<!-- Table -->
+<table class="table table-responsive table-bordered" data-ng-show="pagination.data.length">
+    <thead class="thead-inverse">
+        <tr>
+            <th style="width: 5%;">#</th>
+            <!-- <th style="width: 15%;">Rubro</th> -->
+            <th>Nombre</th>
+            <th>Codigo</th>
+            <th>Unidad</th>
+            <th style="width: 10%;">Acciones</th>
+        </tr>
+    </thead>
+
+    <tr ng-repeat="product in pagination.data">
+        <td>{{$index + 1}}</td>
+        <!-- <td>{{product.item_id}}</td> -->
+        <td>{{product.category}}</td>
+        <td>{{product.special_product_code}}</td>
+        <td>{{product.unit}}</td>
+        <td>
+            <div class="text-center">
+                <div class="btn-group">
+                    <span class="glyphicon glyphicon-trash" data-ng-click="remove(product)" uib-tooltip="Eliminar"></span>&nbsp;
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</div>
+
+<div data-ng-hide="records.length">
+    <h3>No se encontraron resultados.</h3>
+</div>
+
+<div data-ng-include src="'public/app/pagination/pagination.html'"></div>
+
+</div>

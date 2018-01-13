@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* ------------------------- Rutas de servicios rest  -------------------------- */
-$route['default_controller'] = "Login_controller/index";
+$route['default_controller'] = "Welcome/index";
 // $route['default_controller'] = "Login_controller/index";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -76,26 +76,35 @@ $route['api/comercio/registrar']['POST'] = "API/Commerce_controller/register";
 $route['api/comercios']['GET'] = "API/Commerce_controller/businesses";
 $route['api/comercios/favoritos']['GET'] = "API/Commerce_controller/favorites";
 $route['api/comercios/cercanos']['GET'] = "API/Commerce_controller/nearby_businesses";
+$route['api/comercios/(:num)']['DELETE'] = "API/Commerce_controller/delete/$1";
 
 // rutas asociadas a comercios favoritos.
 $route['api/favorito/registrar']['POST'] = "API/Favorite_controller/register";
 
 // rutas asociadas a categorias de productos y rubros.
+$route['api/categorias']['GET'] = "API/Special_product_controller/categories";
 $route['api/categoria/registrar']['POST'] = "API/Special_product_controller/register";
+$route['api/categorias/(:num)']['DELETE'] = "API/Special_product_controller/delete_category/$1";
+
 $route['api/rubro/categorias']['GET'] = "API/Special_product_controller/get_categories_of_items";
 $route['api/rubros']['GET'] = "API/Special_product_controller/get_items";
 $route['api/rubro/registrar']['POST'] = "API/Item_controller/register";
+$route['api/rubro/(:num)']['DELETE'] = "API/Item_controller/delete/$1";
+
 
 // rutas asociadas a precios de productos.
 $route['api/precio/registrar']['POST'] = "API/Price_controller/register";
-$route['api/precio/sugerido'] = "API/Price_controller/get_possible_prices";
+$route['api/precio/sugerido']['GET'] = "API/Price_controller/get_possible_prices";
+$route['api/precios']['GET'] = "API/Price_controller/findAll";
 
 /* ------------------------- Rutas de servicios web --------------------------- */
 $route['api/admin/login']['POST'] = "ADMIN/Login_controller/login";
 $route['api/admin/password/reset']['POST'] = "ADMIN/Forgot_password_controller/reset";
 $route['api/admin/password/change']['POST'] = "ADMIN/Account_controller/change_password";
+$route['api/admin/logout']['POST'] = "ADMIN/Account_controller/logout";
+$route['api/admin/session']['GET'] = "ADMIN/Account_controller/session";
 
-
+$route['api/admin/prices/load']['POST'] = "ADMIN/Price_controller/upload";
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test/user'] = "test/Test_user_model/test";

@@ -1,0 +1,32 @@
+<div class="col-md-3 col-sm-6 col-md-offset-5 col-sm-offset-4">
+    <br>
+    <br>
+    <br>
+    <img src="images/logo-medium.png"></img>
+
+    <h3>Iniciar Sesión</h3>
+    <br>
+
+    <div class="form-group">
+        <label>Correo Electronico:</label>
+        <input type="email" class="form-control" data-ng-model="user.email" on-enter="input[name='password']" placeholder="Correo electronico">
+    </div>
+
+    <div class="form-group">
+        <label>Contraseña:</label>
+        <input type="password" class="form-control" data-ng-model="user.password" name="password" on-enter="input[name='signin']"
+            placeholder="contraseña">
+    </div>
+
+    <h1></h1>
+
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button name="signin" type="submit" class="btn btn-primary" data-ng-click="login()" ng-disabled='!user.email'>Iniciar</button>
+        </div>
+    </div>
+    <br>
+
+    <a href="" data-ng-click="redirectTo('/password/reset')">¿Olvidó su contraseña?</a>
+
+</div>

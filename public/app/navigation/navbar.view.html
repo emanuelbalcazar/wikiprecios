@@ -1,0 +1,123 @@
+<nav class="navbar navbar-default" data-ng-show="isAuthenticated">
+    <div class="container-fluid">
+        <!-- Titulo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="" data-ng-click="redirectTo('/home')">Wikiprecios</a>
+        </div>
+
+        <!-- Menu de administrador para carga masiva de datos -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Comercios
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/commerce/new')">Nuevo Comercio</a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/commerces')">Listar Comercios</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-usd"></span>&nbsp;Precios
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/prices/load')">Cargar Desde Archivo</a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/prices')">Listar Precios</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-barcode"></span>&nbsp;Productos Especiales
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/product/new')">Nuevo Producto</a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/products')">Listar Productos</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-apple"></span>&nbsp;Rubros
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/item/new')">Nuevo Rubro</a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/items')">Listar Rubros</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;Administradores
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="">Nuevo Administrador</a>
+                        </li>
+                        <li>
+                            <a href="">Listar Administradores</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Menu de usuario  -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        {{isAuthenticated.email}}
+                        <b class="caret"></b>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="" data-ng-click="redirectTo('/password/change')">Cambiar Contraseña</a>
+                        </li>
+                        <li>
+                            <a data-ng-click="logout()" href="">Cerrar Sesion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

@@ -161,4 +161,19 @@ class Commerce_controller extends CI_Controller
         return ($a->distance < $b->distance) ? -1 : 1;
     }
 
+    /**
+    * Elimina un comercio mediante su ID.
+    * @access public
+    */
+    public function delete($id) {
+        $result["deleted"] = $this->Commerce->delete(array("id" => $id));
+
+        if ($result["deleted"] > 0)
+            $result["success"] = "El comercio se elimino correctamente.";
+        else
+            $result["error"] = "No se pudo eliminar el comercio con ID ".$id;
+
+        echo json_encode($result);
+    }
+
 }

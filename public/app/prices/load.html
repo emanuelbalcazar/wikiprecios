@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-4">
+            <h3>Cargar Precios</h3>
+        </div>
+        <br>
+        <br></br>        
+
+        <div class="col-lg-4 col-lg-offset-4">
+            <form class="form-signin">
+
+                <ol class="nya-bs-select" ng-model="commerce" data-live-search="true">
+                    <li nya-bs-option="commerce in commerces">
+                        <!-- the text content of anchor element will be used for search -->
+                        <a>
+                            <span>
+                                {{ commerce.name }}
+                                <small> - {{commerce.address}}</small>
+                              </span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>                            
+                        </a>
+                    </li>
+                </ol>
+
+                <br></br>
+                <h4>Seleccione el archivo a cargar:</h4>
+                <input type="file" nv-file-select="" uploader="uploader" accept=".csv"/>
+                <br>
+                <div>
+                    <div>
+                        Progreso:
+                        <div class="progress" style="">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-success btn-s" data-ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Subir
+                    </button>
+    
+                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> Limpiar
+                    </button>
+
+                </div>
+               
+            </form>
+
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>

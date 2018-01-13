@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-4">
+            <h3>Nuevo Producto Especial</h3>
+        </div>
+        <br>
+        <br></br>
+
+        <div class="col-lg-4 col-lg-offset-4">
+            <form class="form-signin">
+
+                <h4>Ingrese el nombre:</h4>
+                <input type="text" class="form-control" data-ng-model="product.name" placeholder="Nombre del producto especial">
+                <br>
+
+                <h4>Seleccione el rubro:</h4>
+                <ol class="nya-bs-select" ng-model="itemSelected" data-live-search="true">
+                    <li nya-bs-option="item in items">
+                        <!-- the text content of anchor element will be used for search -->
+                        <a>
+                            <span>
+                                {{ item.name }}
+                            </span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+                <br>
+
+                <h4>Seleccione la unidad de medida:</h4>
+                <ol class="nya-bs-select" ng-model="product.unit">
+                    <li nya-bs-option="unit in units">
+                        <!-- the text content of anchor element will be used for search -->
+                        <a>
+                            <span>
+                                {{ unit }}
+                            </span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+                <h3></h3>
+
+                <button class="btn btn-lg btn-primary btn-block" data-ng-click="save()" data-ng-disabled="!product.name" type="submit">Guardar</button>
+                
+            </form>
+
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
