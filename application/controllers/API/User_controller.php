@@ -28,7 +28,7 @@ class User_controller extends CI_Controller
     */
     public function create()
     {
-        $data["mail"] = $this->input->post('mail');        
+        $data["mail"] = $this->input->post('mail');
         $data["password"] = $this->input->post('password');
         $data["name"] = $this->input->post('name');
         $data["surname"] = $this->input->post('surname');
@@ -102,6 +102,7 @@ class User_controller extends CI_Controller
         $data["mail"] = $this->input->post('mail');
         $data["name"] = $this->input->post('name');
         $data["surname"] = $this->input->post('surname');
+        $data["password"] = $this->input->post('facebook_id');
 
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 

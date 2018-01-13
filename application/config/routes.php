@@ -66,6 +66,7 @@ $route['api/usuario/cambiar_clave']['POST'] = "API/Account_controller/change_pas
 $route['api/usuario/eliminar_cuenta']['POST'] = "API/Account_controller/delete_account";
 $route['api/usuario/login_facebook']['POST'] = 'API/User_controller/login_facebook';
 
+
 $route['api/usuario/registrar']['POST'] = "API/User_controller/create";
 $route['api/usuario/(:num)']['GET'] = 'API/User_controller/findById/$1';
 $route['api/usuarios']['GET'] = 'API/User_controller/findAll';
