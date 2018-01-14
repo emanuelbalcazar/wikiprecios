@@ -30,4 +30,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 
 bower_components/
+uploads/
 

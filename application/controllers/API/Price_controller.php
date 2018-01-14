@@ -408,6 +408,8 @@ class Price_controller extends CI_Controller
            $commerce_data = $this->Commerce->find(array("id" => $array[$i]->id));
            $distance = $this->utils->calculate_distance($current_commerce[0]->latitude, $current_commerce[0]->longitude, $commerce_data[0]->latitude, $commerce_data[0]->longitude);
            $array[$i]->distance = $distance;
+           $array[$i]->address = $commerce_data[0]->address;
+           $array[$i]->city = $commerce_data[0]->city;
        }
 
        uasort($array, array($this, 'cmp_inverse')); // Ordeno los comercios de menor a mayor
