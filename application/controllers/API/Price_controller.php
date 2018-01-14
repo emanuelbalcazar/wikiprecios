@@ -382,11 +382,23 @@ class Price_controller extends CI_Controller
     {
         $current_commerce = $this->Commerce->find(array("id" => $commerce));
 
-        $favorites_prices = $this->Price->get_favorites_prices($product, $user, $commerce);
+        // Obtengo los precios en los comercios favoritos.
+        $favorites_prices = $this->Price->get_favorites_prices($product, $user, $commerce);        
         $favorites_prices = $this->order_by_distance($favorites_prices, $current_commerce);
 
+        // Agrego una bandera indicando que los comercios SI son favoritos.
+        for ($i = 0; $i < count($favorites_prices); $i++) {
+            $favorites_prices[$i]->favorite = TRUE;
+         }
+        
+        // Obtengo los precios de los comercios NO favoritos.
         $not_favorites_prices = $this->Price->get_prices_that_are_not_favorites($product, $user, $commerce);
         $not_favorites_prices = $this->order_by_distance($not_favorites_prices, $current_commerce);
+        
+        // Agrego una bandera indicando que los comercios NO son favoritos.
+        for ($i = 0; $i < count($not_favorites_prices); $i++) {
+            $not_favorites_prices[$i]->favorite = FALSE;
+         }
 
         for ($i = 0; $i < count($not_favorites_prices); $i++) {
            array_push($favorites_prices, $not_favorites_prices[$i]);
