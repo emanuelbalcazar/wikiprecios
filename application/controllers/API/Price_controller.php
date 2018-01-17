@@ -111,7 +111,7 @@ class Price_controller extends CI_Controller
             $price_1 = $price;
             $ok = $this->Price->register_new_price_calculated($commerce, $product, $price_1, $price_2, "$".$price);
         } else {
-            $this->_existing_calculate_price($commerce, $product);
+            $this->_existing_calculate_price($commerce, $product, $price);
         }
     }
 
@@ -123,12 +123,17 @@ class Price_controller extends CI_Controller
     * @param $commerce comercio en donde se encuentra el producto
     * @param $product codigo del producto
     */
-    private function _existing_calculate_price($commerce, $product)
+    private function _existing_calculate_price($commerce, $product, $price)
     {
         $days = 5; // Como parametro inicial, tomo 5 dias previos de precios registrados.
         $all_prices = $this->Price->get_last_prices($commerce, $product, $days);
 
-        if (count($all_prices) < 10) {  // Si tengo pocos precios, pido datos de los ultimos 10 dias.
+        if (count($all_prices) == 0) {
+            $this->Price->register_new_price_calculated($commerce, $product, $price, 0, "$".$price);
+            return;
+        }
+
+        if (count($all_prices) < 10 && count($all_prices) > 0) {  // Si tengo pocos precios, pido datos de los ultimos 10 dias.
             $days = 10;
             $all_prices = $this->Price->get_last_prices($commerce, $product, $days);
         }
