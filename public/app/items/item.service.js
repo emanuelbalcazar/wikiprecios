@@ -14,7 +14,7 @@
 			findAll: findAll,
 			save: save,
 			remove: remove
-		}
+		};
 
 		return service;
 

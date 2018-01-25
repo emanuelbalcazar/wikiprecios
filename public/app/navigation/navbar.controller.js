@@ -17,7 +17,7 @@
         
         $scope.redirectTo = function (route) {
             $location.path(route);
-        }
+        };
 
         $scope.logout = function () {
             $cookieStore.remove('user');

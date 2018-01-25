@@ -12,7 +12,7 @@
 
 		var service = {
 			paginate: paginate
-		}
+		};
 
 		return service;
 

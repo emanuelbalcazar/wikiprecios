@@ -14,7 +14,7 @@
 			login: login,
 			forgotPassword: forgotPassword,
 			changePassword: changePassword
-		}
+		};
 
 		return service;
 

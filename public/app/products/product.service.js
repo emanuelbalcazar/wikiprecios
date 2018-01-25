@@ -14,7 +14,7 @@
 			save: save,
 			categories: categories,
 			remove: remove
-		}
+		};
 
 		return service;
 

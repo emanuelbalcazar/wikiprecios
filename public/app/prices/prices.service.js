@@ -12,7 +12,7 @@
 
 		var service = {
 			findAll: findAll
-		}
+		};
 
 		return service;
 

@@ -24,7 +24,7 @@
 
         $scope.redirectTo = function (route) {
             $location.path(route);
-        }
+        };
     }
 
 })();

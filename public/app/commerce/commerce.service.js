@@ -13,7 +13,7 @@
 		var service = {
 			findAll: findAll,
 			remove: remove
-		}
+		};
 
 		return service;
 

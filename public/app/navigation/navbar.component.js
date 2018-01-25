@@ -5,5 +5,5 @@
 		.component('navbar', {
             templateUrl: 'public/app/navigation/navbar.view.html',
             controller: 'navbarCtrl'
-		})
+		});
 })();

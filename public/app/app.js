@@ -24,7 +24,7 @@
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
 
             if (next.originalPath == '#/password/reset')    
-                return window.location.href = '#/password/reset';
+                window.location.href = '#/password/reset';
 
             if (next.originalPath !== '#/login' && !$cookieStore.get('user'))
                 window.location.href = '#/login';
