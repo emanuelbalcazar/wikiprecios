@@ -31,4 +31,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 bower_components/
 uploads/
+node_modules/
+package-lock.json
 

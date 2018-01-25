@@ -1,0 +1,32 @@
+{
+    "name": "wikiprecios",
+    "version": "1.0.0",
+    "description": "sistema de precios colaborativos",
+    "main": "index.php",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/emanuelbalcazar/wikiprecios.git"
+    },
+    "keywords": [
+        "wikiprecios",
+        "colaborativo",
+        "codeigniter"
+    ],
+    "author": "balcazar carlos emanuel, mallon emanuel, sañico jorge",
+    "license": "ISC",
+    "devDependencies": {
+        "bower": "^1.8.2",
+        "grunt": "^1.0.1",
+        "grunt-cli": "^1.2.0",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-cssmin": "^2.2.1",
+        "grunt-contrib-jshint": "^1.1.0",
+        "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+        "grunt-shell": "^2.1.0",
+        "jshint-stylish": "^2.2.1",
+        "time-grunt": "^1.4.0"
+    }
+}
