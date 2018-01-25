@@ -12,7 +12,8 @@
         'ngCookies',
         'navbar',
         'nya.bootstrap.select',
-        'angularFileUpload'
+        'angularFileUpload',
+        'openlayers-directive'
     ]);
 
     app.run(['$rootScope', '$route', '$http', '$cookieStore', '$location', function ($rootScope, $route, $http, $cookieStore, $location) {

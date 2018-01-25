@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
     <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
 
+    <link rel="stylesheet" href="bower_components/angular-openlayers-directive/css/markers.css">
+    <link rel="stylesheet" href="bower_components/angular-openlayers-directive/css/openlayers.css">
+    <link rel="stylesheet" href="bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.css">
+    
+    <!-- MAPA - NO PUDE ENCONTRAR UNA LIBRERIA NATIVA >:v -->
+    <link rel="stylesheet" href="https://openlayers.org/en/v3.16.0/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v3.16.0/build/ol.js"></script>
+
+    
     <!-- Scripts -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
@@ -31,6 +40,9 @@
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
     <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js"></script>
+    <script src="bower_components/openlayers/ol.js"></script>
+
 
     <!-- App configuration -->
     <script src="public/app/app.js"></script>
