@@ -33,4 +33,11 @@ bower_components/
 uploads/
 node_modules/
 package-lock.json
+public/assets/*.min.css
+public/assets/*.min.js
 
+public/fonts/*.eot
+public/fonts/*.svg
+public/fonts/*.ttf
+public/fonts/*.woff
+public/fonts/*.woff2
