@@ -10,7 +10,7 @@ module.exports = function (grunt) {
     // Task configuration will be written here.
     grunt.initConfig({
         package: grunt.file.readJSON('package.json'),
-        // Ejecute shell commands
+        // Execute shell commands
         shell: {
             options: {
                 stdout: true
