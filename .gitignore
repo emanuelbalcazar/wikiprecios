@@ -30,7 +30,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 
 bower_components/
-uploads/
+uploads/*.csv
 node_modules/
 package-lock.json
 public/assets/*.min.css

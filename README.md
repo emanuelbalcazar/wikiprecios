@@ -4,8 +4,9 @@ Aplicación desarrollada en la materia de Desarrollo de Software en la UNPSJB.
 ## Preparación
 Requisitos previos:
 
-Instalar NPM:
+Instalar Node.js y NPM:
 * `sudo apt-get install -g npm`
+* `sudo apt-get install node`
 
 Instalar Bower:
 * `sudo npm install -g bower`
