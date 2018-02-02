@@ -7,7 +7,10 @@
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
                 if (event.which === 13) {
-                    $(attrs.onEnter).focus();
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter, { 'event': event });
+                    });
+
                     event.preventDefault();
                 }
             });

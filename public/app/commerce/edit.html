@@ -1,1 +1,46 @@
-<openlayers ol-center="current" height="480px" width="640px"></openlayers>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 pull-left">
+            <openlayers ol-center="current" ol-markers="markers" ol-defaults="defaults" height="500px">
+                <ol-marker ol-marker-properties="marker" ng-click="show(marker)" ng-repeat="marker in markers" lat="marker.lat" lon="marker.lon"></ol-marker>
+            </openlayers>
+        </div>
+
+        <div class="col-xs-4">
+            <button class="btn btn-primary" data-ng-click="new()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                &nbsp;Nuevo Comercio
+            </button>
+
+            <button class="btn btn-primary" data-ng-click="save()">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                &nbsp;Guardar
+            </button>
+
+            <h3></h3>
+
+            <div data-ng-show="true">
+                <label>Nombre:</label>
+                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Nombre Legal">
+
+                <h3></h3>
+
+                <label>Dirección:</label>
+                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Dirección">
+
+                <h3></h3>
+
+                <label>Latitud:</label>
+                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Latitud">
+
+                <h3></h3>
+
+                <label>Longitud:</label>
+                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Longitud">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@
         $scope.markers = [];
 
         // Posicion por defecto en donde se enfocara la vista del mapa.
-        $scope.defaultPosition = { latitude: -43.842451, longitude: -68.666199 };
+        $scope.defaultPosition = { latitude: -42.7865037, longitude: -65.039605 };
 
         // Modifica la configuracion del visualizador de mapa.
         angular.extend($scope, {
@@ -37,6 +37,27 @@
                 }
             }
         });
+
+        /**
+         * Obtiene la geolocalizacion actual.
+         */
+        function getGeolocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    $scope.current.lat = position.coords.latitude;
+                    $scope.current.lon = position.coords.longitude;
+                    $scope.current.zoom = 13;
+
+                    $scope.$apply(function() {
+                        logger.info('Geolocalizacion Activada');
+                    });
+                });
+            } else {
+                logger.info('geolocalizacion no soportada por su navegador');
+            }
+        }
+
+        getGeolocation();
 
         /**
          * Evento capturado al realizar click en el mapa.

@@ -33,8 +33,8 @@
 
 		function save(item) {
 			return $http({
-				url: 'api/rubro/' + id,
-				method: "DELETE"
+				url: 'api/rubro/registrar',
+				method: "POST"
 			}).then(
 				function success(response) {
 					return response.data;
