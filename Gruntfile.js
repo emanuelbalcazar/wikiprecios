@@ -117,7 +117,7 @@ module.exports = function (grunt) {
                 force: true,
                 esversion: 6,
             },
-            all: ['public/app/*.js', 'public/app/**/*.js', 'public/app/**/**/*.js']
+            all: ['Gruntfile.js', 'public/app/*.js', 'public/app/**/*.js', 'public/app/**/**/*.js']
         }
     });
 
