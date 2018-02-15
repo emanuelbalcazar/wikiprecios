@@ -26,9 +26,9 @@ class Item_controller extends CI_Controller
     {
         $data["name"] = $this->input->post('name');
         $data = $this->utils->replace($data, "\"", "");
-        
+
         if ($this->Item->exists($data)) {
-            $result["error"] = "El rubro ya existe";
+            $result["error"] = "El rubro \"".$data["name"]."\" ya existe";
             $result["registered"] = FALSE;
         } else {
             $data["letter"] = strtoupper(substr($data["name"], 0, 3));

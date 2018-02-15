@@ -115,7 +115,7 @@ module.exports = function (grunt) {
             options: {
                 reporter: require('jshint-stylish'),
                 force: true,
-                esversion: 6,
+                esversion: 6
             },
             all: ['Gruntfile.js', 'public/app/*.js', 'public/app/**/*.js', 'public/app/**/**/*.js']
         }

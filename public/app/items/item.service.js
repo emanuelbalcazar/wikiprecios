@@ -34,7 +34,8 @@
 		function save(item) {
 			return $http({
 				url: 'api/rubro/registrar',
-				method: "POST"
+				method: "POST",
+				data: serializer(item)
 			}).then(
 				function success(response) {
 					return response.data;

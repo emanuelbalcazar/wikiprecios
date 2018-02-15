@@ -16,7 +16,7 @@
     <tr ng-repeat="price in pagination.data">
         <td>{{$index + 1}}</td>
         <td>{{price.user}}</td>
-        <td>{{price.price}}</td>
+        <td>${{price.price}}</td>
         <!-- <td>{{price.commerce_id}}</td> -->
         <td>{{price.product_code}}</td>
         <td>{{price.date}}</td>

@@ -14,7 +14,7 @@
                 if (response.error)
                     return logger.error(response.error);
 
-                logger.success(response.success);
+                logger.success('El rubro se registro correctamente');
             });
         };
     }
