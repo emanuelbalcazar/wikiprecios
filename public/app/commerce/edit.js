@@ -43,12 +43,12 @@
          */
         function getGeolocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     $scope.current.lat = position.coords.latitude;
                     $scope.current.lon = position.coords.longitude;
                     $scope.current.zoom = 13;
 
-                    $scope.$apply(function() {
+                    $scope.$apply(function () {
                         logger.info('Geolocalizacion Activada');
                     });
                 });
@@ -58,6 +58,11 @@
         }
 
         getGeolocation();
+
+        $scope.new = function () {
+            $scope.createMarker = true;
+            logger.info('Seleccione un punto en el mapa');
+        };
 
         /**
          * Evento capturado al realizar click en el mapa.
@@ -69,11 +74,33 @@
                 $scope.$apply(function () {
                     // Convierto las coordenadas del click en coordenadas de geolocalizacion.
                     var lonlat = ol.proj.transform(data.coord, 'EPSG:3857', 'EPSG:4326');
-                    console.log(lonlat[1], lonlat[0]);
+                    addMarker($scope.label, lonlat[1], lonlat[0]);
+                    $scope.createMarker = false;
+                    logger.success('Marcador agregado');
                 });
             }
         });
 
+        /**
+       * Agrega un nuevo marcador en el Mapa.
+       * Las coordenadas deben estar en formato EPSG:4326.
+       * @param {String} label etiqueta del marcador
+       * @param {Number} latitude
+       * @param {Number} longitude
+       */
+        function addMarker(label, latitude, longitude, id = null) {
+            $scope.markers = [];
+
+            $scope.markers.push({
+                lat: Number(latitude),
+                lon: Number(longitude),
+                label: {
+                    show: (label) ? true : false,
+                    message: (label) ? label : ""
+                },
+                id: id
+            });
+        }
     }
 
 })();
