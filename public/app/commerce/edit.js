@@ -10,6 +10,8 @@
         // Marcadores del mapa.
         $scope.markers = [];
 
+        $scope.commerce = { name: '', address: '', latitude: '', longitude: '' };
+
         // Posicion por defecto en donde se enfocara la vista del mapa.
         $scope.defaultPosition = { latitude: -42.7865037, longitude: -65.039605 };
 
@@ -90,6 +92,8 @@
        */
         function addMarker(label, latitude, longitude, id = null) {
             $scope.markers = [];
+            $scope.commerce.latitude = latitude;
+            $scope.commerce.longitude = longitude;
 
             $scope.markers.push({
                 lat: Number(latitude),
