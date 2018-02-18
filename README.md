@@ -1,5 +1,6 @@
 # Wikiprecios
 Aplicación desarrollada en la materia de Desarrollo de Software en la UNPSJB.
+El servidor es utilizado por la aplicacion Android de Wikiprecios https://github.com/MallonEmanuel/WikiPrecios
 
 ## Preparación
 Requisitos previos:
