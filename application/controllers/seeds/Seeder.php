@@ -59,10 +59,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Country);
             $this->files->init_load();
-            echo '<p>'.'Se crearon los paises satisfactoriamente';
+            echo 'Se crearon los paises satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar los paises correctamente';
+        echo 'No se pudieron cargar los paises correctamente'.PHP_EOL;
     }
 
     /**
@@ -77,10 +77,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Province);
             $this->files->init_load();
-            echo '<p>'.'Se crearon las provincias satisfactoriamente';
+            echo 'Se crearon las provincias satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar las provincias correctamente';
+        echo 'No se pudieron cargar las provincias correctamente'.PHP_EOL;
     }
 
     /**
@@ -95,10 +95,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new City);
             $this->files->init_load();
-            echo '<p>'.'Se crearon las ciudades satisfactoriamente';
+            echo 'Se crearon las ciudades satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar las ciudades correctamente';
+        echo 'No se pudieron cargar las ciudades correctamente'.PHP_EOL;
     }
 
     /**
@@ -113,10 +113,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Commerce);
             $this->files->init_load();
-            echo '<p>'.'Se crearon los comercios satisfactoriamente';
+            echo  'Se crearon los comercios satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar los comercios correctamente';
+        echo  'No se pudieron cargar los comercios correctamente'.PHP_EOL;
     }
 
     /**
@@ -131,10 +131,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Item);
             $this->files->init_load();
-            echo '<p>'.'Se crearon los rubros satisfactoriamente';
+            echo  'Se crearon los rubros satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar los rubros correctamente';
+        echo  'No se pudieron cargar los rubros correctamente'.PHP_EOL;
     }
 
     /**
@@ -149,10 +149,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Category);
             $this->files->init_load();
-            echo '<p>'.'Se crearon las categorias satisfactoriamente';
+            echo  'Se crearon las categorias satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar las categorias correctamente';
+        echo  'No se pudieron cargar las categorias correctamente'.PHP_EOL;
     }
 
     /**
@@ -167,10 +167,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new Administrator);
             $this->files->init_load();
-            echo '<p>'.'Se crearon los administradores satisfactoriamente';
+            echo  'Se crearon los administradores satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar los administradores correctamente';
+        echo  'No se pudieron cargar los administradores correctamente'.PHP_EOL;
     }
 
     /**
@@ -185,10 +185,10 @@ class Seeder extends CI_Controller
         if ($this->files->set_file($file)) {
             $this->files->set_model(new User);
             $this->files->init_load();
-            echo '<p>'.'Se crearon los usuarios satisfactoriamente';
+            echo  'Se crearon los usuarios satisfactoriamente'.PHP_EOL;
             return;
         }
-        echo '<p>'.'No se pudieron cargar los usuarios correctamente';
+        echo  'No se pudieron cargar los usuarios correctamente'.PHP_EOL;
     }
 
 }

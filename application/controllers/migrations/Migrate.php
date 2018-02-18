@@ -15,9 +15,7 @@ class Migrate extends CI_Controller {
         if (!$this->migration->current()) {
             show_error($this->migration->error_string());
         } else {
-            $info["status"] = "La migracion se realizo correctamente";
-            $info["latest"] = $this->migration->latest();
-            echo json_encode($info);
+            echo PHP_EOL."La migracion se realizo correctamente";
         }
     }
 }

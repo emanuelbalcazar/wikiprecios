@@ -30,6 +30,12 @@ module.exports = function (grunt) {
             },
             clean: {
                 command: '\\rm -rf public/assets/app.js && \\rm -rf public/assets/app.css'
+            },
+            seed: {
+                command: 'curl http://localhost/wikiprecios/seeds'
+            },
+            migrate: {
+                command: 'curl http://localhost/wikiprecios/migrate'
             }
         },
         // Concatenate our JavaScript and CSS files.
@@ -124,6 +130,8 @@ module.exports = function (grunt) {
     // Register all tasks.
     grunt.registerTask('default', ['shell:copy_fonts', 'concat', 'cssmin', 'uglify', 'shell:clean']);
     grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install']);
+    grunt.registerTask('seed', ['shell:seed']);
+    grunt.registerTask('migrate', ['shell:migrate']);
 
     grunt.registerTask('test', ['jshint']);
 
