@@ -12,11 +12,14 @@
 
 		var service = {
 			findAll: findAll,
-			remove: remove
+			remove: remove,
+			getAddress: getAddress,
+			save: save
 		};
 
 		return service;
 
+		// busca todos los comercios.
 		function findAll() {
 			return $http({
 				url: 'api/comercios',
@@ -30,10 +33,40 @@
 				});
 		}
 
+		// elimina un comercio por ID.
 		function remove(id) {
 			return $http({
 				url: 'api/comercios/' + id,
 				method: "DELETE"
+			}).then(
+				function success(response) {
+					return response.data;
+				},
+				function error(error) {
+					return error.data;
+				});
+		}
+
+		// obtiene la direccion a partir de la posicion geografica.
+		function getAddress(latitude, longitude) {
+			return $http({
+				url: 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latitude + '&lon=' + longitude,
+				method: "GET"
+			}).then(
+				function success(response) {
+					return response.data;
+				},
+				function error(error) {
+					return error.data;
+				});
+		}
+
+		// guarda un nuevo comercio.
+		function save(commerce) {
+			return $http({
+				url: 'api/comercio/registrar',
+				method: "POST",
+				data: serializer(commerce)
 			}).then(
 				function success(response) {
 					return response.data;

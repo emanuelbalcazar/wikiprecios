@@ -4,6 +4,8 @@
             <openlayers ol-center="current" ol-markers="markers" ol-defaults="defaults" height="500px">
                 <ol-marker ol-marker-properties="marker" ng-click="show(marker)" ng-repeat="marker in markers" lat="marker.lat" lon="marker.lon"></ol-marker>
             </openlayers>
+            <h4></h4>
+            <label>{{information}}</label>
         </div>
 
         <div class="col-xs-4">
@@ -12,7 +14,7 @@
                 &nbsp;Nuevo Comercio
             </button>
 
-            <button class="btn btn-primary" data-ng-click="save()">
+            <button class="btn btn-primary" data-ng-disabled="!commerce.name || !commerce.address" data-ng-click="save()">
                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                 &nbsp;Guardar
             </button>
@@ -37,6 +39,16 @@
 
                 <label>Longitud:</label>
                 <input type="text" class="form-control" data-ng-model="commerce.longitude" placeholder="Longitud">
+
+                <h3></h3>
+
+                <label>Ciudad:</label>
+                <input type="text" data-ng-disabled="true" class="form-control" data-ng-model="commerce.city" placeholder="Ciudad">
+
+                <h3></h3>
+
+                <label>Provincia:</label>
+                <input type="text" data-ng-disabled="true" class="form-control" data-ng-model="commerce.province" placeholder="Provincia">
 
             </div>
 

@@ -3,14 +3,17 @@
 
     var controllerName = 'commerceEditCtrl';
 
-    angular.module('app').controller(controllerName, ['$scope', 'toastr', '$routeParams', 'commerceSrv', commerceEditCtrl]);
+    angular.module('app').controller(controllerName, ['$scope', 'toastr', '$routeParams', 'dialogs', 'commerceSrv', commerceEditCtrl]);
 
-    function commerceEditCtrl($scope, logger, $routeParams, service) {
+    function commerceEditCtrl($scope, logger, $routeParams, dialogs, service) {
 
         // Marcadores del mapa.
         $scope.markers = [];
 
-        $scope.commerce = { name: '', address: '', latitude: '', longitude: '' };
+        // Comercio
+        $scope.commerce = { name: '', address: '', latitude: '', longitude: '', city: '', country: '' };
+
+        $scope.information = '';
 
         // Posicion por defecto en donde se enfocara la vista del mapa.
         $scope.defaultPosition = { latitude: -42.7865037, longitude: -65.039605 };
@@ -55,7 +58,7 @@
                     });
                 });
             } else {
-                logger.info('geolocalizacion no soportada por su navegador');
+                logger.info('Geolocalizacion no soportada por su navegador');
             }
         }
 
@@ -76,7 +79,23 @@
                 $scope.$apply(function () {
                     // Convierto las coordenadas del click en coordenadas de geolocalizacion.
                     var lonlat = ol.proj.transform(data.coord, 'EPSG:3857', 'EPSG:4326');
-                    addMarker($scope.label, lonlat[1], lonlat[0]);
+                    addMarker($scope.commerce.name, lonlat[1], lonlat[0]);
+
+                    service.getAddress(lonlat[1], lonlat[0]).then(function (result) {
+                        if (!result && result.address)
+                            return logger.info('La dirección no pudo obtenerse a partir de la posición');
+
+                        var address = result.address.road;
+                        var number = (result.address.house_number) || "";
+
+                        $scope.commerce.address = (address + " " + number).trim();
+                        $scope.commerce.city = result.address.city.toUpperCase();
+                        $scope.commerce.province = result.address.state.toUpperCase();
+                        $scope.commerce.country = result.address.country.toUpperCase();
+
+                        $scope.information = result.display_name || '';
+                    });
+
                     $scope.createMarker = false;
                     logger.success('Marcador agregado');
                 });
@@ -105,6 +124,21 @@
                 id: id
             });
         }
+
+        $scope.save = function () {
+            dialogs.confirm('Confirmación', '¿Está seguro que desea guardar el comercio "' + $scope.commerce.name + '"?', { size: 'md' }).result.then(
+                function () {
+                    service.save($scope.commerce).then(function (result) {
+                        if (result.registered)
+                            logger.success(result.message);
+                        else
+                            logger.error(result.message);
+                    });
+                }, function () {
+                    // nothing to do.
+                }
+            );
+        };
     }
 
 })();
