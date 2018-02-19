@@ -29,14 +29,13 @@ class Forgot_password_controller extends CI_Controller
     public function reset()
     {
         $data["mail"] = $this->input->post('email', TRUE);
-
         $data = $this->utils->replace($data, "\"", "");  // Saco las comillas
 
         $new_password = mt_rand(1000, 9999);
         $encrypted_password = $this->encryption->encrypt($new_password);
 
         set_error_handler(array($this, 'my_error_handler')); // Para capturar los warnings de PHP.
-        $data["error"] = $this->_send_email($data["mail"], $new_password, $encrypted_password);
+        $data["status"] = $this->_send_email($data["mail"], $new_password, $encrypted_password);
 
         echo json_encode($data);
     }

@@ -14,10 +14,10 @@
         $scope.reset = function () {
             service.forgotPassword($scope.email).then(
                 function (response) {
-                    if (response.error)
+                    if (response.status.error)
                         return logger.error(response.error);
 
-                    return logger.success(response.success);
+                    return logger.success(response.status.success);
                 }
             );
         };

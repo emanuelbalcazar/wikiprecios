@@ -7,15 +7,15 @@
     <h3>Iniciar Sesión</h3>
     <br>
 
-    <ng-form ng-submit="login()">
+    <div>
         <div class="form-group">
             <label>Correo Electronico:</label>
-            <input type="email" class="form-control" data-ng-model="user.email" placeholder="Correo electronico">
+            <input type="email" class="form-control" data-ng-model="user.email" placeholder="Correo electronico" data-ng-enter="login()">
         </div>
 
         <div class="form-group">
             <label>Contraseña:</label>
-            <input type="password" class="form-control" data-ng-model="user.password" name="password" on-enter="login()"
+            <input type="password" class="form-control" data-ng-model="user.password" name="password" data-ng-enter="login()"
                 placeholder="Contraseña">
         </div>
 
@@ -26,7 +26,7 @@
                 <button name="signin" type="submit" class="btn btn-primary" data-ng-click="login()" ng-disabled='!user.email'>Iniciar</button>
             </div>
         </div>
-    </ng-form>
+    </div>
     <br>
 
     <a href="" data-ng-click="redirectTo('/password/reset')">¿Olvidó su contraseña?</a>
