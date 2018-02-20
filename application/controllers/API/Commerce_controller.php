@@ -35,7 +35,9 @@ class Commerce_controller extends CI_Controller
         $data = $this->utils->replace($data, "\"", "");     // elimino las comillas.
 
         // Armo la consulta de busqueda en el arreglo.
-        $where = $data;
+        $where["name"] = $data["name"];
+        $where["address"] = $data["address"];
+        $where["city"] = $data["city"];
 
         if ($this->Commerce->exists($where)) {
             $result["registered"] = FALSE;
