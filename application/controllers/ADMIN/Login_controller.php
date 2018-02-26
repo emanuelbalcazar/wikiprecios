@@ -42,8 +42,7 @@ class Login_controller extends CI_Controller
             echo json_encode($result); 
             return;
         }
-        
-        
+
         $this->Administrator->update(array("mail" => $data["mail"]), array("last_session" => date("y-m-d H:m:s")));
         $user = $this->Administrator->find(array("mail" => $data["mail"]))[0];
         $this->session->set_userdata(array('user' => $data["mail"]));

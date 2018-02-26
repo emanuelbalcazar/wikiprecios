@@ -75,16 +75,16 @@ class Account_controller extends CI_Controller
     public function logout()
     {
         $data["user"] = $this->input->post('user', TRUE);        
-        $this->session->sess_destroy;  
+        $this->session->unset_userdata(array('user' => $data["mail"]));  
         
         $data["session"] = $this->session->has_userdata('user');
         echo json_encode($data);
     }
 
+    /**
+     * Retorna la sesion actual del usuario
+     */
     public function session() {
-        //$data["user"] = $this->input->get('user');
-        //$data = $this->utils->replace($data, "\"", "");  // Saco las comillas
-        
         $session = $this->session->userdata();        
         echo json_encode($session);
     }

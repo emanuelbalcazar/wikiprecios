@@ -13,7 +13,8 @@
 		var service = {
 			login: login,
 			forgotPassword: forgotPassword,
-			changePassword: changePassword
+			changePassword: changePassword,
+			logout: logout
 		};
 
 		return service;
@@ -52,6 +53,20 @@
 				url: 'api/admin/password/change',
 				method: "POST",
 				data: serializer(data)
+			}).then(
+				function success(response) {
+					return response.data;
+				},
+				function error(error) {
+					return error.data;
+				});
+		}
+
+		function logout(email) {
+			return $http({
+				url: 'api/admin/logout',
+				method: "POST",
+				data: serializer({user: email})
 			}).then(
 				function success(response) {
 					return response.data;

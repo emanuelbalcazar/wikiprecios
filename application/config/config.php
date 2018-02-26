@@ -360,7 +360,7 @@ $config['encryption_key'] = 'wiki';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 1200;
+$config['sess_expiration'] = 60 * 20; // 60 seconds x 20 minutes 
 $config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
