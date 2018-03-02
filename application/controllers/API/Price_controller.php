@@ -28,6 +28,7 @@ class Price_controller extends CI_Controller
         $this->load->model('Product');
         $this->load->model('User');
         $this->load->model('Commerce');
+        $this->load->model('CalculatedPrice');
     }
 
     /**
@@ -457,7 +458,6 @@ class Price_controller extends CI_Controller
 
    /**
    * Devuelve los precios posibles de un producto en un determinado comercio.
-   *
    * @access public
    */
    public function get_possible_prices()
@@ -470,8 +470,30 @@ class Price_controller extends CI_Controller
        echo json_encode($result);
    }
 
-    public function findAll() {
+    /**
+    * Devuelve los precios registrados.
+    * @access public
+    */
+    public function findAll() 
+    {
         $all = $this->Price->find();
+        echo json_encode($all);
+    }
+
+    /**
+    * Devuelve todos los precios calculados con su respectivo comercio.
+    * @access public
+    */
+    public function calculated_prices()
+    {
+        $all = $this->CalculatedPrice->find();
+
+        for ($i = 0; $i < count($all); $i++) {
+            $commerce_data = $this->Commerce->find(array("id" => $all[$i]->commerce_id));
+            $all[$i]->commerce_name = $commerce_data[0]->name;
+            $all[$i]->commerce_address = $commerce_data[0]->address;
+        }
+
         echo json_encode($all);
     }
 }

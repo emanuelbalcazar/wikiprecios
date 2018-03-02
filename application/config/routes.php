@@ -97,6 +97,7 @@ $route['api/rubro/(:num)']['DELETE'] = "API/Item_controller/delete/$1";
 $route['api/precio/registrar']['POST'] = "API/Price_controller/register";
 $route['api/precio/sugerido']['GET'] = "API/Price_controller/get_possible_prices";
 $route['api/precios']['GET'] = "API/Price_controller/findAll";
+$route['api/precios/calculados']['GET'] = "API/Price_controller/calculated_prices";
 
 /* ------------------------- Rutas de servicios web --------------------------- */
 $route['api/admin/login']['POST'] = "ADMIN/Login_controller/login";

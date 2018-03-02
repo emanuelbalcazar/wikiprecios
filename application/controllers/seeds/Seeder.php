@@ -19,6 +19,7 @@ class Seeder extends CI_Controller
         $this->load->library('encrypt');
         $this->load->library('csvimport');
         $this->load->library('files');
+
         $this->load->model('Province');
         $this->load->model('Country');
         $this->load->model('City');
@@ -27,6 +28,7 @@ class Seeder extends CI_Controller
         $this->load->model('Category');
         $this->load->model('Administrator');
         $this->load->model('User');
+        $this->load->model('Product');
 
         $this->file_path = APPPATH.$this->route;
     }
@@ -45,6 +47,7 @@ class Seeder extends CI_Controller
         $this->load_categories();
         $this->load_administrators();
         $this->load_users();
+        $this->load_products();
     }
 
     /**
@@ -189,6 +192,22 @@ class Seeder extends CI_Controller
             return;
         }
         echo  'No se pudieron cargar los usuarios correctamente'.PHP_EOL;
+    }
+
+    /**
+     * Carga productos desde un archivo CSV a la Base de Datos.
+     * @access public
+     */
+    public function load_products() {
+        $file = $this->file_path.'products.csv';
+        
+        if ($this->files->set_file($file)) {
+            $this->files->set_model(new Product);
+            $this->files->init_load();
+            echo  'Se crearon los productos satisfactoriamente'.PHP_EOL;
+            return;
+        }
+        echo  'No se pudieron cargar los productos correctamente'.PHP_EOL;
     }
 
 }

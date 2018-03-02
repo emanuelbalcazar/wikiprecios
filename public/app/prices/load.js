@@ -21,6 +21,7 @@
         $scope.uploader.onBeforeUploadItem = function (item) {
             item.formData.push({ user: $cookieStore.get('user').email });
             item.formData.push({ commerce: $scope.commerce.id });
+            logger.info('Se procedera a cargar los datos, por favor espere');
         };
 
         // on finish load, show status messages.

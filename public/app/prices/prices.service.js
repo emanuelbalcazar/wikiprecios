@@ -18,7 +18,7 @@
 
 		function findAll() {
 			return $http({
-				url: 'api/precios',
+				url: 'api/precios/calculados',
 				method: "GET"
 			}).then(
 				function success(response) {

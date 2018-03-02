@@ -5,20 +5,20 @@
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
-            <th>Usuario</th>
-            <th>Precio</th>
-            <!-- <th>Comercio</th> -->
             <th>Producto</th>
+            <th>Precio</th>
+            <th>Comercio</th>
+            <th>Dirección</th>
             <th>Fecha</th>  
         </tr>
     </thead>
 
     <tr ng-repeat="price in pagination.data">
         <td>{{$index + 1}}</td>
-        <td>{{price.user}}</td>
-        <td>${{price.price}}</td>
-        <!-- <td>{{price.commerce_id}}</td> -->
         <td>{{price.product_code}}</td>
+        <td>{{price.price}}</td>
+        <td>{{price.commerce_name}}</td>
+        <td>{{price.commerce_address}}</td>
         <td>{{price.date}}</td>
     </tr>
 </table>
