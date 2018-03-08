@@ -64,7 +64,7 @@ class Price_controller extends CI_Controller
         $where = array("mail" => $data["user"]);
         $result["user"] = $this->User->find($where)[0];
 
-        echo json_encode($result[0]);
+        echo json_encode($result);
     }
 
     // -------------------------------------------------------------------------
