@@ -59,9 +59,12 @@ class Price_controller extends CI_Controller
         $this->_register_price($data);
         $this->_calculate_price($data["commerce_id"], $data["price"], $data["product_code"]);
         $this->_user_qualify($data["commerce_id"], $data["user"], $data["price"], $data["product_code"]);
-        $result = $this->_get_favorites_prices($data["commerce_id"], $data["user"], $data["product_code"]);
+        $result["result"] = $this->_get_favorites_prices($data["commerce_id"], $data["user"], $data["product_code"]);
 
-        echo json_encode($result);
+        $where = array("mail" => $data["user"]);
+        $result["user"] = $this->User->find($where)[0];
+
+        echo json_encode($result[0]);
     }
 
     // -------------------------------------------------------------------------
