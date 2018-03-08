@@ -133,7 +133,7 @@ class Price extends MY_Model {
             $ids[] = $id['commerce_id'];
         }
 
-        $this->db->select('e.id, e.name, p.price, p.product_code, p.date');
+        $this->db->select('e.id, e.name, p.price, p.product_code, p.date, p.price_1, p.price_2');
         $this->db->from('pricescalculated p');
         $this->db->join('businesses as e', 'e.id = p.commerce_id', 'left');
         $this->db->where('p.product_code', $product_code);
@@ -168,7 +168,7 @@ class Price extends MY_Model {
             $ids = -1;
         }
 
-        $this->db->select('e.id, e.name, p.price, p.product_code, p.date');
+        $this->db->select('e.id, e.name, p.price, p.product_code, p.date, p.price_1, p.price_2');
         $this->db->from('pricescalculated p');
         $this->db->join('businesses as e', 'e.id = p.commerce_id', 'left');
         $this->db->where('p.product_code', $product_code);
