@@ -7,6 +7,9 @@
 
     function loadPricesCtrl($scope, logger, FileUploader, $cookieStore, commerceSrv, service) {
 
+        $scope.alert = { strong: "Atención!", message: "Procesando el archivo, por favor espere" };
+        $scope.show = false;
+
         commerceSrv.findAll().then(function (response) {
             $scope.commerces = response;
             $scope.commerce = $scope.commerces[0];
@@ -14,22 +17,27 @@
 
         // create a instance from FileUploader
         $scope.uploader = new FileUploader({
-            url: 'api/admin/prices/load'
+            url: 'api/admin/prices/load',
+            queueLimit: 1
         });
 
         // add other data before upload item.
         $scope.uploader.onBeforeUploadItem = function (item) {
             item.formData.push({ user: $cookieStore.get('user').email });
             item.formData.push({ commerce: $scope.commerce.id });
-            logger.info('Se procedera a cargar los datos, por favor espere');
+            logger.info('Subiendo el archivo');
+            $scope.show = true;
         };
 
         // on finish load, show status messages.
         $scope.uploader.onCompleteItem = function (fileItem, response, status, headers) {
-            if (response.error)
+            if (response.error) {
+                $scope.show = false;
                 return logger.error(response.error, 'Error al cargar');
+            }
 
             logger.success(response.success, 'Carga Exitosa');
+            $scope.show = false;
         };
 
     }

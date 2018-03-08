@@ -24,7 +24,7 @@
 
                 <br></br>
                 <h4>Seleccione el archivo a cargar:</h4>
-                <input type="file" nv-file-select="" uploader="uploader" accept=".csv" multiple/>
+                <input type="file" nv-file-select="" uploader="uploader" accept=".csv" ng-click="uploader.clearQueue()"/>
                 <br>
 
                     <h3>{{ uploader.queue.length }} archivos en espera</h3>
@@ -83,15 +83,21 @@
                                 <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                            <span class="glyphicon glyphicon-upload"></span> Subir todo
+                        <!-- <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Subir
                         </button>
                         <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
                             <span class="glyphicon glyphicon-ban-circle"></span> Cancelar todo
                         </button>
                         <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                             <span class="glyphicon glyphicon-trash"></span> Quitar todo
-                        </button>
+                        </button> -->
+
+                        <div class="alert alert-warning alert-dismissable" data-ng-show="show">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>{{alert.strong}}</strong>&nbsp;{{alert.message}}
+                        </div>
+
                     </div>
 
             </form>
