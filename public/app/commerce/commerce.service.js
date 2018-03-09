@@ -14,6 +14,7 @@
 			findAll: findAll,
 			remove: remove,
 			getAddress: getAddress,
+			geocode: geocode,
 			save: save
 		};
 
@@ -51,6 +52,19 @@
 		function getAddress(latitude, longitude) {
 			return $http({
 				url: 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latitude + '&lon=' + longitude,
+				method: "GET"
+			}).then(
+				function success(response) {
+					return response.data;
+				},
+				function error(error) {
+					return error.data;
+				});
+		}
+
+		function geocode(address, city) {
+			return $http({
+				url: 'https://nominatim.openstreetmap.org/search?format=jsonv2&street=' + address + '&city=' + city,
 				method: "GET"
 			}).then(
 				function success(response) {

@@ -11,7 +11,7 @@
         $scope.markers = [];
 
         // Comercio
-        $scope.commerce = { name: '', address: '', latitude: '', longitude: '', city: '', country: '' };
+        $scope.commerce = { name: '', address: '', latitude: '', longitude: '', city: 'PUERTO MADRYN', country: 'CHUBUT' };
 
         $scope.information = '';
 
@@ -101,6 +101,18 @@
                 });
             }
         });
+
+        $scope.geocode = function () {
+            service.geocode($scope.commerce.address, $scope.commerce.city).then(function (result) {
+                if (result.length == 0)
+                    return logger.error('No se pudo encontrar la dirección especificada');
+
+                $scope.current.lat = Number(result[0].lat);
+                $scope.current.lon = Number(result[0].lon);
+                $scope.current.zoom = 17;
+                addMarker($scope.commerce.name, result[0].lat, result[0].lon);
+            });
+        };
 
         /**
        * Agrega un nuevo marcador en el Mapa.

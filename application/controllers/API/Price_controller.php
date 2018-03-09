@@ -13,10 +13,10 @@ class Price_controller extends CI_Controller
     private $DIFF_SCORE = 15; // Diferencia de puntos entre dos precios
 
     private $MAX_QUALIFICATION = 5;
-    private $MIN_QUALIFICATION = -3;
+    private $MIN_QUALIFICATION = 0;
 
     private $MAX_ACCUMULATED = 5;
-    private $MIN_ACCUMULATED = -3;
+    private $MIN_ACCUMULATED = 0;
 
 
     public function __construct()

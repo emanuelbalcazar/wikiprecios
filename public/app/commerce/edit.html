@@ -8,10 +8,15 @@
             <label>{{information}}</label>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-5">
             <button class="btn btn-primary" data-ng-click="new()">
                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                &nbsp;Indicar Posición
+                &nbsp;Marcador
+            </button>
+
+            <button class="btn btn-primary" data-ng-click="geocode()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                &nbsp;Buscar Dirección
             </button>
 
             <button class="btn btn-primary" data-ng-disabled="!commerce.name || !commerce.address" data-ng-click="save()">
@@ -23,13 +28,13 @@
 
             <div data-ng-show="true">
                 <label>Nombre:</label>
-                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Nombre Legal">
+                <input type="text" class="form-control" data-ng-model="commerce.name" placeholder="Nombre del comercio">
 
                 <h3></h3>
 
                 <label>Dirección:</label>
                 <input type="text" class="form-control" data-ng-model="commerce.address" placeholder="Dirección">
-
+   
                 <h3></h3>
 
                 <label>Latitud:</label>
@@ -48,7 +53,7 @@
                 <h3></h3>
 
                 <label>Provincia:</label>
-                <input type="text" data-ng-disabled="true" class="form-control" data-ng-model="commerce.province" placeholder="Provincia">
+                <input type="text" data-ng-disabled="true" class="form-control" data-ng-model="commerce.country" placeholder="Provincia">
 
             </div>
 
