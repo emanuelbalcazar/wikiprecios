@@ -11,7 +11,7 @@
         $scope.markers = [];
 
         // Comercio
-        $scope.commerce = { name: '', address: '', latitude: '', longitude: '', city: 'PUERTO MADRYN', country: 'CHUBUT' };
+        $scope.commerce = { name: '', address: '', latitude: '', longitude: '', city: '', country: '' };
 
         $scope.information = '';
 
@@ -53,8 +53,13 @@
                     $scope.current.lon = position.coords.longitude;
                     $scope.current.zoom = 13;
 
-                    $scope.$apply(function () {
-                        logger.info('Geolocalizacion Activada');
+                    service.getAddress(position.coords.latitude, position.coords.longitude).then(function (result) {
+                        if (!result)
+                            return logger.error('Error al intentar geolocalizar');
+
+                        $scope.commerce.city = result.address.city.toUpperCase();
+                        $scope.commerce.province = result.address.state.toUpperCase();
+                        $scope.commerce.country = result.address.country.toUpperCase();
                     });
                 });
             } else {
@@ -107,6 +112,7 @@
                 if (result.length == 0)
                     return logger.error('No se pudo encontrar la dirección especificada');
 
+                console.log(result);
                 $scope.current.lat = Number(result[0].lat);
                 $scope.current.lon = Number(result[0].lon);
                 $scope.current.zoom = 17;
