@@ -116,6 +116,8 @@
                 $scope.current.lat = Number(result[0].lat);
                 $scope.current.lon = Number(result[0].lon);
                 $scope.current.zoom = 17;
+                $scope.information = result[0].display_name;
+                
                 addMarker($scope.commerce.name, result[0].lat, result[0].lon);
             });
         };

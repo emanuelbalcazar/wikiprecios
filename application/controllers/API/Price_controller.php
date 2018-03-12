@@ -493,8 +493,14 @@ class Price_controller extends CI_Controller
 
         for ($i = 0; $i < count($all); $i++) {
             $commerce_data = $this->Commerce->find(array("id" => $all[$i]->commerce_id));
-            $all[$i]->commerce_name = $commerce_data[0]->name;
-            $all[$i]->commerce_address = $commerce_data[0]->address;
+
+            if (isset($commerce_data[0])) {
+                $all[$i]->commerce_name = $commerce_data[0]->name;
+                $all[$i]->commerce_address = $commerce_data[0]->address;
+            } else {
+                $all[$i]->commerce_name = "Nombre de comercio no encontrado";
+                $all[$i]->commerce_address = "Direccion de comercio no encontrado";
+            }
         }
 
         echo json_encode($all);

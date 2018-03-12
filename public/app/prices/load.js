@@ -7,7 +7,7 @@
 
     function loadPricesCtrl($scope, logger, FileUploader, $cookieStore, commerceSrv, service) {
 
-        $scope.alert = { strong: "Atención!", message: "Procesando el archivo, por favor espere" };
+        $scope.alert = { strong: "Atención!", message: "Procesando el archivo, por favor espere y se le notificará cuando termine." };
         $scope.show = false;
 
         commerceSrv.findAll().then(function (response) {
@@ -37,6 +37,7 @@
             }
 
             logger.success(response.success, 'Carga Exitosa');
+            $scope.uploader.clearQueue();
             $scope.show = false;
         };
 
