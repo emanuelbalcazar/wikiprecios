@@ -11,7 +11,6 @@
         function findAll() {
             service.findAll().then(function (response) {
                 $scope.records = response;
-                logger.info('Se obtuvieron ' + $scope.records.length + ' registros');
                 paginate();
             });
         }

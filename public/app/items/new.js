@@ -3,9 +3,9 @@
 
     var controllerName = 'newItemCtrl';
 
-    angular.module('app').controller(controllerName, ['$scope', 'toastr', 'itemSrv', newItemCtrl]);
+    angular.module('app').controller(controllerName, ['$scope', 'toastr', '$location', 'itemSrv', newItemCtrl]);
 
-    function newItemCtrl($scope, logger, itemSrv) {
+    function newItemCtrl($scope, logger, $location, itemSrv) {
 
         $scope.item = { name: '' };
 
@@ -15,6 +15,7 @@
                     return logger.error(response.error);
 
                 logger.success('El rubro se registro correctamente');
+                $location.path('/items');
             });
         };
     }
