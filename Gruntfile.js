@@ -80,6 +80,7 @@ module.exports = function (grunt) {
                     'bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js',
                     'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
                     'bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js',
+                    'bower_components/angular-translate/angular-translate.min.js',
 
                     'public/app/app.js',
                     'public/app/**/*.js',

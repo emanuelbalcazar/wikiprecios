@@ -70,6 +70,7 @@ class Price_controller extends CI_Controller
                 $this->Product->create(array("product_code" => $row["product_code"]));
                 $this->Price->register_new_price_calculated($data["commerce_id"], $row["product_code"], $row["price"], 0, "$".$row["price"]);
             } else {
+                //$this->Price->register_new_price_calculated($data["commerce_id"], $row["product_code"], $row["price"], 0, "$".$row["price"]);
                 $this->_existing_calculate_price($data["commerce_id"], $row["product_code"], $row["price"]);
             }
 
@@ -77,6 +78,7 @@ class Price_controller extends CI_Controller
             $data["product_code"] = $row["product_code"];
             $data["date"] = date("Y-m-d");
             $this->Price->create($data);
+
             $count++;
         }
 
@@ -159,7 +161,7 @@ class Price_controller extends CI_Controller
             if (array_key_exists($price->price, $possible_prices)) {
                 $possible_prices[$price->price] = $possible_prices[$price->price] + $price->ranking;
             } else {
-                $possible_prices[$price->price] = 0 + $price->ranking;
+                $possible_prices[$price->price] = 5 + $price->ranking;
             }
         }
 
