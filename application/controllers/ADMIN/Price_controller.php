@@ -10,7 +10,7 @@
 class Price_controller extends CI_Controller
 {
 
-    private $DIFF_SCORE = 15; // Diferencia de puntos entre dos precios    
+    private $DIFF_SCORE = 15; // Diferencia de puntos entre dos precios
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class Price_controller extends CI_Controller
         $this->load->library('utils');
         $this->load->model('Commerce');
         $this->load->model('Price');
-        $this->load->model('Product');        
+        $this->load->model('Product');
     }
 
     /**
@@ -59,13 +59,13 @@ class Price_controller extends CI_Controller
         $file_data = $this->files->get_data();
         $count = 0;
 
-        foreach ($file_data as $row) {
             if (!isset($row["price"]) || !isset($row["product_code"])) {
+              foreach ($file_data as $row) {
                $result["error"] = "El archivo esta mal formado o no es el correcto.";
                echo json_encode($result);
                return;
-            }  
-            
+            }
+
             if (!$this->Product->exists(array("product_code" => $row["product_code"]))) {
                 $this->Product->create(array("product_code" => $row["product_code"]));
                 $this->Price->register_new_price_calculated($data["commerce_id"], $row["product_code"], $row["price"], 0, "$".$row["price"]);

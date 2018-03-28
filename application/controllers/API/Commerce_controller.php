@@ -109,6 +109,8 @@ class Commerce_controller extends CI_Controller
         $commerces = $this->_get_favorites_by_distance($commerces, $favorites_businesses, $data);
         $nearby_businesses = [];    // almaceno los comercios cercanos para posteriormente devolverlos.
 
+        //var_dump ($commerces);
+        array_push($nearby_businesses, current($commerces));
         for ($i = 0; $i < count($commerces) - 1; $i++) {
             array_push($nearby_businesses, next($commerces));
         }
