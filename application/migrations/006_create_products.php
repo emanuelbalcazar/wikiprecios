@@ -17,7 +17,8 @@ class Migration_create_products extends CI_Migration {
             'product_code' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 50,
-                'null' => FALSE
+                'null' => FALSE,
+                'unique' => TRUE
             ),
             'name' => array(
                 'type' => 'VARCHAR',

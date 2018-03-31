@@ -1,21 +1,21 @@
 item_id;category;special_product_code;unit
-1;peceto;CAR1;KG
-1;bola de lomo;CAR2;KG
-1;nalga;CAR3;KG
-1;carne picada;CAR4;KG
-1;pechuga;CAR5;KG
-2;acelga;VER1;KG
-2;lechuga;VER2;KG
-2;perejil;VER3;KG
-2;cebolla;VER4;KG
-2;papas;VER5;KG
-3;minion;PAN1;KG
-3;pan flauta;PAN2;KG
-3;bollos;PAN3;KG
-3;torta fritas;PAN4;DOCENA
-3;bizcochos;PAN5;KG
-4;naranjas;FRU1;KG
-4;manzanas;FRU2;KG
-4;bananas;FRU3;KG
-4;mandarinas;FRU4;KG
-4;sandia;FRU5;KG
+1;peceto;CAR-1;KG
+1;bola de lomo;CAR-2;KG
+1;nalga;CAR-3;KG
+1;carne picada;CAR-4;KG
+1;pechuga;CAR-5;KG
+2;acelga;VER-1;KG
+2;lechuga;VER-2;KG
+2;perejil;VER-3;KG
+2;cebolla;VER-4;KG
+2;papas;VER-5;KG
+3;minion;PAN-1;KG
+3;pan flauta;PAN-2;KG
+3;bollos;PAN-3;KG
+3;torta fritas;PAN-4;DOCENA
+3;bizcochos;PAN-5;KG
+4;naranjas;FRU-1;KG
+4;manzanas;FRU-2;KG
+4;bananas;FRU-3;KG
+4;mandarinas;FRU-4;KG
+4;sandia;FRU-5;KG

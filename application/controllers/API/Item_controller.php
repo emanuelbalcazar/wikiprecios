@@ -25,21 +25,43 @@ class Item_controller extends CI_Controller
     public function register()
     {
         $data["name"] = $this->input->post('name');
+        $data["letter"] = $this->input->post('letter');
         $data = $this->utils->replace($data, "\"", "");
 
-        if ($this->Item->exists($data)) {
+        if ($this->Item->find(array('name' => $data["name"]))) {
             $result["error"] = "El rubro \"".$data["name"]."\" ya existe";
             $result["registered"] = FALSE;
         } else {
-            $data["letter"] = strtoupper(substr($data["name"], 0, 3));
-            $result["registered"] = $this->Item->create($data);
-            $result["success"] = "Rubro agregado correctamente";
+
+            if ($this->Item->find(array('letter' => $data['letter'])))
+                $result["error"] = "El codigo de rubro \"" . $data["letter"] . "\" ya fue utilizado.";
+            else {
+                $status = $this->Item->create($data);
+                $result["success"] = $status;
+            }
         }
 
         echo json_encode($result);
     }
 
-    public function delete($id) {
+    public function update($id)
+    {
+        $status = $this->input->post('active');
+        $where = array('id' => $id);
+        $data = array('active' => $status);
+
+        $updated = $this->Item->update($where, $data);
+
+        if ($updated)
+            $result["success"] = "Rubro actualizado";
+        else
+            $result["error"] = "Ocurrio un error al actualizar el rubro";
+
+        echo json_encode($result);
+    }
+
+    public function delete($id) 
+    {
         $result["deleted"] = $this->Item->delete(array("id" => $id));
 
         if ($result["deleted"] > 0)

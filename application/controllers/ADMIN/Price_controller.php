@@ -58,9 +58,9 @@ class Price_controller extends CI_Controller
         $this->files->set_file($file_path);
         $file_data = $this->files->get_data();
         $count = 0;
-
+       
+        foreach ($file_data as $row) {
             if (!isset($row["price"]) || !isset($row["product_code"])) {
-              foreach ($file_data as $row) {
                $result["error"] = "El archivo esta mal formado o no es el correcto.";
                echo json_encode($result);
                return;

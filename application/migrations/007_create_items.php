@@ -17,11 +17,16 @@ class Migration_create_items extends CI_Migration {
             'letter' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null' => FALSE
+                'null' => FALSE,
+                'unique' => TRUE
             ),
             'name' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 50
+            ),
+            'active' => array(
+                'type' => 'BOOLEAN',
+                'null' => FALSE
             )
         );
 

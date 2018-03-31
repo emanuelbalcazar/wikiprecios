@@ -13,14 +13,15 @@
 		var service = {
 			findAll: findAll,
 			save: save,
-			remove: remove
+			remove: remove,
+			update: update
 		};
 
 		return service;
 
 		function findAll() {
 			return $http({
-				url: 'api/rubros',
+				url: 'api/admin/items',
 				method: "GET"
 			}).then(
 				function success(response) {
@@ -49,6 +50,20 @@
 			return $http({
 				url: 'api/rubro/' + id,
 				method: "DELETE"
+			}).then(
+				function success(response) {
+					return response.data;
+				},
+				function error(error) {
+					return error.data;
+				});
+		}
+
+		function update(item) {
+			return $http({
+				url: 'api/rubro/' + item.id,
+				method: "POST",
+				data: serializer(item)
 			}).then(
 				function success(response) {
 					return response.data;

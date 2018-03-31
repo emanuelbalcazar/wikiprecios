@@ -79,7 +79,7 @@ class Special_product_controller extends CI_Controller {
         $letters = $this->Item->get_letters_item($item);
 
         $quantity = $quantity->quantity + 1;
-        $letter = $letters->letter;
+        $letter = $letters->letter . "-"; // para tener CAR1-1, 
         $product_code = (string)$letter.$quantity; // Creo el codigo del producto especial (ej CAR1)
 
         return $product_code;
@@ -129,6 +129,12 @@ class Special_product_controller extends CI_Controller {
     * @access public
     */
     public function get_items()
+    {
+        $items = $this->Item->find(array('active' => 1));
+        echo json_encode($items);
+    }
+
+    public function get_all_items()
     {
         $items = $this->Item->find();
         echo json_encode($items);

@@ -7,11 +7,12 @@
 
     function productListCtrl($scope, logger, paginationSrv, dialogs, productSrv) {
 
+        $scope.sort = { column: 'id', descending: false };
+
         // find all prices.
         function findAll() {
             productSrv.categories().then(function (response) {
                 $scope.records = response;
-                logger.info('Se obtuvieron ' + $scope.records.length + ' registros');
                 paginate();
             });
         }
@@ -25,6 +26,18 @@
                 $scope.pagination = paginationSrv.paginate($scope.records, $scope.pagination.currentPage, 10);
             });
         }
+
+        $scope.search = function (toSearch) {
+            productSrv.categories().then(function (response) {
+                $scope.records = response;
+
+                $scope.records = $scope.records.filter(function (elem) {
+                    return (elem.category.match(new RegExp(toSearch, 'i')));
+                });
+                
+                paginate();
+            });
+        };
 
          // delete product from database.
          $scope.remove = function (product) {
@@ -42,6 +55,16 @@
                     // nothing to do.
                 }
             );
+        };
+
+        $scope.changeSorting = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
         };
     }
 

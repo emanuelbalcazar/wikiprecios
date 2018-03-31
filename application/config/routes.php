@@ -89,9 +89,10 @@ $route['api/categorias/(:num)']['DELETE'] = "API/Special_product_controller/dele
 
 $route['api/rubro/categorias']['GET'] = "API/Special_product_controller/get_categories_of_items";
 $route['api/rubros']['GET'] = "API/Special_product_controller/get_items";
+
 $route['api/rubro/registrar']['POST'] = "API/Item_controller/register";
 $route['api/rubro/(:num)']['DELETE'] = "API/Item_controller/delete/$1";
-
+$route['api/rubro/(:num)']['POST'] = "API/Item_controller/update/$1";
 
 // rutas asociadas a precios de productos.
 $route['api/precio/registrar']['POST'] = "API/Price_controller/register";
@@ -107,6 +108,7 @@ $route['api/admin/logout']['POST'] = "ADMIN/Account_controller/logout";
 $route['api/admin/session']['GET'] = "ADMIN/Account_controller/session";
 
 $route['api/admin/prices/load']['POST'] = "ADMIN/Price_controller/upload";
+$route['api/admin/items']['GET'] = "API/Special_product_controller/get_all_items";
 
 /* -------------------------- Rutas de Testing ----------------------------- */
 $route['test/user'] = "test/Test_user_model/test";

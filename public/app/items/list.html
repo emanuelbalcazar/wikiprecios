@@ -6,22 +6,38 @@
             <tr>
                 <th style="width: 5%;">#</th>
                 <th>Codigo</th>
-                <th>Nombre</th>
+                <th data-ng-click="changeSorting('name')">Nombre
+                    <span data-ng-show="sort.column == 'name'">
+                        <i data-ng-class="{'glyphicon glyphicon-arrow-down' : sort.descending, 'glyphicon glyphicon-arrow-up' : !sort.descending}"></i>
+                    </span>
+                </th>
+                <th>Estado</th>
                 <th style="width: 10%;">Acciones</th>
             </tr>
         </thead>
 
-        <tr ng-repeat="item in pagination.data">
+        <tr ng-repeat="item in pagination.data | orderBy:sort.column:sort.descending">
             <td>{{$index + 1}}</td>
             <td>{{item.letter}}</td>
             <td>{{item.name}}</td>
-            <td>
+            <td data-ng-show="{{item.active}}">Activo</td>
+            <td data-ng-hide="{{item.active}}">Inactivo</td>
+            <td data-ng-show="{{item.active}}">
                 <div class="text-center">
                     <div class="btn-group">
-                        <span class="glyphicon glyphicon-trash" data-ng-click="remove(item)" uib-tooltip="Eliminar"></span>&nbsp;
+                        <span class="glyphicon glyphicon-off" data-ng-click="changeStatus(item, 0)" uib-tooltip="Desactivar"></span>&nbsp;
                     </div>
                 </div>
             </td>
+
+            <td data-ng-hide="{{item.active}}">
+                <div class="text-center">
+                    <div class="btn-group">
+                        <span class="glyphicon glyphicon-plus" data-ng-click="changeStatus(item, 1)" uib-tooltip="Activar"></span>&nbsp;
+                    </div>
+                </div>
+            </td>
+
         </tr>
     </table>
 </div>

@@ -7,11 +7,13 @@
 
     function commerceListCtrl($scope, logger, paginationSrv, dialogs, service) {
 
+        $scope.sort = { column: 'id', descending: false };
+        $scope.toSearch = '';
+
         // find all commerces.
         function findAll() {
             service.findAll().then(function (response) {
                 $scope.records = response;
-                logger.info('Se obtuvieron ' + $scope.records.length + ' registros');
                 paginate();
             });
         }
@@ -25,6 +27,17 @@
                 $scope.pagination = paginationSrv.paginate($scope.records, $scope.pagination.currentPage, 10);
             });
         }
+
+        $scope.search = function (toSearch) {
+            service.findAll().then(function (response) {
+                $scope.records = response;
+
+                $scope.records = $scope.records.filter(function (elem) {
+                    return (elem.name.match(new RegExp(toSearch, 'i')) || elem.address.match(new RegExp(toSearch, 'i')));
+                });
+                paginate();
+            });
+        };
 
         // delete commerce from database.
         $scope.remove = function (commerce) {
@@ -42,6 +55,17 @@
                 }
             );
         };
+
+        $scope.changeSorting = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+        };
+
     }
 
 })();

@@ -1,19 +1,38 @@
-<!-- Table -->
+<div class="col-md-5">
+    <div class="input-group">
+        <input type="text" data-ng-model="toSearch" class="form-control" ng-enter="search(toSearch)" placeholder="Buscar comercios por nombre o dirección">
+        <div class="input-group-btn">
+            <span class="input-group-btn">
+                <button class="btn btn-default" data-ng-click="search(toSearch)" type="button">Buscar</button>
+            </span>
+        </div>
+        <!-- /btn-group -->
+    </div>
+</div>
+
+<br></br>
+
 <table class="table table-responsive table-bordered" data-ng-show="pagination.data.length">
     <thead class="thead-inverse">
         <tr>
-            <th>#</th>
-            <th>Nombre</th>
+            <th style="width: 2%;">#</th>
+            <th data-ng-click="changeSorting('name')">Nombre
+                <span data-ng-show="sort.column == 'name'">
+                    <i data-ng-class="{'glyphicon glyphicon-arrow-down' : sort.descending, 'glyphicon glyphicon-arrow-up' : !sort.descending}"></i>
+                </span>
+            </th>
             <th>Dirección</th>
             <th>Latitud</th>
             <th>Longitud</th>
             <th>Ciudad</th>
-            <th>Acciones</th>
+            <th style="width: 2%;">Acciones</th>
         </tr>
     </thead>
 
-    <tr ng-repeat="commerce in pagination.data">
-        <td>{{$index + 1}}</td>
+    <tr ng-repeat="commerce in pagination.data | orderBy:sort.column:sort.descending">
+        <td>
+            <b>{{$index + 1}}</b>
+        </td>
         <td>{{commerce.name}}</td>
         <td>{{commerce.address}}</td>
         <td>{{commerce.latitude}}</td>
@@ -22,7 +41,7 @@
         <td>
             <div class="text-center">
                 <div class="btn-group">
-                    <span class="glyphicon glyphicon-trash" data-ng-click="remove(commerce)" uib-tooltip="Eliminar"></span>&nbsp;
+                    <span class="glyphicon glyphicon-trash" data-ng-click="remove(commerce)" uib-tooltip="Eliminar"></span>
                 </div>
             </div>
         </td>

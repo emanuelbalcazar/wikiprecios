@@ -7,6 +7,8 @@
 
     function itemListCtrl($scope, logger, paginationSrv, dialogs, service) {
 
+        $scope.sort = { column: 'name', descending: false };
+
         // find all items.
         function findAll() {
             service.findAll().then(function (response) {
@@ -25,11 +27,14 @@
             });
         }
 
-        // delete item from database.
-        $scope.remove = function (item) {
-            dialogs.confirm('Confirmación', '¿Está seguro que desea eliminar el rubro "' + item.name + '"?', { size: 'md' }).result.then(
+        $scope.changeStatus = function (item, status) {
+            var text = (status == 1) ? "activar" : "desactivar";
+
+            dialogs.confirm('Confirmación', '¿Está seguro que desea ' + text + ' el rubro "' + item.name + '"?', { size: 'md' }).result.then(
                 function () {
-                    service.remove(item.id).then(function (response) {
+                    item.active = Number(status);
+                    
+                    service.update(item).then(function (response) {
                         if (response.error)
                             return logger.error(response.error);
 
@@ -40,6 +45,16 @@
                     // nothing to do.
                 }
             );
+        };
+
+        $scope.changeSorting = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
         };
     }
 

@@ -1,5 +1,5 @@
-letter;name
-CAR;carnes
-VER;verduras
-PAN;panaderia
-FRU;frutas
+letter;name;active
+CAR;carnes;1
+VER;verduras;1
+PAN;panaderia;1
+FRU;frutas;1
