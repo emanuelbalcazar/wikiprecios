@@ -1,5 +1,17 @@
 <div class="col-md-8 col-md-offset-2">
 
+    <div class="col-md-6" data-ng-show="pagination.data.length">
+        <div class="input-group">
+            <input type="text" data-ng-model="toSearch" class="form-control" placeholder="Buscar por nombre o codigo" data-ng-enter="search(toSearch)">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" data-ng-click="search(toSearch)">Buscar</button>
+            </span>
+        </div>
+        <!-- /input-group -->
+    </div>
+
+    <br></br>
+
     <!-- Table -->
     <table class="table table-responsive table-bordered" data-ng-show="pagination.data.length">
         <thead class="thead-inverse">
@@ -11,7 +23,11 @@
                         <i data-ng-class="{'glyphicon glyphicon-arrow-down' : sort.descending, 'glyphicon glyphicon-arrow-up' : !sort.descending}"></i>
                     </span>
                 </th>
-                <th>Estado</th>
+                <th data-ng-click="changeSorting('active')">Estado
+                    <span data-ng-show="sort.column == 'active'">
+                        <i data-ng-class="{'glyphicon glyphicon-arrow-down' : sort.descending, 'glyphicon glyphicon-arrow-up' : !sort.descending}"></i>
+                    </span>
+                </th>
                 <th style="width: 10%;">Acciones</th>
             </tr>
         </thead>

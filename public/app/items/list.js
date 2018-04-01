@@ -27,6 +27,18 @@
             });
         }
 
+        $scope.search = function (toSearch) {
+            service.findAll().then(function (response) {
+                $scope.records = response;
+
+                $scope.records = $scope.records.filter(function (elem) {
+                    return (elem.name.match(new RegExp(toSearch, 'i')) || elem.letter.match(new RegExp(toSearch, 'i')));
+                });
+                
+                paginate();
+            });
+        };
+
         $scope.changeStatus = function (item, status) {
             var text = (status == 1) ? "activar" : "desactivar";
 
