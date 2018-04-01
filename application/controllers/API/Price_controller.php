@@ -474,10 +474,12 @@ class Price_controller extends CI_Controller
 
         $product_calculated = $this->CalculatedPrice->find(array('product_code' => $data["product"]));
         $price_calculated = floatval($product_calculated[0]->price_1);
+        
         $limit = $price_calculated * 3;
+        $min = $price_calculated / 3;
         
         for ($i = 0; $i < count($posibles); $i++) {
-            if (floatval($posibles[$i]->price) < $limit) {
+            if (floatval($posibles[$i]->price) <= $limit && floatval($posibles[$i]->price) >= $min) {
                 array_push($result, $posibles[$i]);
             }
         }       
