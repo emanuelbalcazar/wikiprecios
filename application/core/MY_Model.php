@@ -75,7 +75,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-    * Actualiza un registro con los datos indicados como parametros.
+    * Elimina un registro segun la condicion de busqueda.
     *
     * @access public
     * @param $where condiciones de busqueda para el registro a borrar.
