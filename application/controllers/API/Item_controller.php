@@ -26,6 +26,7 @@ class Item_controller extends CI_Controller
     {
         $data["name"] = $this->input->post('name');
         $data["letter"] = $this->input->post('letter');
+        $data["active"] => $this->input->post('active');
         $data = $this->utils->replace($data, "\"", "");
 
         if ($this->Item->find(array('name' => $data["name"]))) {

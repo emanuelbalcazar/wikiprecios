@@ -7,7 +7,7 @@
 
     function newItemCtrl($scope, logger, $location, itemSrv) {
 
-        $scope.item = { name: '', letter: '', active: 1 };
+        $scope.item = { name: '', letter: '', active: true };
 
         $scope.save = function () {
 
