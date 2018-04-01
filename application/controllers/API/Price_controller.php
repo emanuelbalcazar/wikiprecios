@@ -469,8 +469,19 @@ class Price_controller extends CI_Controller
        $data["product"]= $this->input->get('product');
        $data = $this->utils->replace($data, "\"", "");
 
-       $result = $this->Price->get_possible_prices($data["commerce"] , $data["product"]);
-       echo json_encode($result);
+       $posibles = $this->Price->get_possible_prices($data["commerce"] , $data["product"]);
+        $result = [];
+
+        $product_calculated = $this->CalculatedPrice->find(array('product_code' => $data["product"]));
+        $price_calculated = floatval($product_calculated[0]->price_1);
+        $limit = $price_calculated * 3;
+        
+        for ($i = 0; $i < count($posibles); $i++) {
+            if (floatval($posibles[$i]->price) < $limit) {
+                array_push($result, $posibles[$i]);
+            }
+        }       
+        echo json_encode($result);
    }
 
     /**
