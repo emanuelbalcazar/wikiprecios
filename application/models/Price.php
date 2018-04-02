@@ -125,7 +125,7 @@ class Price extends MY_Model {
         if (count($favorites) == 0) {
             return $favorites;
         }
-
+        
         $latitude = $this->_get_latitude($commerce);
         $longitude = $this->_get_longitude($commerce);
 
@@ -205,7 +205,6 @@ class Price extends MY_Model {
         $this->db->from('businesses');
         $this->db->where('id', $commerce);
         $result = $this->db->get();
-
         return $result->row()->latitude;
     }
 

@@ -18,7 +18,7 @@ class MY_Model extends CI_Model {
      * @var String
      */
     protected $table = '';
-
+ 
 
     public function __construct()
     {

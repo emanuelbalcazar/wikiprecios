@@ -46,9 +46,11 @@ class Price_controller extends CI_Controller
         $data["commerce_id"] = $this->input->post('commerce');
         $data["price"] = $this->input->post('price');
         $data["product_code"]= $this->input->post('product');
+        $data2["latitud"]= $this->input->post('latitud');
+        $data2["longitud"]= $this->input->post('longitud');
 
         $data = $this->utils->replace($data, "\"", ""); // Elimino las comillas
-        
+
         $where = array("product_code" => $data["product_code"]);
         $product_exists = $this->Product->exists($where);
 
@@ -59,7 +61,7 @@ class Price_controller extends CI_Controller
         $this->_register_price($data);
         $this->_calculate_price($data["commerce_id"], $data["price"], $data["product_code"]);
         $this->_user_qualify($data["commerce_id"], $data["user"], $data["price"], $data["product_code"]);
-        $result["result"] = $this->_get_favorites_prices($data["commerce_id"], $data["user"], $data["product_code"]);
+        $result["result"] = $this->_get_favorites_prices($data["commerce_id"], $data["user"], $data["product_code"], $data2["latitud"], $data2["longitud"]);
 
         $where = array("mail" => $data["user"]);
         $result["user"] = $this->User->find($where)[0];
@@ -387,23 +389,22 @@ class Price_controller extends CI_Controller
     * @param $product
     * @return $array
     */
-    private function _get_favorites_prices($commerce, $user, $product)
+    private function _get_favorites_prices($commerce, $user, $product, $latitud , $longitud)
     {
         $current_commerce = $this->Commerce->find(array("id" => $commerce));
-
         // Obtengo los precios en los comercios favoritos.
-        $favorites_prices = $this->Price->get_favorites_prices($product, $user, $commerce);        
-        $favorites_prices = $this->order_by_distance($favorites_prices, $current_commerce);
+        $favorites_prices = $this->Price->get_favorites_prices($product, $user, $commerce);
+        $favorites_prices = $this->order_by_distance($favorites_prices, $latitud , $longitud);
 
         // Agrego una bandera indicando que los comercios SI son favoritos.
         for ($i = 0; $i < count($favorites_prices); $i++) {
             $favorites_prices[$i]->favorite = TRUE;
          }
-        
+
         // Obtengo los precios de los comercios NO favoritos.
         $not_favorites_prices = $this->Price->get_prices_that_are_not_favorites($product, $user, $commerce);
-        $not_favorites_prices = $this->order_by_distance($not_favorites_prices, $current_commerce);
-        
+        $not_favorites_prices = $this->order_by_distance($not_favorites_prices, $latitud , $longitud);
+
         // Agrego una bandera indicando que los comercios NO son favoritos.
         for ($i = 0; $i < count($not_favorites_prices); $i++) {
             $not_favorites_prices[$i]->favorite = FALSE;
@@ -416,18 +417,20 @@ class Price_controller extends CI_Controller
     }
 
     /**
-    * Retorna un arreglo ordenado por distancia respecto a un comercio de referencia base.
+    * Retorna un arreglo ordenado por distancia respecto a la ubicacion del usuario.
     *
     * @access private
     * @param $array
-    * @param $current_commerce
+    * @param $latitude
+    * @param $longitude
     * @return $array
     */
-    private function order_by_distance($array, $current_commerce)
+    private function order_by_distance($array, $latitude , $longitude)
     {
        for ($i = 0; $i < count($array); $i++) {
            $commerce_data = $this->Commerce->find(array("id" => $array[$i]->id));
-           $distance = $this->utils->calculate_distance($current_commerce[0]->latitude, $current_commerce[0]->longitude, $commerce_data[0]->latitude, $commerce_data[0]->longitude);
+           //$distance = $this->utils->calculate_distance($current_commerce[0]->latitude, $current_commerce[0]->longitude, $commerce_data[0]->latitude, $commerce_data[0]->longitude);
+           $distance = $this->utils->calculate_distance($latitude, $longitude, $commerce_data[0]->latitude, $commerce_data[0]->longitude);
            $array[$i]->distance = $distance;
            $array[$i]->address = $commerce_data[0]->address;
            $array[$i]->city = $commerce_data[0]->city;
@@ -473,16 +476,20 @@ class Price_controller extends CI_Controller
         $result = [];
 
         $product_calculated = $this->CalculatedPrice->find(array('product_code' => $data["product"]));
-        $price_calculated = floatval($product_calculated[0]->price_1);
-        
-        $limit = $price_calculated * 3;
-        $min = $price_calculated / 3;
-        
-        for ($i = 0; $i < count($posibles); $i++) {
-            if (floatval($posibles[$i]->price) <= $limit && floatval($posibles[$i]->price) >= $min) {
-                array_push($result, $posibles[$i]);
-            }
-        }       
+        //var_dump($product_calculated[0]);
+
+        if($product_calculated != null){
+          $price_calculated = floatval($product_calculated[0]->price_1);
+          $limit = $price_calculated * 3;
+          $min = $price_calculated / 3;
+
+          for ($i = 0; $i < count($posibles); $i++) {
+              if (floatval($posibles[$i]->price) <= $limit && floatval($posibles[$i]->price) >= $min) {
+                  array_push($result, $posibles[$i]);
+              }
+          }
+        }
+
         echo json_encode($result);
    }
 
@@ -490,7 +497,7 @@ class Price_controller extends CI_Controller
     * Devuelve los precios registrados.
     * @access public
     */
-    public function findAll() 
+    public function findAll()
     {
         $all = $this->Price->find();
         echo json_encode($all);
