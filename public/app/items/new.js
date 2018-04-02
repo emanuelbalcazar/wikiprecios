@@ -18,6 +18,9 @@
             if ($scope.item.name == '')
                 return logger.error('Ingrese un nombre para el rubro');
 
+            if ($scope.item.letter === ' ')
+                return logger.error('El codigo del rubro no puede estar vacio');
+
             $scope.item.letter = $scope.item.letter.toUpperCase();
 
             itemSrv.save($scope.item).then(function (response) {
