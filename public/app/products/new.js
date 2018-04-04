@@ -7,7 +7,7 @@
 
     function newProductCtrl($scope, logger, productSrv, itemSrv) {
 
-        $scope.units = ["KG", "LITRO", "DOCENA"];
+        $scope.units = ["KG", "LITRO", "DOCENA", "UNIDAD"];
         $scope.itemSelected = {};
 
         itemSrv.findAll().then(function (response) {

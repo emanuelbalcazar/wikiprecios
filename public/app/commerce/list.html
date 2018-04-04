@@ -31,7 +31,7 @@
 
     <tr ng-repeat="commerce in pagination.data | orderBy:sort.column:sort.descending">
         <td>
-            <b>{{$index + 1}}</b>
+            <b>{{commerce.id}}</b>
         </td>
         <td>{{commerce.name}}</td>
         <td>{{commerce.address}}</td>

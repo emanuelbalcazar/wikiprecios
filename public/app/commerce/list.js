@@ -14,6 +14,10 @@
         function findAll() {
             service.findAll().then(function (response) {
                 $scope.records = response;
+
+                for (var i = 0; i < $scope.records.length; i++)
+                    $scope.records[i].id = Number($scope.records[i].id);
+                    
                 paginate();
             });
         }
